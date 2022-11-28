@@ -20,7 +20,7 @@ services:
        - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_USER=cyturel@gmail.com
        - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PASSWORD=${EMAIL_PASSWORD}
 
-  plex:
+   plex:
     image: linuxserver/plex:1.29.2
     container_name: custom_plex
     network_mode: host
