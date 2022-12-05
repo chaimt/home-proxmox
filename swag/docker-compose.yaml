@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  watchtower:
+    image: containrrr/watchtower:1.5.1
+    container_name: custom_watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    environment:
+      - WATCHTOWER_TRACE=true
+      - WATCHTOWER_MONITOR_ONLY=true
+      - WATCHTOWER_DEBUG=true
+      - WATCHTOWER_NOTIFICATIONS=email
+      - WATCHTOWER_NOTIFICATION_EMAIL_FROM=ha@turkel.com
+      - WATCHTOWER_NOTIFICATION_EMAIL_TO=cyturel@gmail.com
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER=smtp.gmail.com
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT=587
+      - WATCHTOWER_NOTIFICATION_EMAIL_DELAY=2
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_USER=cyturel@gmail.com
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PASSWORD=${EMAIL_PASSWORD}
+
+  swag:
+    image: ghcr.io/linuxserver/swag:1.32.0
+    container_name: custom_swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Jerusalem
+      - URL=turkel.duckdns.org
+      - SUBDOMAINS=wildcard
+      - VALIDATION=duckdns
+      - DUCKDNSTOKEN=${DUCKDNSTOKEN}
+      - EMAIL=cyturel@gmail.com
+      - ONLY_SUBDOMAINS=false
+      - STAGING=false
+    volumes:
+      - /usr/share/hassio/share/swag:/config
+    ports:
+      - 443:443
+      - 80:80
+    restart: unless-stopped
+
+  heimdall:
+    image: linuxserver/heimdall:2.4.15
+    container_name: custom_heimdall
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Jerusalem
+    volumes:
+      - /usr/share/hassio/share/heimdall:/config
+    ports:
+      - 8070:80
