@@ -57,7 +57,7 @@ services:
     restart: unless-stopped
 
   sonarr:
-    image: linuxserver/sonarr:4.0.0-v4
+    image: linuxserver/sonarr:4.0.0-develop
     container_name: sonarr
     environment:
       - PUID=1000
