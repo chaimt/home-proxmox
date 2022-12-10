@@ -29,7 +29,6 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Asia/Jerusalem
-      - URL=turkel.duckdns.org
       - SUBDOMAINS=wildcard
       - VALIDATION=dns
       - DNSPLUGIN=cloudflare
