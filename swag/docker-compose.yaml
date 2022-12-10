@@ -31,8 +31,8 @@ services:
       - TZ=Asia/Jerusalem
       - URL=turkel.duckdns.org
       - SUBDOMAINS=wildcard
-      - VALIDATION=duckdns
-      - DUCKDNSTOKEN=${DUCKDNSTOKEN}
+      - VALIDATION=dns
+      - DNSPLUGIN=cloudflare
       - EMAIL=cyturel@gmail.com
       - ONLY_SUBDOMAINS=false
       - STAGING=false
