@@ -79,12 +79,12 @@ services:
     environment:
         - GLANCES_OPT=-w
     volumes:
-        - 'glances_config:/glances/conf'
-        - '/var/run/docker.sock:/var/run/docker.sock:ro'
+        - /home/home/hassio/glances/glances_config:/glances/conf
+        - /var/run/docker.sock:/var/run/docker.sock:ro
     pid: host
     image: docker.io/nicolargo/glances
     ports:
-      - "61208:61208"
+      - 61208:61208
     privileged: true
 
 
