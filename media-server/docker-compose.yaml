@@ -71,21 +71,20 @@ services:
       - 8989:8989
     restart: unless-stopped
 
-  glances:
-    build:
-      context: ./
-      dockerfile: Dockerfile
+  nicolargo:
     container_name: custom_glances
+    hostname: Glances
     restart: always
+    network_mode: host
+    environment:
+        - GLANCES_OPT=-w
+    volumes:
+        - 'glances_config:/glances/conf'
+        - '/var/run/docker.sock:/var/run/docker.sock:ro'
+    pid: host
+    image: docker.io/nicolargo/glances
     ports:
       - "61208:61208"
-    environment:
-      GLANCES_OPT: "-C /glances/conf/glances.conf -w"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./glances.conf:/glances/conf/glances.conf"
-    pid: "host"
     privileged: true
-    network_mode: "host"
 
 
