@@ -54,3 +54,19 @@ services:
       - /usr/share/hassio/share/heimdall:/config
     ports:
       - 8070:80
+
+  nicolargo:
+    container_name: custom_glances
+    hostname: Glances
+    restart: always
+    network_mode: host
+    environment:
+        - GLANCES_OPT=-w
+    volumes:
+        - /home/home/hassio/glances:/glances/conf
+        - /var/run/docker.sock:/var/run/docker.sock:ro
+    pid: host
+    image: docker.io/nicolargo/glances
+    ports:
+      - 61208:61208
+    privileged: true
