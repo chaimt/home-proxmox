@@ -17,6 +17,15 @@ services:
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_SCHEDULE=0 0 20 * * 0
 
+  dozzle:
+    container_name: custom_dozzle
+    image: amir20/dozzle:v4.3.0
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9999:8080
+
   plex:
     image: linuxserver/plex:1.29.2
     container_name: custom_plex
