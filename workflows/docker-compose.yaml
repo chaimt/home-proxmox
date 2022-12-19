@@ -1,0 +1,64 @@
+version: "3.3"
+
+services:
+  watchtower:
+    image: containrrr/watchtower:1.5.1
+    container_name: custom_watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    environment:
+      - WATCHTOWER_TRACE=true
+      - WATCHTOWER_MONITOR_ONLY=true
+      - WATCHTOWER_DEBUG=true
+      - WATCHTOWER_NOTIFICATIONS=email
+      - WATCHTOWER_NOTIFICATION_EMAIL_FROM=ha@turkel.com
+      - WATCHTOWER_NOTIFICATION_EMAIL_TO=cyturel@gmail.com
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER=smtp.gmail.com
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT=587
+      - WATCHTOWER_NOTIFICATION_EMAIL_DELAY=2
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_USER=cyturel@gmail.com
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PASSWORD=${EMAIL_PASSWORD}
+
+  dozzle:
+    container_name: custom_dozzle
+    image: amir20/dozzle:v4.3.0
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9999:8080
+
+  n8n:
+    image: n8nio/n8n
+    restart: always
+    ports:
+      - "127.0.0.1:5678:5678"
+    # labels:
+    #   - traefik.enable=true
+    #   - traefik.http.routers.n8n.rule=Host(`${SUBDOMAIN}.${DOMAIN_NAME}`)
+    #   - traefik.http.routers.n8n.tls=true
+    #   - traefik.http.routers.n8n.entrypoints=web,websecure
+    #   - traefik.http.routers.n8n.tls.certresolver=mytlschallenge
+    #   - traefik.http.middlewares.n8n.headers.SSLRedirect=true
+    #   - traefik.http.middlewares.n8n.headers.STSSeconds=315360000
+    #   - traefik.http.middlewares.n8n.headers.browserXSSFilter=true
+    #   - traefik.http.middlewares.n8n.headers.contentTypeNosniff=true
+    #   - traefik.http.middlewares.n8n.headers.forceSTSHeader=true
+    #   - traefik.http.middlewares.n8n.headers.SSLHost=${DOMAIN_NAME}
+    #   - traefik.http.middlewares.n8n.headers.STSIncludeSubdomains=true
+    #   - traefik.http.middlewares.n8n.headers.STSPreload=true
+    #   - traefik.http.routers.n8n.middlewares=n8n@docker
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER
+      - N8N_BASIC_AUTH_PASSWORD
+      - N8N_HOST=n8n.turel.cloud
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=https
+      - NODE_ENV=production
+      - WEBHOOK_URL=https://n8n.turel.cloud/
+      - GENERIC_TIMEZONE=Europe/Athens
+    volumes:    
+      - /home/home/hassio/n8n/.n8n:/home/node/.n8n
+
