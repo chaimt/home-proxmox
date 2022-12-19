@@ -1,0 +1,9 @@
+# misc
+logs/
+.user.yml
+.DS_Store
+
+
+# Ignore dynaconf secret files
+.secrets.*
+.env
