@@ -1,9 +1,26 @@
 version: "3.3"
 
 services:
+  duplicati:
+    image: duplicati/duplicati:latest
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
+    hostname: duplicati
+    restart: always
+    # Recommendation: Duplicati needs root user to get access to all files
+    user: "${DOCKER_ROOTPUID:-0}:${DOCKER_ROOTPGID:-0}"
+    network_mode: bridge
+    ports:
+      - 8200:8200
+    volumes:
+      - ${DOCKER_PATH_PERSISTENT}/duplicati_data:/data:rw
+      - /docker/backups:/backups:rw
+      - ${DOCKER_PATH_PERSISTENT}:/source:ro
+    environment:
+      - TZ=${DOCKER_TZ}
+
   watchtower:
     image: containrrr/watchtower:1.5.1
-    container_name: custom_watchtower
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
@@ -15,7 +32,7 @@ services:
       - WATCHTOWER_NOTIFICATION_URL=telegram://${BOT_TOKEN}@telegram/?channels=${CHAT_ID}
 
   dozzle:
-    container_name: custom_dozzle
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
     image: amir20/dozzle:v4.3.0
     restart: unless-stopped
     volumes:
@@ -25,7 +42,7 @@ services:
 
   swag:
     image: ghcr.io/linuxserver/swag:1.32.0
-    container_name: custom_swag
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_swag
     cap_add:
       - NET_ADMIN
     environment:
@@ -48,7 +65,7 @@ services:
 
   heimdall:
     image: linuxserver/heimdall:2.4.15
-    container_name: custom_heimdall
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_heimdall
     restart: unless-stopped
     environment:
       - PUID=1000
@@ -60,7 +77,7 @@ services:
       - 8070:80
 
   nicolargo:
-    container_name: custom_glances
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
     hostname: Glances
     restart: always
     network_mode: host

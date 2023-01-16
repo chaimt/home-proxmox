@@ -1,9 +1,26 @@
 version: "3.3"
 
 services:
+  duplicati:
+    image: duplicati/duplicati:latest
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
+    hostname: duplicati
+    restart: always
+    # Recommendation: Duplicati needs root user to get access to all files
+    user: "${DOCKER_ROOTPUID:-0}:${DOCKER_ROOTPGID:-0}"
+    network_mode: bridge
+    ports:
+      - 8200:8200
+    volumes:
+      - ${DOCKER_PATH_PERSISTENT}/duplicati_data:/data:rw
+      - /docker/backups:/backups:rw
+      - ${DOCKER_PATH_PERSISTENT}:/source:ro
+    environment:
+      - TZ=${DOCKER_TZ}
+
   watchtower:
     image: containrrr/watchtower:1.5.1
-    container_name: custom_watchtower
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
@@ -18,7 +35,7 @@ services:
       - WATCHTOWER_SCHEDULE=0 0 20 * * 0
 
   dozzle:
-    container_name: custom_dozzle
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
     image: amir20/dozzle:v4.3.0
     restart: unless-stopped
     volumes:
@@ -28,7 +45,7 @@ services:
 
   plex:
     image: linuxserver/plex:1.29.2
-    container_name: custom_plex
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_plex
     network_mode: host
     environment:
       - PUID=1000
@@ -44,7 +61,7 @@ services:
 
   transmission:
     image: linuxserver/transmission:version-3.00-r5
-    container_name: custom_transmission
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_transmission
     environment:
       - PUID=1000
       - PGID=1000
@@ -64,7 +81,7 @@ services:
 
   sonarr:
     image: linuxserver/sonarr:4.0.0-develop
-    container_name: custom_sonarr
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_sonarr
     environment:
       - PUID=1000
       - PGID=1000
@@ -78,7 +95,7 @@ services:
     restart: unless-stopped
 
   nicolargo:
-    container_name: custom_glances
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
     hostname: Glances
     restart: always
     network_mode: host
