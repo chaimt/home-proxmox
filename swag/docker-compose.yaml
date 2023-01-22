@@ -64,7 +64,7 @@ services:
     restart: unless-stopped
 
   heimdall:
-    image: linuxserver/heimdall:2.4.15
+    image: linuxserver/heimdall:2.5.5
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_heimdall
     restart: unless-stopped
     environment:
