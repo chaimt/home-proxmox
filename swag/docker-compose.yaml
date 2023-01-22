@@ -84,7 +84,7 @@ services:
     environment:
         - GLANCES_OPT=-w
     volumes:
-        - /home/home/hassio/glances:/glances/conf
+        - ${DOCKER_PATH_PERSISTENT}/glances:/glances/conf
         - /var/run/docker.sock:/var/run/docker.sock:ro
     pid: host
     image: docker.io/nicolargo/glances

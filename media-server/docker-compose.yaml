@@ -54,9 +54,9 @@ services:
       - UMASK_SET=022 #optional
       - PLEX_CLAIM= #optional
     volumes:
-      - /home/home/hassio/plex/config:/config
-      - /home/home/hassio/transmission/downloads/complete:/tv
-      - /home/home/hassio/plex/movies:/movies
+      - ${DOCKER_PATH_PERSISTENT}/plex/config:/config
+      - ${DOCKER_PATH_PERSISTENT}/transmission/downloads/complete:/tv
+      - ${DOCKER_PATH_PERSISTENT}/plex/movies:/movies
     restart: unless-stopped
 
   transmission:
@@ -70,9 +70,9 @@ services:
       - USER=ha #optional
       - PASS=tv #optional
     volumes:
-      - /home/home/hassio/transmission/config:/config
-      - /home/home/hassio/transmission/downloads:/downloads
-      - /home/home/hassio/transmission/watch:/watch
+      - ${DOCKER_PATH_PERSISTENT}/transmission/config:/config
+      - ${DOCKER_PATH_PERSISTENT}/transmission/downloads:/downloads
+      - ${DOCKER_PATH_PERSISTENT}/transmission/watch:/watch
     ports:
       - 9091:9091
       - 51413:51413
@@ -87,9 +87,9 @@ services:
       - PGID=1000
       - TZ=Europe/London
     volumes:
-      - /home/home/hassio/sonarr/config:/config
-      - /home/home/hassio/sonarr/downloads:/downloads
-      - /home/home/hassio/sonarr/tv:/tv
+      - ${DOCKER_PATH_PERSISTENT}/sonarr/config:/config
+      - ${DOCKER_PATH_PERSISTENT}/sonarr/downloads:/downloads
+      - ${DOCKER_PATH_PERSISTENT}/sonarr/tv:/tv
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -102,7 +102,7 @@ services:
     environment:
         - GLANCES_OPT=-w
     volumes:
-        - /home/home/hassio/glances:/glances/conf
+        - ${DOCKER_PATH_PERSISTENT}/glances:/glances/conf
         - /var/run/docker.sock:/var/run/docker.sock:ro
     pid: host
     image: docker.io/nicolargo/glances

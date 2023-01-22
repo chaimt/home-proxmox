@@ -45,7 +45,7 @@ services:
     image: louislam/uptime-kuma:1.18.5
     restart: unless-stopped
     volumes:
-      - /usr/share/hassio/share/kuma:/app/data
+      - ${DOCKER_PATH_PERSISTENT}/kuma:/app/data
     ports:
       - 3001:3001
 
