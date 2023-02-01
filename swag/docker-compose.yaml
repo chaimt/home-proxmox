@@ -57,10 +57,23 @@ services:
       - ONLY_SUBDOMAINS=false
       - STAGING=false
     volumes:
-      - /usr/share/hassio/share/swag:/config
+      - ${DOCKER_PATH_PERSISTENT}/swag:/config
     ports:
       - 443:443
       - 80:80
+    restart: unless-stopped
+
+  authelia:
+    image: authelia/authelia:4.37.5
+    container_name: custom_authelia
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Jerusalem
+    ports:
+      - 9092:9091
+    volumes:
+      - ${DOCKER_PATH_PERSISTENT}/authelia:/config
     restart: unless-stopped
 
   heimdall:
@@ -72,7 +85,7 @@ services:
       - PGID=1000
       - TZ=Asia/Jerusalem
     volumes:
-      - /usr/share/hassio/share/heimdall:/config
+      - ${DOCKER_PATH_PERSISTENT}/heimdall:/config
     ports:
       - 8070:80
 
