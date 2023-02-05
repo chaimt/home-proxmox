@@ -1,0 +1,118 @@
+###############################################################################
+#                           Authelia Configuration                            #
+###############################################################################
+
+## The host and port to listen on.
+host: 0.0.0.0
+port: 9091
+
+## The theme to display: light, dark, grey.
+theme: light
+
+server:
+  read_buffer_size: 4096
+  write_buffer_size: 4096
+  path: "authelia"
+
+## Level of verbosity for logs: info, debug, trace.
+log_level: debug
+
+jwt_secret: a_very_important_secret
+
+default_redirection_url: https://turel.cloud
+
+#totp:
+#  issuer: authelia.com
+#  period: 30
+#  skew: 1
+
+authentication_backend:
+  refresh_interval: 5m
+  file:
+    path: /config/users_database.yml
+    password:
+      algorithm: argon2id
+      iterations: 1
+      key_length: 32
+      salt_length: 16
+      memory: 1024
+      parallelism: 8
+
+access_control:
+  ## Default policy can either be 'bypass', 'one_factor', 'two_factor' or 'deny'. It is the policy applied to any
+  ## resource if there is no policy to be applied to the user.
+  default_policy: deny
+
+#  networks:
+#    - name: internal
+#      networks:
+#        - 10.10.0.0/16
+#        - 192.168.2.0/24
+#    - name: VPN
+#      networks: 10.9.0.0/16
+
+  rules:
+    ## Rules applied to everyone
+    - domain: turel.cloud
+      policy: bypass
+
+    - domain: vacuum.turel.cloud
+      policy: one_factor
+      ## Network based rule, if not provided any network matches.
+      #networks:
+      #  - internal
+      #  - VPN
+      #  - 192.168.1.0/24
+      #  - 10.0.0.1
+
+    #- domain:
+    #    - secure.example.com
+    #    - private.example.com
+    #  policy: two_factor
+
+   # - domain: singlefactor.example.com
+   #   policy: one_factor
+
+##
+## Session Provider Configuration
+##
+## The session cookies identify the user once logged in.
+## The available providers are: `memory`, `redis`. Memory is the provider unless redis is defined.
+session:
+  name: authelia_session
+  secret: insecure_session_secret
+  expiration: 5m
+  inactivity: 5m
+  remember_me_duration: 1M
+  domain: turel.cloud
+  redis:
+    host: redis
+    port: 6379
+
+regulation:
+  max_retries: 3
+  find_time: 2m
+  ban_time: 5m
+
+storage:
+   local:
+     path: /config/db.sqlite3
+
+notifier:
+  disable_startup_check: false
+  smtp:
+    username: cyturel@gmail.com
+    ## Password can also be set using a secret: https://www.authelia.com/docs/configuration/secrets.html
+    host: smtp.gmail.com
+    port: 587
+    sender: ha@turkel.com
+    identifier: turel
+    subject: "[Authelia] {title}"
+    startup_check_address: cyturel@gmail.com
+    disable_require_tls: false
+    disable_html_emails: false
+
+    tls:
+      skip_verify: false
+      minimum_version: TLS1.2
+
