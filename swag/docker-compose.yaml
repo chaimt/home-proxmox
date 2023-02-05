@@ -76,6 +76,19 @@ services:
       - ${DOCKER_PATH_PERSISTENT}/authelia:/config
     restart: unless-stopped
 
+  redis:
+    image: redis:alpine
+    container_name: custom_redis
+    volumes:
+      - ${DOCKER_PATH_PERSISTENT}/redis:/data
+    ports:
+      - 6379:6379
+    restart: unless-stopped
+    environment:
+      - TZ=America/Vancouver
+      - PUID=1000
+      - PGID=1000
+
   heimdall:
     image: linuxserver/heimdall:2.5.5
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_heimdall
