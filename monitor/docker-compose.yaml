@@ -38,7 +38,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
     environment:
+      - WATCHTOWER_POLL_INTERVAL=86400
       - WATCHTOWER_TRACE=true
+      - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_MONITOR_ONLY=true
       - WATCHTOWER_DEBUG=true
       - WATCHTOWER_NOTIFICATIONS=shoutrrr
