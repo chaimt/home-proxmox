@@ -1,0 +1,14 @@
+# /usr/local/share/doc/glances/glances.conf
+# -C /usr/local/share/doc/glances/glances.conf
+[influxdb]
+enabled=true
+host=10.0.0.2
+port=8086
+interval=60
+password=homeassistant
+user=glances
+db=glances
+prefix=home_3
+org=nicolargo
+
+

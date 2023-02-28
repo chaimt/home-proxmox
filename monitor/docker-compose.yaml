@@ -46,7 +46,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v4.7.4
+    image: amir20/dozzle:v4.81.1
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -55,11 +55,22 @@ services:
 
   uptime-kuma:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_uptime-kuma
-    image: louislam/uptime-kuma:1.19.6
+    image: louislam/uptime-kuma:1.20.2
     restart: unless-stopped
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/kuma:/app/data
     ports:
       - 3001:3001
 
-
+  glances:
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
+    image: nicolargo/glances:latest-alpine
+    restart: always
+    pid: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${DOCKER_PATH_PERSISTENT}/glances:/glances/conf
+    ports:
+      - 61208-61209:61208-61209      
+    environment:
+      - "GLANCES_OPT=-w"
