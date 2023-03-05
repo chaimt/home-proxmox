@@ -42,6 +42,15 @@ services:
     ports:
       - 9999:8080
 
+  glances:
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
+    image: docker.io/nicolargo/glances
+    restart: always
+    network_mode: host
+    ports:
+      - 61208:61208
+    command: ["glances", "-w"]
+
   n8n:
     image: n8nio/n8n
     restart: always

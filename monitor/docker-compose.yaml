@@ -66,13 +66,9 @@ services:
 
   glances:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
-    image: nicolargo/glances:latest-alpine
+    image: docker.io/nicolargo/glances
     restart: always
-    pid: host
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ${DOCKER_PATH_PERSISTENT}/glances:/glances/conf
+    network_mode: host
     ports:
-      - 61208-61209:61208-61209      
-    environment:
-      - "GLANCES_OPT=-w"
+      - 61208:61208
+    command: ["glances", "-w"]
