@@ -48,7 +48,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v4.8.1
+    image: amir20/dozzle:v4.9.2
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -57,7 +57,7 @@ services:
 
   uptime-kuma:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_uptime-kuma
-    image: louislam/uptime-kuma:1.20.2
+    image: louislam/uptime-kuma:1.21.2
     restart: unless-stopped
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/kuma:/app/data
@@ -72,3 +72,17 @@ services:
     ports:
       - 61208:61208
     command: ["glances", "-w"]
+
+  checkmk:
+    container_name: checkmk
+    image: checkmk/check-mk-raw:2023.04.09
+    tmpfs:
+      - /opt/omd/sites/cmk/tmp:uid=1000,gid=1000
+    ulimits:
+      nofile: 1024
+    volumes:
+      - ./monitoring:/omd/sites
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "8080:5000"
+    restart: unless-stopped
