@@ -67,7 +67,7 @@ services:
 
   authelia:
     image: authelia/authelia:4.37.5
-    container_name: custom_authelia
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_authelia
     environment:
       - PUID=1000
       - PGID=1000
@@ -80,7 +80,7 @@ services:
 
   redis:
     image: redis:alpine
-    container_name: custom_redis
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_redis
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/redis:/data
     ports:
