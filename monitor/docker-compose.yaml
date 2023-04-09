@@ -20,7 +20,7 @@ services:
 
   portainer:
       image: portainer/portainer-ce:latest
-      container_name: portainer
+      container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_portainer
       restart: unless-stopped
       security_opt:
         - no-new-privileges:true
@@ -74,7 +74,7 @@ services:
     command: ["glances", "-w"]
 
   checkmk:
-    container_name: checkmk
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_checkmk
     image: checkmk/check-mk-raw:2023.04.09
     tmpfs:
       - /opt/omd/sites/cmk/tmp:uid=1000,gid=1000
