@@ -87,4 +87,4 @@ services:
       - "8080:5000"
     restart: unless-stopped
     environment:
-      - CMK_PASSWORD=home$7
+      - CMK_PASSWORD=${PASSWORD}
