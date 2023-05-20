@@ -35,7 +35,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v4.8.1
+    image: amir20/dozzle:v4.10.8
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -43,7 +43,7 @@ services:
       - 9999:8080
 
   plex:
-    image: linuxserver/plex:1.32.0
+    image: linuxserver/plex:1.32.1
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_plex
     network_mode: host
     environment:
@@ -65,7 +65,6 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Asia/Jerusalem
-      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
       - USER=ha #optional
       - PASS=tv #optional
     volumes:
