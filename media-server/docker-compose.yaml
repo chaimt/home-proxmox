@@ -35,7 +35,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v4.10.8
+    image: amir20/dozzle:v4.10.12
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -43,7 +43,7 @@ services:
       - 9999:8080
 
   plex:
-    image: linuxserver/plex:1.32.1
+    image: linuxserver/plex:1.32.2
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_plex
     network_mode: host
     environment:
@@ -78,7 +78,7 @@ services:
     restart: unless-stopped
 
   sonarr:
-    image: linuxserver/sonarr:4.0.0-develop
+    image: linuxserver/sonarr:3.0.10
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_sonarr
     environment:
       - PUID=1000
