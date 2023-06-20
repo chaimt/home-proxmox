@@ -43,7 +43,7 @@ services:
       - 9999:8080
 
   plex:
-    image: linuxserver/plex:1.32.2
+    image: linuxserver/plex:1.32.4
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_plex
     network_mode: host
     environment:
