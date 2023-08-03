@@ -1,0 +1,14 @@
+auto lo
+iface lo inet loopback
+
+iface eno0 inet manual
+
+auto vmbr0
+iface vmbr0 inet static
+	address 10.0.0.94/24
+	gateway 10.0.0.1
+	bridge-ports eno0
+	bridge-stp off
+	bridge-fd 0
+
+iface wlp2s0 inet manual

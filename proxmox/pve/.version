@@ -1,0 +1,65 @@
+{
+"starttime": 1687518273,
+"clinfo": 11,
+"vmlist": 3,
+"corosync.conf": 2,
+"corosync.conf.new": 2,
+"storage.cfg": 2,
+"user.cfg": 2,
+"domains.cfg": 2,
+"priv/shadow.cfg": 2,
+"priv/acme/plugins.cfg": 2,
+"priv/tfa.cfg": 2,
+"priv/token.cfg": 2,
+"priv/ipam.db": 2,
+"datacenter.cfg": 2,
+"vzdump.cron": 2,
+"vzdump.conf": 2,
+"jobs.cfg": 2,
+"ha/crm_commands": 2,
+"ha/manager_status": 2,
+"ha/resources.cfg": 2,
+"ha/groups.cfg": 2,
+"ha/fence.cfg": 2,
+"status.cfg": 2,
+"replication.cfg": 2,
+"ceph.conf": 2,
+"sdn/vnets.cfg": 2,
+"sdn/zones.cfg": 2,
+"sdn/controllers.cfg": 2,
+"sdn/subnets.cfg": 2,
+"sdn/ipams.cfg": 2,
+"sdn/dns.cfg": 2,
+"sdn/.running-config": 2,
+"virtual-guest/cpu-models.conf": 2,
+"firewall/cluster.fw": 2,
+"kvstore": {
+"home4": {
+"kv/static-info": 0,
+"tasklist": 89,
+"kv/cpuflags-tcg": 0,
+"kv/cpuflags-kvm": 0,
+"kv/version-info": 0}
+,
+"home2": {
+"kv/static-info": 3,
+"tasklist": 83,
+"kv/cpuflags-tcg": 4,
+"kv/cpuflags-kvm": 4,
+"kv/version-info": 4}
+,
+"home1": {
+"kv/static-info": 4,
+"tasklist": 72,
+"kv/cpuflags-tcg": 5,
+"kv/cpuflags-kvm": 5,
+"kv/version-info": 5}
+,
+"home3": {
+"kv/static-info": 3,
+"tasklist": 83,
+"kv/cpuflags-tcg": 4,
+"kv/cpuflags-kvm": 4,
+"kv/version-info": 4}
+}
+}

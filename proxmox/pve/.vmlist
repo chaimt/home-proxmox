@@ -1,0 +1,12 @@
+{
+"version": 3,
+"ids": {
+"105": { "node": "home1", "type": "qemu", "version": 11 },
+"107": { "node": "home4", "type": "lxc", "version": 10 },
+"100": { "node": "home3", "type": "qemu", "version": 14 },
+"104": { "node": "home2", "type": "lxc", "version": 15 },
+"106": { "node": "home1", "type": "lxc", "version": 12 },
+"101": { "node": "home2", "type": "qemu", "version": 8 },
+"103": { "node": "home1", "type": "lxc", "version": 13 }}
+
+}
