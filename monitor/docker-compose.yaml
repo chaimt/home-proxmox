@@ -57,7 +57,7 @@ services:
 
   uptime-kuma:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_uptime-kuma
-    image: louislam/uptime-kuma:1.21.3
+    image: louislam/uptime-kuma:1.23.0-beta.1
     restart: unless-stopped
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/kuma:/app/data
