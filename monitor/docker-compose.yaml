@@ -48,7 +48,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v4.10.26
+    image: amir20/dozzle:v4.11.1
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -57,7 +57,7 @@ services:
 
   uptime-kuma:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_uptime-kuma
-    image: louislam/uptime-kuma:1.23.0-beta.1
+    image: louislam/uptime-kuma:1.23.0
     restart: unless-stopped
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/kuma:/app/data
@@ -75,7 +75,7 @@ services:
 
   checkmk:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_checkmk
-    image: checkmk/check-mk-raw:2023.06.03
+    image: checkmk/check-mk-raw:2023.08.21
     tmpfs:
       - /opt/omd/sites/cmk/tmp:uid=1000,gid=1000
     ulimits:
