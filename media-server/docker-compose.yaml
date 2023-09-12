@@ -106,6 +106,13 @@ services:
       network_mode: host
       environment:
           - MQTT_HOST=10.0.0.2
+          - MQTT_USERNAME=ha
+          - MQTT_PASSWORD=${MQTT_PASS}
+          - PUBLISH_ALL=true
+          - HASS_DISCOVERY=true
+          - SCAN_TIME=60
+          - TIME_BETWEEN=60
+
       volumes:
           - '/var/run/dbus:/var/run/dbus'
       container_name: TheengsGateway
