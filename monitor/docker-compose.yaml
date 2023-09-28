@@ -57,7 +57,7 @@ services:
 
   uptime-kuma:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_uptime-kuma
-    image: louislam/uptime-kuma:1.23.1
+    image: louislam/uptime-kuma:1.23.2
     restart: unless-stopped
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/kuma:/app/data
@@ -107,5 +107,3 @@ services:
     environment:
       - CMK_PASSWORD=${PASSWORD}
   
-docker run -d --name cockpit -p 8080:80 agentejo/cockpit
-
