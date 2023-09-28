@@ -90,20 +90,3 @@ services:
     environment:
       - CMK_PASSWORD=${PASSWORD}
 
-  cockpit:
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_checkmk
-    image: agentejo/cockpit:2.7.0
-    tmpfs:
-      - /opt/omd/sites/cmk/tmp:uid=1000,gid=1000
-    ulimits:
-      nofile: 1024
-    volumes:
-      - ./monitoring:/omd/sites
-      - /etc/localtime:/etc/localtime:ro
-    ports:
-      - "8080:5000"
-      - "8000:8000"
-    restart: unless-stopped
-    environment:
-      - CMK_PASSWORD=${PASSWORD}
-  
