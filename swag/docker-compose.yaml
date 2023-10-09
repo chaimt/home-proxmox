@@ -19,7 +19,7 @@ services:
       - TZ=${DOCKER_TZ}
 
   watchtower:
-    image: containrrr/watchtower:1.5.3
+    image: containrrr/watchtower:1.6.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
