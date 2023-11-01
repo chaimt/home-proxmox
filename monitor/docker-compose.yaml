@@ -64,15 +64,18 @@ services:
     ports:
       - 3001:3001
 
-  glances:
+glances:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
     image: docker.io/nicolargo/glances
     restart: always
-    network_mode: host
+    pid: host
     ports:
       - 61208:61208
     command: ["glances", "-w"]
-
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/docker/glances:/glances/conf
+      
   checkmk:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_checkmk
     image: checkmk/check-mk-raw:2023.09.05
