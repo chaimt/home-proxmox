@@ -105,7 +105,7 @@ services:
     ports:
       - 8070:80
 
-glances:
+  glances:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
     image: docker.io/nicolargo/glances
     restart: always
