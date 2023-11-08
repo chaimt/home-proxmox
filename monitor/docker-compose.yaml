@@ -77,20 +77,20 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /var/docker/glances:/glances/conf
       
-  checkmk:
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_checkmk
-    image: checkmk/check-mk-raw:2023.09.05
-    tmpfs:
-      - /opt/omd/sites/cmk/tmp:uid=1000,gid=1000
-    ulimits:
-      nofile: 1024
-    volumes:
-      - ./monitoring:/omd/sites
-      - /etc/localtime:/etc/localtime:ro
-    ports:
-      - "8080:5000"
-      - "8000:8000"
-    restart: unless-stopped
-    environment:
-      - CMK_PASSWORD=${PASSWORD}
+  # checkmk:
+  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_checkmk
+  #   image: checkmk/check-mk-raw:2023.09.05
+  #   tmpfs:
+  #     - /opt/omd/sites/cmk/tmp:uid=1000,gid=1000
+  #   ulimits:
+  #     nofile: 1024
+  #   volumes:
+  #     - ./monitoring:/omd/sites
+  #     - /etc/localtime:/etc/localtime:ro
+  #   ports:
+  #     - "8080:5000"
+  #     - "8000:8000"
+  #   restart: unless-stopped
+  #   environment:
+  #     - CMK_PASSWORD=${PASSWORD}
 

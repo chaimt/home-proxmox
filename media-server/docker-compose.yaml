@@ -93,7 +93,7 @@ services:
       - 8989:8989
     restart: unless-stopped
 
-glances:
+  glances:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
     image: docker.io/nicolargo/glances
     restart: always
