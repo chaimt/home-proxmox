@@ -1,0 +1,35 @@
+version: "3.3"
+
+services:
+  duplicati:
+    image: duplicati/duplicati:latest
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
+    hostname: duplicati
+    restart: always
+    # Recommendation: Duplicati needs root user to get access to all files
+    user: "${DOCKER_ROOTPUID:-0}:${DOCKER_ROOTPGID:-0}"
+    network_mode: bridge
+    ports:
+      - 8200:8200
+    volumes:
+      - ${DOCKER_PATH_PERSISTENT}/duplicati_data:/data:rw
+      - /docker/backups:/backups:rw
+      - ${DOCKER_PATH_PERSISTENT}:/source:ro
+      - ${CONFIG_PATH}:/config:ro      
+    environment:
+      - TZ=${DOCKER_TZ}
+
+
+
+  glances:
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
+    image: docker.io/nicolargo/glances
+    restart: always
+    pid: host
+    ports:
+      - 61208:61208
+    command: ["glances", "-w"]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/docker/glances:/glances/conf
+      
