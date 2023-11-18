@@ -44,7 +44,7 @@ services:
       - 9999:8080
 
   swag:
-    image: ghcr.io/linuxserver/swag:2.74
+    image: ghcr.io/linuxserver/swag:2.7.4
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_swag
     cap_add:
       - NET_ADMIN
