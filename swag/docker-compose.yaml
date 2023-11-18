@@ -20,7 +20,7 @@ services:
       - TZ=${DOCKER_TZ}
 
   watchtower:
-    image: containrrr/watchtower:1.6.0
+    image: containrrr/watchtower:1.7.1
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -36,7 +36,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v5.3.1
+    image: amir20/dozzle:v5.4.2
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -44,7 +44,7 @@ services:
       - 9999:8080
 
   swag:
-    image: ghcr.io/linuxserver/swag:1.32.0
+    image: ghcr.io/linuxserver/swag:2.74
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_swag
     cap_add:
       - NET_ADMIN
@@ -93,7 +93,7 @@ services:
       - PGID=1000
 
   heimdall:
-    image: linuxserver/heimdall:2.5.6
+    image: linuxserver/heimdall:2.5.8
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_heimdall
     restart: unless-stopped
     environment:
