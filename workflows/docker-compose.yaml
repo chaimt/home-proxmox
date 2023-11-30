@@ -56,7 +56,7 @@ services:
       - /var/docker/glances:/glances/conf
 
   n8n:
-    image: n8nio/n8n:1.19.3
+    image: n8nio/n8n:1.18.0
     restart: always
     user: "${UID}:${GID}"
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_n8n
@@ -66,5 +66,9 @@ services:
       - GENERIC_TIMEZONE="Asia/Jerusalem"
       - TZ="Asia/Jerusalem"
       - WEBHOOK_URL=https://n8n.turel.cloud
+      - VUE_APP_URL_BASE_API=https://n8n.turel.cloud
+      - N8N_HOST=n8n.turel.cloud
+#      - N8N_PORT=443
+#      - N8N_PROTOCOL=https
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/n8n/.n8n:/home/node/.n8n
