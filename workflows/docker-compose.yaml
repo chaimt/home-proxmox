@@ -8,7 +8,7 @@ services:
     image: duplicati/duplicati:latest
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
-    restart: always
+    restart: unless-stopped
     # Recommendation: Duplicati needs root user to get access to all files
     user: "${DOCKER_ROOTPUID:-0}:${DOCKER_ROOTPGID:-0}"
     network_mode: bridge
@@ -18,8 +18,7 @@ services:
       - ${DOCKER_PATH_PERSISTENT}/duplicati_data:/data:rw
       - /docker/backups:/backups:rw
       - ${DOCKER_PATH_PERSISTENT}:/source:ro
-      - ${CONFIG_PATH}:/config:ro
-      - n8n_storage:/source/n8n_storage
+      - ${CONFIG_PATH}:/config:ro      
     environment:
       - TZ=${DOCKER_TZ}
 
@@ -50,7 +49,7 @@ services:
   glances:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
     image: docker.io/nicolargo/glances
-    restart: always
+    restart: unless-stopped
     pid: host
     ports:
       - 61208:61208
@@ -61,7 +60,7 @@ services:
 
   n8n:
     image: n8nio/n8n:1.19.5
-    restart: always
+    restart: unless-stopped
     user: "${UID}:${GID}"
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_n8n
     ports:
@@ -73,4 +72,4 @@ services:
       - WEBHOOK_URL=https://n8n.turel.cloud
       - VUE_APP_URL_BASE_API=https://n8n.turel.cloud      
     volumes:
-      - n8n_storage:/home/node/.n8n
+      - ${DOCKER_PATH_PERSISTENT}/n8n/.n8n:/home/node/.n8n
