@@ -1,5 +1,8 @@
 version: "3.3"
 
+volumes:
+  n8n_storage:
+
 services:
   duplicati:
     image: duplicati/duplicati:latest
@@ -15,7 +18,8 @@ services:
       - ${DOCKER_PATH_PERSISTENT}/duplicati_data:/data:rw
       - /docker/backups:/backups:rw
       - ${DOCKER_PATH_PERSISTENT}:/source:ro
-      - ${CONFIG_PATH}:/config:ro      
+      - ${CONFIG_PATH}:/config:ro
+      - n8n_storage:/source/n8n_storage
     environment:
       - TZ=${DOCKER_TZ}
 
@@ -63,10 +67,10 @@ services:
     ports:
       - 5678:5678
     environment:
+      - N8N_HOST=n8n.turel.cloud    
       - GENERIC_TIMEZONE=Asia/Jerusalem
       - TZ=Asia/Jerusalem
       - WEBHOOK_URL=https://n8n.turel.cloud
-      - VUE_APP_URL_BASE_API=https://n8n.turel.cloud
-      - N8N_HOST=n8n.turel.cloud    
+      - VUE_APP_URL_BASE_API=https://n8n.turel.cloud      
     volumes:
-      - ${DOCKER_PATH_PERSISTENT}/n8n/.n8n:/home/node/.n8n
+      - n8n_storage:/home/node/.n8n
