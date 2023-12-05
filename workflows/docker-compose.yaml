@@ -1,7 +1,8 @@
 version: "3.3"
 
-# volumes:
-#   n8n_storage:
+volumes:
+  n8n_storage:
+    external: true
 
 services:
   duplicati:
@@ -61,6 +62,7 @@ services:
   n8n:
     image: n8nio/n8n:1.19.5
     restart: unless-stopped
+    user: "1000:1000"
     # user: "${UID}:${GID}"
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_n8n
     ports:
