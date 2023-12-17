@@ -76,21 +76,17 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /var/docker/glances:/glances/conf
-      
-  # checkmk:
-  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_checkmk
-  #   image: checkmk/check-mk-raw:2023.09.05
-  #   tmpfs:
-  #     - /opt/omd/sites/cmk/tmp:uid=1000,gid=1000
-  #   ulimits:
-  #     nofile: 1024
-  #   volumes:
-  #     - ./monitoring:/omd/sites
-  #     - /etc/localtime:/etc/localtime:ro
-  #   ports:
-  #     - "8080:5000"
-  #     - "8000:8000"
-  #   restart: unless-stopped
-  #   environment:
-  #     - CMK_PASSWORD=${PASSWORD}
+
+  cronicle-docker:
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock:rw
+        - $DOCKER_PATH_PERSISTENT/cronicle/data:/opt/cronicle/data:rw
+        - $DOCKER_PATH_PERSISTENT/cronicle/logs:/opt/cronicle/logs:rw
+        - $DOCKER_PATH_PERSISTENT/cronicle/plugins:/opt/cronicle/plugins:rw
+        - $DOCKER_PATH_PERSISTENT/cronicle/app:/app:rw
+    hostname: localhost
+    ports:
+        - 3012:3012
+    container_name: cronicle
+    image: bluet/cronicle-docker:0.9.39
 
