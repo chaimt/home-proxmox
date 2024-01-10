@@ -40,7 +40,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v5.6.1
+    image: amir20/dozzle:v6.0.7
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -60,7 +60,7 @@ services:
       - /var/docker/glances:/glances/conf
 
   n8n:
-    image: n8nio/n8n:1.19.5
+    image: n8nio/n8n:1.24.0
     restart: unless-stopped
     user: "1000:1000"
     # user: "${UID}:${GID}"
