@@ -36,7 +36,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v6.1.1
+    image: amir20/dozzle:v6.4.6
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -93,7 +93,7 @@ services:
       - PGID=1000
 
   heimdall:
-    image: linuxserver/heimdall:2.5.8
+    image: linuxserver/heimdall:2.6.1
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_heimdall
     restart: unless-stopped
     environment:
