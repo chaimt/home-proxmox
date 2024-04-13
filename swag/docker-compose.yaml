@@ -67,7 +67,7 @@ services:
     restart: unless-stopped
 
   authelia:
-    image: authelia/authelia:4.37.5
+    image: authelia/authelia:4.38
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_authelia
     environment:
       - PUID=1000
