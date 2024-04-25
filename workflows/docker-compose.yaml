@@ -1,5 +1,3 @@
-version: "3.3"
-
 volumes:
   n8n_storage:
     external: true
