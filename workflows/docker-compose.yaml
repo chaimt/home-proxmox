@@ -60,7 +60,7 @@ services:
       - /var/docker/glances:/glances/conf
 
   n8n:
-    image: n8nio/n8n:1.24.0
+    image: n8nio/n8n:1.38.1
     restart: unless-stopped
     user: "1000:1000"
     # user: "${UID}:${GID}"
