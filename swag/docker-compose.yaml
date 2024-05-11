@@ -34,7 +34,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v6.5.1
+    image: amir20/dozzle:v6.6.0
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -42,7 +42,7 @@ services:
       - 9999:8080
 
   swag:
-    image: ghcr.io/linuxserver/swag:2.7.4
+    image: ghcr.io/linuxserver/swag:2.10.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_swag
     cap_add:
       - NET_ADMIN
