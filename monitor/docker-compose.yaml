@@ -56,7 +56,7 @@ services:
 
   uptime-kuma:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_uptime-kuma
-    image: louislam/uptime-kuma:1.23.11
+    image: louislam/uptime-kuma:1.23.13
     restart: unless-stopped
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/kuma:/app/data
@@ -86,5 +86,5 @@ services:
     ports:
         - 3012:3012
     container_name: custom_cronicle
-    image: bluet/cronicle-docker:0.9.39
+    image: bluet/cronicle-docker:0.9.46
 
