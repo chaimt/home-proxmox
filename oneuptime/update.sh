@@ -17,18 +17,6 @@ services:
     environment:
       - TZ=${DOCKER_TZ}
 
-  portainer:
-      image: portainer/portainer-ce:latest
-      container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_portainer
-      restart: unless-stopped
-      security_opt:
-        - no-new-privileges:true
-      volumes:
-        - /etc/localtime:/etc/localtime:ro
-        - /var/run/docker.sock:/var/run/docker.sock:ro
-        - ${DOCKER_PATH_PERSISTENT}/portainer:/data
-      ports:
-        - 9000:9000
 
   watchtower:
     image: containrrr/watchtower:1.7.1
@@ -42,7 +30,7 @@ services:
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_MONITOR_ONLY=true
       - WATCHTOWER_DEBUG=true
-      # - WATCHTOWER_NOTIFICATIONS=shoutrrr
+    #   - WATCHTOWER_NOTIFICATIONS=shoutrrr
       - WATCHTOWER_NOTIFICATION_URL=telegram://${BOT_TOKEN}@telegram/?channels=${CHAT_ID}
 
   dozzle:
@@ -54,14 +42,7 @@ services:
     ports:
       - 9999:8080
 
-  uptime-kuma:
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_uptime-kuma
-    image: louislam/uptime-kuma:1.23.13
-    restart: unless-stopped
-    volumes:
-      - ${DOCKER_PATH_PERSISTENT}/kuma:/app/data
-    ports:
-      - 3001:3001
+
 
   glances:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
@@ -75,16 +56,4 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /var/docker/glances:/glances/conf
 
-  cronicle-docker:
-    volumes:
-        - /var/run/docker.sock:/var/run/docker.sock:rw
-        - $DOCKER_PATH_PERSISTENT/cronicle/data:/opt/cronicle/data:rw
-        - $DOCKER_PATH_PERSISTENT/cronicle/logs:/opt/cronicle/logs:rw
-        - $DOCKER_PATH_PERSISTENT/cronicle/plugins:/opt/cronicle/plugins:rw
-        - $DOCKER_PATH_PERSISTENT/cronicle/app:/app:rw
-    hostname: localhost
-    ports:
-        - 3012:3012
-    container_name: custom_cronicle
-    image: bluet/cronicle-docker:0.9.39
 

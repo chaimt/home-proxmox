@@ -33,7 +33,7 @@ services:
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_MONITOR_ONLY=true
       - WATCHTOWER_DEBUG=true
-      - WATCHTOWER_NOTIFICATIONS=shoutrrr
+      # - WATCHTOWER_NOTIFICATIONS=shoutrrr
       - WATCHTOWER_NOTIFICATION_URL=telegram://${BOT_TOKEN}@telegram/?channels=${CHAT_ID}
 
   dozzle:

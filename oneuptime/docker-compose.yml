@@ -41,68 +41,7 @@ services:
     ports:
       - 9999:8080
 
-  swag:
-    image: ghcr.io/linuxserver/swag:2.10.0
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_swag
-    cap_add:
-      - NET_ADMIN
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Jerusalem
-      - URL=turkel.duckdns.org
-      - SUBDOMAINS=wildcard
-      - VALIDATION=duckdns
-      - DUCKDNSTOKEN=${DUCKDNSTOKEN}
-      - EMAIL=cyturel@gmail.com
-      - ONLY_SUBDOMAINS=false
-      - STAGING=false
-    volumes:
-      - ${DOCKER_PATH_PERSISTENT}/swag:/config
-    ports:
-      - 443:443
-      - 80:80
-    restart: unless-stopped
-
-  authelia:
-    image: authelia/authelia:4.38.8
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_authelia
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Jerusalem
-    ports:
-      - 9092:9091
-    volumes:
-      - ${DOCKER_PATH_PERSISTENT}/authelia:/config
-    restart: unless-stopped
-
-  redis:
-    image: redis:alpine
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_redis
-    volumes:
-      - ${DOCKER_PATH_PERSISTENT}/redis:/data
-    ports:
-      - 6379:6379
-    restart: unless-stopped
-    environment:
-      - TZ=America/Vancouver
-      - PUID=1000
-      - PGID=1000
-
-  heimdall:
-    image: linuxserver/heimdall:2.6.1
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_heimdall
-    restart: unless-stopped
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Jerusalem
-    volumes:
-      - ${DOCKER_PATH_PERSISTENT}/heimdall:/config
-    ports:
-      - 8070:80
-
+  
   glances:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
     image: docker.io/nicolargo/glances
