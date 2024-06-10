@@ -75,15 +75,4 @@ services:
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/n8n/.n8n:/home/node/.n8n
 
-  portainer:
-      image: portainer/portainer-ce:latest
-      container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_portainer
-      restart: unless-stopped
-      security_opt:
-        - no-new-privileges:true
-      volumes:
-        - /etc/localtime:/etc/localtime:ro
-        - /var/run/docker.sock:/var/run/docker.sock:ro
-        - ${DOCKER_PATH_PERSISTENT}/portainer:/data
-      ports:
-        - 9000:9000      
+  
