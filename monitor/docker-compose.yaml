@@ -62,16 +62,29 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /var/docker/glances:/glances/conf
 
-  cronicle-docker:
-    volumes:
-        - /var/run/docker.sock:/var/run/docker.sock:rw
-        - $DOCKER_PATH_PERSISTENT/cronicle/data:/opt/cronicle/data:rw
-        - $DOCKER_PATH_PERSISTENT/cronicle/logs:/opt/cronicle/logs:rw
-        - $DOCKER_PATH_PERSISTENT/cronicle/plugins:/opt/cronicle/plugins:rw
-        - $DOCKER_PATH_PERSISTENT/cronicle/app:/app:rw
-    hostname: localhost
-    ports:
-        - 3012:3012
-    container_name: custom_cronicle
-    image: bluet/cronicle-docker:0.9.39
+  # cronicle-docker:
+  #   volumes:
+  #       - /var/run/docker.sock:/var/run/docker.sock:rw
+  #       - $DOCKER_PATH_PERSISTENT/cronicle/data:/opt/cronicle/data:rw
+  #       - $DOCKER_PATH_PERSISTENT/cronicle/logs:/opt/cronicle/logs:rw
+  #       - $DOCKER_PATH_PERSISTENT/cronicle/plugins:/opt/cronicle/plugins:rw
+  #       - $DOCKER_PATH_PERSISTENT/cronicle/app:/app:rw
+  #   hostname: localhost
+  #   ports:
+  #       - 3012:3012
+  #   container_name: custom_cronicle
+  #   image: bluet/cronicle-docker:0.9.39
 
+
+  heimdall:
+    image: linuxserver/heimdall:2.6.1
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_heimdall
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Jerusalem
+    volumes:
+      - ${DOCKER_PATH_PERSISTENT}/heimdall:/config
+    ports:
+      - 8070:80
