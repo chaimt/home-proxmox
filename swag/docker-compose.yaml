@@ -1,6 +1,6 @@
 services:
   duplicati:
-    image: duplicati/duplicati:latest
+    image: duplicati/duplicati:2.0.9.101
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
