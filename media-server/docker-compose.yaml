@@ -93,7 +93,7 @@ services:
 
   glances:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
-    image: docker.io/nicolargo/glances
+    image: nicolargo/glances:4.1.1
     restart: unless-stopped
     pid: host
     ports:

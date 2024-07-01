@@ -1,7 +1,7 @@
 services:
 
   portainer:
-      image: portainer/portainer-ce:latest
+      image: portainer/portainer-ce:2.20.3
       container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_portainer
       restart: unless-stopped
       security_opt:
