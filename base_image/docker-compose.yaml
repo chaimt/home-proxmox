@@ -14,7 +14,7 @@ services:
         - 9000:9000
 
   duplicati:
-    image: duplicati/duplicati:2.0.9.101
+    image: duplicati/duplicati:2.0.9.102
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: always
