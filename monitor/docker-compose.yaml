@@ -90,7 +90,7 @@ services:
       - 8070:80
 
   homarr:
-    container_name: homarr
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_homarr
     image: ghcr.io/ajnart/homarr:latest
     restart: unless-stopped
     volumes:
