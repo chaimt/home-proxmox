@@ -1,6 +1,6 @@
 services:
   duplicati:
-    image: duplicati/duplicati:2.0.9.101
+    image: duplicati/duplicati:2.0.9.108
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: always
@@ -34,7 +34,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v8.0.5
+    image: amir20/dozzle:v8.7.1
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -43,7 +43,7 @@ services:
 
   uptime-kuma:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_uptime-kuma
-    image: louislam/uptime-kuma:1.23.13
+    image: louislam/uptime-kuma:1.23.15
     restart: unless-stopped
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/kuma:/app/data
@@ -52,7 +52,7 @@ services:
 
   glances:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
-    image: nicolargo/glances:4.1.2.1
+    image: nicolargo/glances:4.2.0
     restart: unless-stopped
     pid: host
     ports:
