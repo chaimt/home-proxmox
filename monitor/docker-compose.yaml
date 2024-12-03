@@ -50,30 +50,17 @@ services:
     ports:
       - 3001:3001
 
-  # glances:
-  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
-  #   image: nicolargo/glances:4.2.1
-  #   restart: unless-stopped
-  #   pid: host
-  #   ports:
-  #     - 61208:61208
-  #   command: ["glances", "-w"]
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
-  #     - /var/docker/glances:/glances/conf
-
-  # # cronicle-docker:
-  # #   volumes:
-  # #       - /var/run/docker.sock:/var/run/docker.sock:rw
-  # #       - $DOCKER_PATH_PERSISTENT/cronicle/data:/opt/cronicle/data:rw
-  # #       - $DOCKER_PATH_PERSISTENT/cronicle/logs:/opt/cronicle/logs:rw
-  # #       - $DOCKER_PATH_PERSISTENT/cronicle/plugins:/opt/cronicle/plugins:rw
-  # #       - $DOCKER_PATH_PERSISTENT/cronicle/app:/app:rw
-  # #   hostname: localhost
-  # #   ports:
-  # #       - 3012:3012
-  # #   container_name: custom_cronicle
-  # #   image: bluet/cronicle-docker:0.9.39
+  glances:
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
+    image: nicolargo/glances:4.2.1
+    restart: unless-stopped
+    pid: host
+    ports:
+      - 61208:61208
+    command: ["glances", "-w"]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/docker/glances:/glances/conf
 
 
   # heimdall:
