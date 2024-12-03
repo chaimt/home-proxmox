@@ -34,7 +34,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v8.7.4
+    image: amir20/dozzle:v8.8.2
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -77,7 +77,7 @@ services:
 
 
   heimdall:
-    image: linuxserver/heimdall:2.6.1
+    image: linuxserver/heimdall:2.6.3
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_heimdall
     restart: unless-stopped
     environment:
@@ -91,7 +91,7 @@ services:
 
   homarr:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_homarr
-    image: ghcr.io/ajnart/homarr:latest
+    image: ghcr.io/ajnart/homarr:v0.15.7
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration

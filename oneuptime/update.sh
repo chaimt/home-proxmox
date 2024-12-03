@@ -35,7 +35,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v8.7.4
+    image: amir20/dozzle:v8.8.2
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
