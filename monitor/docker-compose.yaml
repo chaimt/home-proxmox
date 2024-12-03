@@ -17,86 +17,86 @@ services:
     environment:
       - TZ=${DOCKER_TZ}
 
-  watchtower:
-    image: containrrr/watchtower:1.7.1
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    restart: unless-stopped
-    environment:
-      - WATCHTOWER_POLL_INTERVAL=86400
-      - WATCHTOWER_TRACE=true
-      - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_MONITOR_ONLY=true
-      - WATCHTOWER_DEBUG=true
-      - WATCHTOWER_NOTIFICATIONS=shoutrrr
-      - WATCHTOWER_NOTIFICATION_URL=telegram://${BOT_TOKEN}@telegram/?channels=${CHAT_ID}
-
-  dozzle:
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v8.8.2
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - 9999:8080
-
-  uptime-kuma:
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_uptime-kuma
-    image: louislam/uptime-kuma:1.23.15
-    restart: unless-stopped
-    volumes:
-      - ${DOCKER_PATH_PERSISTENT}/kuma:/app/data
-    ports:
-      - 3001:3001
-
-  glances:
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
-    image: nicolargo/glances:4.2.1
-    restart: unless-stopped
-    pid: host
-    ports:
-      - 61208:61208
-    command: ["glances", "-w"]
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /var/docker/glances:/glances/conf
-
-  # cronicle-docker:
+  # watchtower:
+  #   image: containrrr/watchtower:1.7.1
+  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_watchtower
   #   volumes:
-  #       - /var/run/docker.sock:/var/run/docker.sock:rw
-  #       - $DOCKER_PATH_PERSISTENT/cronicle/data:/opt/cronicle/data:rw
-  #       - $DOCKER_PATH_PERSISTENT/cronicle/logs:/opt/cronicle/logs:rw
-  #       - $DOCKER_PATH_PERSISTENT/cronicle/plugins:/opt/cronicle/plugins:rw
-  #       - $DOCKER_PATH_PERSISTENT/cronicle/app:/app:rw
-  #   hostname: localhost
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   restart: unless-stopped
+  #   environment:
+  #     - WATCHTOWER_POLL_INTERVAL=86400
+  #     - WATCHTOWER_TRACE=true
+  #     - WATCHTOWER_CLEANUP=true
+  #     - WATCHTOWER_MONITOR_ONLY=true
+  #     - WATCHTOWER_DEBUG=true
+  #     - WATCHTOWER_NOTIFICATIONS=shoutrrr
+  #     - WATCHTOWER_NOTIFICATION_URL=telegram://${BOT_TOKEN}@telegram/?channels=${CHAT_ID}
+
+  # dozzle:
+  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
+  #   image: amir20/dozzle:v8.8.2
+  #   restart: unless-stopped
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
   #   ports:
-  #       - 3012:3012
-  #   container_name: custom_cronicle
-  #   image: bluet/cronicle-docker:0.9.39
+  #     - 9999:8080
+
+  # uptime-kuma:
+  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_uptime-kuma
+  #   image: louislam/uptime-kuma:1.23.15
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ${DOCKER_PATH_PERSISTENT}/kuma:/app/data
+  #   ports:
+  #     - 3001:3001
+
+  # glances:
+  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
+  #   image: nicolargo/glances:4.2.1
+  #   restart: unless-stopped
+  #   pid: host
+  #   ports:
+  #     - 61208:61208
+  #   command: ["glances", "-w"]
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - /var/docker/glances:/glances/conf
+
+  # # cronicle-docker:
+  # #   volumes:
+  # #       - /var/run/docker.sock:/var/run/docker.sock:rw
+  # #       - $DOCKER_PATH_PERSISTENT/cronicle/data:/opt/cronicle/data:rw
+  # #       - $DOCKER_PATH_PERSISTENT/cronicle/logs:/opt/cronicle/logs:rw
+  # #       - $DOCKER_PATH_PERSISTENT/cronicle/plugins:/opt/cronicle/plugins:rw
+  # #       - $DOCKER_PATH_PERSISTENT/cronicle/app:/app:rw
+  # #   hostname: localhost
+  # #   ports:
+  # #       - 3012:3012
+  # #   container_name: custom_cronicle
+  # #   image: bluet/cronicle-docker:0.9.39
 
 
-  heimdall:
-    image: linuxserver/heimdall:2.6.3
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_heimdall
-    restart: unless-stopped
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Jerusalem
-    volumes:
-      - ${DOCKER_PATH_PERSISTENT}/heimdall:/config
-    ports:
-      - 8070:80
+  # heimdall:
+  #   image: linuxserver/heimdall:2.6.3
+  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_heimdall
+  #   restart: unless-stopped
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Asia/Jerusalem
+  #   volumes:
+  #     - ${DOCKER_PATH_PERSISTENT}/heimdall:/config
+  #   ports:
+  #     - 8070:80
 
-  homarr:
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_homarr
-    image: ghcr.io/ajnart/homarr:v0.15.7
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-      - ${DOCKER_PATH_PERSISTENT}/homarr/configs:/app/data/configs
-      - ${DOCKER_PATH_PERSISTENT}/homarr/icons:/app/public/icons
-      - ${DOCKER_PATH_PERSISTENT}/homarr/data:/data
-    ports:
-      - '7575:7575'      
+  # homarr:
+  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_homarr
+  #   image: ghcr.io/ajnart/homarr:v0.15.7
+  #   restart: unless-stopped
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
+  #     - ${DOCKER_PATH_PERSISTENT}/homarr/configs:/app/data/configs
+  #     - ${DOCKER_PATH_PERSISTENT}/homarr/icons:/app/public/icons
+  #     - ${DOCKER_PATH_PERSISTENT}/homarr/data:/data
+  #   ports:
+  #     - '7575:7575'      
