@@ -106,7 +106,7 @@ services:
   glances:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
     image: nicolargo/glances:4.2.1
-    restart: always
+    restart: unless-stopped
     pid: host
     ports:
       - 61208:61208

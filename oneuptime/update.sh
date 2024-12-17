@@ -3,7 +3,7 @@ services:
     image: duplicati/duplicati:2.0.9.108
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
-    restart: always
+    restart: unless-stopped
     # Recommendation: Duplicati needs root user to get access to all files
     user: "${DOCKER_ROOTPUID:-0}:${DOCKER_ROOTPGID:-0}"
     network_mode: bridge
