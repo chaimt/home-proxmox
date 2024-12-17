@@ -1,0 +1,119 @@
+services:
+  duplicati:
+    image: duplicati/duplicati:2.0.9.108
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
+    hostname: duplicati
+    restart: unless-stopped
+    # Recommendation: Duplicati needs root user to get access to all files
+    user: "${DOCKER_ROOTPUID:-0}:${DOCKER_ROOTPGID:-0}"
+    network_mode: bridge
+    ports:
+      - 8200:8200
+    volumes:
+      - ${DOCKER_PATH_PERSISTENT}/duplicati_data:/data:rw
+      - /docker/backups:/backups:rw
+      - ${DOCKER_PATH_PERSISTENT}:/source:ro
+      - ${CONFIG_PATH}:/config:ro      
+    environment:
+      - TZ=${DOCKER_TZ}
+
+  watchtower:
+    image: containrrr/watchtower:1.7.1
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    environment:
+      - WATCHTOWER_POLL_INTERVAL=86400
+      - WATCHTOWER_TRACE=true
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_MONITOR_ONLY=true
+      - WATCHTOWER_DEBUG=true
+      - WATCHTOWER_NOTIFICATIONS=shoutrrr
+      - WATCHTOWER_NOTIFICATION_URL=telegram://${BOT_TOKEN}@telegram/?channels=${CHAT_ID}
+
+  dozzle:
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
+    image: amir20/dozzle:v8.8.2
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9999:8080
+
+
+  glances:
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
+    image: nicolargo/glances:4.2.1
+    restart: always
+    pid: host
+    ports:
+      - 61208:61208
+    command: ["glances", "-w"]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/docker/glances:/glances/conf
+
+
+  app:
+    build: .
+    ports:
+      - 8000:8000
+      - 5678:5678
+    volumes:
+      - .:/code
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+    restart: always
+    depends_on:
+      - ollama
+      - ollama-webui
+    networks:
+      - ollama-docker
+      
+  ollama:
+    volumes:
+      - ./ollama/ollama:/root/.ollama
+    container_name: ollama
+    pull_policy: always
+    tty: true
+    restart: unless-stopped
+    image: ollama/ollama:latest
+    ports:
+      - 7869:11434
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+    networks:
+      - ollama-docker
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  ollama-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: ollama-webui
+    volumes:
+      - ./ollama/ollama-webui:/app/backend/data
+    depends_on:
+      - ollama
+    ports:
+      - 8080:8080
+    environment: # https://docs.openwebui.com/getting-started/env-configuration#default_models
+      - OLLAMA_BASE_URLS=http://host.docker.internal:7869 #comma separated ollama hosts
+      - ENV=dev
+      - WEBUI_AUTH=False
+      - WEBUI_NAME=valiantlynx AI
+      - WEBUI_URL=http://localhost:8080
+      - WEBUI_SECRET_KEY=t0p-s3cr3t
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    restart: unless-stopped
+    networks:
+      - ollama-docker
+
+networks:
+  ollama-docker:
+    external: false                      # Declares a named volume for persisting application data.
