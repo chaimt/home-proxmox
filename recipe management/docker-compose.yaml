@@ -75,6 +75,11 @@ services:
       - MAX_WORKERS=1                           # Limits the number of workers to 1.
       - WEB_CONCURRENCY=1                       # Sets the concurrency level for web workers.
       - BASE_URL=https://mealie.turel.cloud     # The base URL where Mealie is accessed.
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_FROM_EMAIL=cyturel@gmail.com
+      - SMTP_USER=cyturel@gmail.com
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
 
 volumes:
   mealie-data:                                  # Declares a named volume for persisting application data.
