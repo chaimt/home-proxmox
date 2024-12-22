@@ -1,7 +1,7 @@
 services:
   openWebUI:
     image: ghcr.io/open-webui/open-webui:main
-    container_name: openwebui
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_openwebui
     hostname: openwebui
     networks:
       - traefik-net
@@ -20,12 +20,13 @@ services:
 
   ollama:
     image: ollama/ollama:latest
-    container_name: ollama
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_ollama
+    restart: unless-stopped
     hostname: ollama
     networks:
       - traefik-net
     volumes:
-      - ./ollama-local:/root/.ollama
+      - ${DOCKER_PATH_PERSISTENT}/ollama-local:/root/.ollama
 networks:
   traefik-net:
     external: true
