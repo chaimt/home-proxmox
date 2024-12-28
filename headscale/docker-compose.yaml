@@ -56,7 +56,7 @@ services:
 
   headscale:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_headscale
-    image: headscale/headscale:latest-alpine
+    image: headscale/headscale:latest
     restart: unless-stopped
     ports:
       - 8080:8080
