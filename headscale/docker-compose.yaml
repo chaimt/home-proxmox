@@ -61,6 +61,6 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ${DOCKER_PATH_PERSISTENT}/container-config:/etc/headscale
-      - ${DOCKER_PATH_PERSISTENT}/container-data:/var/lib/headscale
+      - ${DOCKER_PATH_PERSISTENT}/headscale/container-config:/etc/headscale
+      - ${DOCKER_PATH_PERSISTENT}/headscale/container-data:/var/lib/headscale
     entrypoint: headscale serve
