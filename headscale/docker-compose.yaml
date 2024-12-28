@@ -65,14 +65,14 @@ services:
       - ${DOCKER_PATH_PERSISTENT}/headscale/container-data:/var/lib/headscale
     entrypoint: headscale serve
     networks:
-      reverseproxy-nw:    
+      - reverseproxy-nw 
 
   headscale-ui:
     container_name: headscale-ui
     image: ghcr.io/gurucomputing/headscale-ui:latest
     restart: unless-stopped
     networks:
-      reverseproxy-nw:
+      - reverseproxy-nw 
 
 networks:
   reverseproxy-nw:
