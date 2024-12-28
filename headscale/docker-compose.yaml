@@ -71,6 +71,7 @@ services:
     image: ghcr.io/gurucomputing/headscale-ui:latest
     restart: unless-stopped
     ports:
-      - 8081:2019 # Expose the UI on port 8081
+      - 8082:8443
+      - 8081:8080   
     depends_on:
       - headscale
