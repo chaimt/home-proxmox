@@ -68,9 +68,11 @@ services:
     #   - reverseproxy-nw 
 
   headscale-ui:
-    container_name: headscale-ui
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_headscale-ui
     image: ghcr.io/gurucomputing/headscale-ui:latest
     restart: unless-stopped
+    ports:
+      - 80:80
     # networks:
     #   - reverseproxy-nw 
 
