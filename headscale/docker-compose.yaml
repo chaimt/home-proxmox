@@ -1,0 +1,11 @@
+services:
+  headscale:
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_headscale
+    image: headscale/headscale:latest-alpine
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    volumes:
+      - ${DOCKER_PATH_PERSISTENT}/container-config:/etc/headscale
+      - ${DOCKER_PATH_PERSISTENT}/container-data:/var/lib/headscale
+    entrypoint: headscale serve
