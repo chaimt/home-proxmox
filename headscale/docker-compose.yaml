@@ -64,16 +64,17 @@ services:
       - ${DOCKER_PATH_PERSISTENT}/headscale/container-config:/etc/headscale
       - ${DOCKER_PATH_PERSISTENT}/headscale/container-data:/var/lib/headscale
     entrypoint: headscale serve
-    networks:
-      - reverseproxy-nw 
+    # networks:
+    #   - reverseproxy-nw 
 
   headscale-ui:
     container_name: headscale-ui
     image: ghcr.io/gurucomputing/headscale-ui:latest
     restart: unless-stopped
-    networks:
-      - reverseproxy-nw 
+    # networks:
+    #   - reverseproxy-nw 
 
-networks:
-  reverseproxy-nw:
-    external: true
+# networks:
+#   reverseproxy-nw:
+#     external: true
+    
