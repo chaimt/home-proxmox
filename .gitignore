@@ -7,3 +7,4 @@ logs/
 # Ignore dynaconf secret files
 .secrets.*
 .env
+.qodo
