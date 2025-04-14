@@ -45,17 +45,17 @@ services:
     ports:
       - 9999:8080
 
-  glances:
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
-    image: nicolargo/glances:4.3.1
-    restart: unless-stopped
-    pid: host
-    ports:
-      - 61208:61208
-    command: ["glances", "-w"]
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /var/docker/glances:/glances/conf
+  # glances:
+  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
+  #   image: nicolargo/glances:4.3.1
+  #   restart: unless-stopped
+  #   pid: host
+  #   ports:
+  #     - 61208:61208
+  #   command: ["glances", "-w"]
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - /var/docker/glances:/glances/conf
 
   n8n:
     image: n8nio/n8n:1.88.0
