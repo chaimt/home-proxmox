@@ -1,6 +1,6 @@
 services:
   duplicati:
-    image: duplicati/duplicati:2.1.0.111
+    image: duplicati/duplicati:2.1.0.114
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -21,7 +21,7 @@ services:
 
   glances:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
-    image: nicolargo/glances:4.2.1
+    image: nicolargo/glances:4.3.1
     restart: unless-stopped
     pid: host
     ports:
