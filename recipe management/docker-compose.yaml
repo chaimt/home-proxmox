@@ -1,3 +1,9 @@
+volumes:
+  mealie-data:                                  # Declares a named volume for persisting application data.
+
+networks:
+  zabbix-net:
+    driver: bridge
 services:
   duplicati:
     image: duplicati/duplicati:2.1.0.114
@@ -92,9 +98,4 @@ services:
       - SMTP_USER=cyturel@gmail.com
       - SMTP_PASSWORD=${SMTP_PASSWORD}
 
-volumes:
-  mealie-data:                                  # Declares a named volume for persisting application data.
 
-networks:
-  zabbix-net:
-    driver: bridge

@@ -1,3 +1,6 @@
+networks:
+  zabbix-net:
+    driver: bridge
 services:
   duplicati:
     image: duplicati/duplicati:2.1.0.114

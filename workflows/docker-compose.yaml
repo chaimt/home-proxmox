@@ -2,6 +2,9 @@ volumes:
   n8n_storage:
     external: true
 
+networks:
+  zabbix-network:
+    external: true
 services:
   duplicati:
     image: duplicati/duplicati:2.1.0.114
@@ -77,7 +80,7 @@ services:
 
   
 
-    zabbix-agent:
+  zabbix-agent:
     image: zabbix/zabbix-agent:alpine-latest
     container_name: zabbix-agent
     restart: unless-stopped
