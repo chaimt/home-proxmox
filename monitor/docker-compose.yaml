@@ -34,7 +34,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v8.12.7
+    image: amir20/dozzle:v8.12.10
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -50,17 +50,17 @@ services:
     ports:
       - 3001:3001
 
-  glances:
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
-    image: nicolargo/glances:4.3.1
-    restart: unless-stopped
-    pid: host
-    ports:
-      - 61208:61208
-    command: ["glances", "-w"]
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /var/docker/glances:/glances/conf
+  # glances:
+  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
+  #   image: nicolargo/glances:4.3.1
+  #   restart: unless-stopped
+  #   pid: host
+  #   ports:
+  #     - 61208:61208
+  #   command: ["glances", "-w"]
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - /var/docker/glances:/glances/conf
 
 
   heimdall:
@@ -87,3 +87,15 @@ services:
       - ${DOCKER_PATH_PERSISTENT}/homarr/data:/data
     ports:
       - '7575:7575'      
+
+  zabbix-agent:
+    image: zabbix/zabbix-agent:alpine-latest
+    container_name: zabbix-agent
+    restart: unless-stopped
+    environment:
+      - ZBX_SERVER_HOST=10.0.0.105  # replace with your actual Zabbix server hostname or IP
+      - ZBX_HOSTNAME=zabbix-monitor
+    networks:
+      - zabbix-net
+    volumes:
+      - /etc/localtime:/etc/localtime:ro

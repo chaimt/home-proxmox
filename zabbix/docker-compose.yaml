@@ -44,7 +44,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v8.12.7
+    image: amir20/dozzle:v8.12.10
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -138,7 +138,7 @@ services:
     image: ${ZABBIX_AGENT_IMAGE_TAG}
     environment:
       ZBX_HOSTNAME: Zabbix server
-      ZBX_SERVER_HOST: zabbix-server
+      ZBX_SERVER_HOST: 10.0.0.105
     networks:
       - zabbix-network
     restart: unless-stopped
