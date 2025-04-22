@@ -41,18 +41,29 @@ services:
     ports:
       - 9999:8080
 
-
-  glances:
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
-    image: nicolargo/glances:4.3.1
+  zabbix-agent:
+    image: zabbix/zabbix-agent:alpine-latest
+    container_name: zabbix-agent
     restart: unless-stopped
-    pid: host
-    ports:
-      - 61208:61208
-    command: ["glances", "-w"]
+    environment:
+      - ZBX_SERVER_HOST=10.0.0.105  # replace with your actual Zabbix server hostname or IP
+      - ZBX_HOSTNAME=zabbix-mealie
+    networks:
+      - zabbix-net
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /var/docker/glances:/glances/conf
+      - /etc/localtime:/etc/localtime:ro
+
+  # glances:
+  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
+  #   image: nicolargo/glances:4.3.1
+  #   restart: unless-stopped
+  #   pid: host
+  #   ports:
+  #     - 61208:61208
+  #   command: ["glances", "-w"]
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - /var/docker/glances:/glances/conf
 
 
   mealie:
@@ -83,3 +94,7 @@ services:
 
 volumes:
   mealie-data:                                  # Declares a named volume for persisting application data.
+
+networks:
+  zabbix-net:
+    driver: bridge
