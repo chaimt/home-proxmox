@@ -99,6 +99,6 @@ services:
       - ZBX_SERVER_HOST=10.0.0.105  # replace with your actual Zabbix server hostname or IP
       - ZBX_HOSTNAME=zabbix-monitor
     networks:
-      - zabbix-net
+      - zabbix-network
     volumes:
       - /etc/localtime:/etc/localtime:ro

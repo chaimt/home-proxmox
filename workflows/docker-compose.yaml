@@ -5,6 +5,7 @@ volumes:
 networks:
   zabbix-network:
     external: true
+
 services:
   duplicati:
     image: duplicati/duplicati:2.1.0.114
@@ -48,18 +49,6 @@ services:
     ports:
       - 9999:8080
 
-  # glances:
-  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
-  #   image: nicolargo/glances:4.3.1
-  #   restart: unless-stopped
-  #   pid: host
-  #   ports:
-  #     - 61208:61208
-  #   command: ["glances", "-w"]
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
-  #     - /var/docker/glances:/glances/conf
-
   n8n:
     image: n8nio/n8n:1.88.0
     restart: unless-stopped
@@ -88,6 +77,6 @@ services:
       - ZBX_SERVER_HOST=10.0.0.105  # replace with your actual Zabbix server hostname or IP
       - ZBX_HOSTNAME=zabbix-workflows
     networks:
-      - zabbix-net
+      - zabbix-network
     volumes:
       - /etc/localtime:/etc/localtime:ro
