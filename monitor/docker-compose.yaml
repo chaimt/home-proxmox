@@ -1,5 +1,5 @@
 networks:
-  zabbix-net:
+  zabbix-network:
     driver: bridge
 services:
   duplicati:

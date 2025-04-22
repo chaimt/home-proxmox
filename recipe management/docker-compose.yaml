@@ -2,7 +2,7 @@ volumes:
   mealie-data:                                  # Declares a named volume for persisting application data.
 
 networks:
-  zabbix-net:
+  zabbix-network:
     driver: bridge
 services:
   duplicati:
