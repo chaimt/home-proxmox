@@ -12,8 +12,7 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Lifecycle manager for the FastAPI application"""
-    ivrit.load_model()
+    """Lifecycle manager for the FastAPI application"""    
     
     yield
     

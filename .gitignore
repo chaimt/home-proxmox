@@ -4,7 +4,6 @@
 .idea/
 venv
 .qodo
-
 mcp.json
 
 # Python
@@ -38,11 +37,12 @@ coverage.xml
 cover/
 
 log/
-src/log/
+.root-config/
 
 .DS_Store
 
-requirements.txt
+
 .env
+.env.bak
 logs/
 .task/remote/

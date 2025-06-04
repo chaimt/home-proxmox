@@ -1,0 +1,18 @@
+networks:
+  model-network:
+    driver: bridge
+
+services:
+  model-serving:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: model_serving
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./models:/app/models
+      - ./config:/app/config
+    environment:
+      - TZ=${DOCKER_TZ:-UTC}

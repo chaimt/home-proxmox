@@ -1,25 +1,40 @@
-# Use Python 3.11 as the base image
 FROM python:3.11-slim
 
-# Set working directory
-WORKDIR /app
-
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y curl openssh-client git && \
+    pip install --no-cache-dir --upgrade pip && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install uv using pip instead of the install script
+# Set up environment variables
+ENV VIRTUAL_ENV=/app/.venv \
+    SSH_DIR=/root/.ssh
+
+# Configure SSH for GitHub access
+RUN mkdir -p -m 0700 $SSH_DIR && \
+    ssh-keyscan github.com >> $SSH_DIR/known_hosts && \
+    git config --global url."git@github.com:".insteadOf "https://github.com/"
+
+# Set up SSH key
+ARG SSH_PRIVATE_KEY
+RUN echo "$SSH_PRIVATE_KEY" > $SSH_DIR/id_rsa && \
+    chmod 600 $SSH_DIR/id_rsa
+
+# Set up application
+WORKDIR /app
 RUN pip install uv
 
-COPY pyproject.toml uv.lock .
-RUN uv sync
+# Install dependencies
+COPY pyproject.toml uv.lock /app/
+RUN uv sync --frozen
 
 # Copy application code
-COPY . .
+RUN mkdir -p /app/src
+COPY src /app/src
+COPY entrypoint.sh /app/entrypoint.sh
 
-# Expose the port the app runs on
-EXPOSE 8000
+# Clean up SSH
+RUN rm -rf ~/.ssh
 
-# Command to run the application
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run application
+CMD ["/app/entrypoint.sh"]

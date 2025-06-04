@@ -42,6 +42,8 @@ async def health_check(local_model=None):
     if local_model is None:
         global model
         if model is None:
+            load_model()
+        if model is None:
             return JSONResponse(
                 status_code=503,
                 content={"status": "unhealthy", "message": "Model not loaded"}
@@ -66,6 +68,9 @@ async def transcribe_audio(
     """
     if local_model is None:
         global model
+        if model is None:
+            load_model()
+        
         if model is None:
             raise HTTPException(status_code=503, detail="Model not loaded")
     local_model = model
