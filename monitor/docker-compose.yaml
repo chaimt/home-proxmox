@@ -13,7 +13,7 @@ services:
     ports:
       - 8200:8200
     volumes:
-      - ${DOCKER_PATH_PERSISTENT}/duplicati_data:/data:rw
+      - ${DOCKER_PATH_PERSISTENT}:/data:rw
       - /docker/backups:/backups:rw
       - ${DOCKER_PATH_PERSISTENT}:/source:ro
       - ${CONFIG_PATH}:/config:ro      
@@ -53,17 +53,6 @@ services:
     ports:
       - 3001:3001
 
-  # glances:
-  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
-  #   image: nicolargo/glances:4.3.1
-  #   restart: unless-stopped
-  #   pid: host
-  #   ports:
-  #     - 61208:61208
-  #   command: ["glances", "-w"]
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
-  #     - /var/docker/glances:/glances/conf
 
 
   heimdall:
