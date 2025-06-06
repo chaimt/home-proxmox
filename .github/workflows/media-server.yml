@@ -49,3 +49,6 @@ jobs:
           subject-name: index.docker.io/chaimt/model-server
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
+          predicate-type: https://slsa.dev/provenance/v1
+          registry-username: ${{ secrets.DOCKER_USERNAME }}
+          registry-password: ${{ secrets.DOCKER_PASSWORD }}
