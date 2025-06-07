@@ -23,6 +23,7 @@ model_name = None
 def load_model():
     global model
     global model_name
+    logger.info("Starting model loading process...")
     try:    
         logger.info("Loading Whisper model...")
         model = faster_whisper.WhisperModel(
@@ -31,7 +32,7 @@ def load_model():
             compute_type="int8"  # Options: int8, int16, float16, float32
         )
         model_name = "ivrit-ai/whisper-large-v3-turbo-ct2"
-        logger.info("Model loaded successfully!")
+        logger.info(f"Model {model_name} loaded successfully!")
     except Exception as e:
         logger.error(f"Failed to load model: {e}")
         raise e
@@ -39,16 +40,20 @@ def load_model():
 @router.get("/health")
 async def health_check(local_model=None):
     """Check if model is loaded and ready"""
+    logger.info("Health check requested")
     if local_model is None:
         global model
         if model is None:
+            logger.info("Model not loaded, attempting to load...")
             load_model()
         if model is None:
+            logger.error("Model failed to load during health check")
             return JSONResponse(
                 status_code=503,
                 content={"status": "unhealthy", "message": "Model not loaded"}
             )
     global model_name
+    logger.info("Health check successful")
     return {"status": "healthy", "message": "Model is ready", "model_name": model_name} 
 
 @router.post("/transcribe")
@@ -65,18 +70,28 @@ async def transcribe_audio(
         file: Audio file (WAV, MP3, M4A, etc.)
         language: Language code (e.g., 'en', 'he', 'ar'). Auto-detect if None
         task: Either 'transcribe' or 'translate'
+        
+    Returns:
+        JSON response containing:
+            - detected_language: Detected language code
+            - segments: List of transcribed segments with timing and confidence
+            - text: Full transcribed text
     """
+    logger.info(f"Received transcription request - File: {file.filename}, Language: {language}, Task: {task}")
     if local_model is None:
         global model
         if model is None:
+            logger.info("Model not loaded, attempting to load...")
             load_model()
         
         if model is None:
+            logger.error("Model failed to load during transcription request")
             raise HTTPException(status_code=503, detail="Model not loaded")
     local_model = model
     
     # Check file type
     if not file.content_type.startswith('audio/'):
+        logger.warning(f"Invalid file type received: {file.content_type}")
         raise HTTPException(
             status_code=400, 
             detail="File must be an audio file"
@@ -84,6 +99,7 @@ async def transcribe_audio(
     
     try:
         # Save uploaded file temporarily
+        logger.debug("Saving uploaded file to temporary location")
         with tempfile.NamedTemporaryFile(delete=False, suffix=".tmp") as temp_file:
             content = await file.read()
             temp_file.write(content)
@@ -92,6 +108,7 @@ async def transcribe_audio(
         logger.info(f"Processing file: {file.filename}")
         
         # Transcribe using faster-whisper
+        logger.debug("Starting transcription process")
         segments, info = local_model.transcribe(
             temp_file_path,
             language=language,
@@ -102,6 +119,7 @@ async def transcribe_audio(
         )
         
         # Collect results
+        logger.debug("Processing transcription results")
         transcription_segments = []
         full_text = ""
         
@@ -116,8 +134,10 @@ async def transcribe_audio(
             full_text += segment.text.strip() + " "
         
         # Clean up temporary file
+        logger.debug("Cleaning up temporary file")
         os.unlink(temp_file_path)
         
+        logger.info("Transcription completed successfully")
         return {
             "filename": file.filename,
             "language": info.language,
@@ -132,8 +152,10 @@ async def transcribe_audio(
         # Clean up temporary file in case of error
         if 'temp_file_path' in locals():
             try:
+                logger.debug("Attempting to clean up temporary file after error")
                 os.unlink(temp_file_path)
             except:
+                logger.warning("Failed to clean up temporary file")
                 pass
         
         logger.error(f"Transcription error: {e}")
@@ -154,15 +176,19 @@ async def transcribe_from_url(
         language: Language code (e.g., 'en', 'he', 'ar'). Auto-detect if None
         task: Either 'transcribe' or 'translate'
     """
+    logger.info(f"Received URL transcription request - URL: {audio_url}, Language: {language}, Task: {task}")
     if model is None:
+        logger.error("Model not available for URL transcription")
         raise HTTPException(status_code=503, detail="Model not loaded")
     
     try:
         # Download audio file
+        logger.info("Downloading audio file from URL")
         response = requests.get(audio_url, timeout=30)
         response.raise_for_status()
         
         # Save to temporary file
+        logger.debug("Saving downloaded file to temporary location")
         with tempfile.NamedTemporaryFile(delete=False, suffix=".tmp") as temp_file:
             temp_file.write(response.content)
             temp_file_path = temp_file.name
@@ -170,6 +196,7 @@ async def transcribe_from_url(
         logger.info(f"Processing URL: {audio_url}")
         
         # Transcribe
+        logger.debug("Starting transcription process")
         segments, info = model.transcribe(
             temp_file_path,
             language=language,
@@ -180,6 +207,7 @@ async def transcribe_from_url(
         )
         
         # Collect results
+        logger.debug("Processing transcription results")
         transcription_segments = []
         full_text = ""
         
@@ -194,8 +222,10 @@ async def transcribe_from_url(
             full_text += segment.text.strip() + " "
         
         # Clean up
+        logger.debug("Cleaning up temporary file")
         os.unlink(temp_file_path)
         
+        logger.info("URL transcription completed successfully")
         return {
             "url": audio_url,
             "language": info.language,
@@ -209,8 +239,10 @@ async def transcribe_from_url(
     except Exception as e:
         if 'temp_file_path' in locals():
             try:
+                logger.debug("Attempting to clean up temporary file after error")
                 os.unlink(temp_file_path)
             except:
+                logger.warning("Failed to clean up temporary file")
                 pass
         
         logger.error(f"URL transcription error: {e}")

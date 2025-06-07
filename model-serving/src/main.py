@@ -3,10 +3,11 @@ from fastapi import FastAPI
 import faster_whisper
 import logging
 from contextlib import asynccontextmanager
+from config import AppSettings
 from routers import ivrit
 from routers import gemini
 # Set up logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=AppSettings().log_level)
 logger = logging.getLogger(__name__)
 
 
@@ -30,7 +31,7 @@ app = FastAPI(
 @app.get("/")
 async def root():
     """Health check endpoint"""
-    return {"message": "Whisper Speech-to-Text API is running"}
+    return {"message": "Model Server is running"}
 
 
 @app.get(
