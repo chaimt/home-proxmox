@@ -15,6 +15,7 @@ services:
       - ./config:/app/config
     environment:
       - TZ=${DOCKER_TZ}
+      - log_level=${log_level:-info}
 
   duplicati:
     image: duplicati/duplicati:2.1.0.119
