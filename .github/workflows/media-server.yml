@@ -7,6 +7,8 @@ on:
       - main
     paths:
       - 'model-serving/**'
+      - '.github/workflows/media-server.yml'
+      
   # release:
   #   types: [published]
 
