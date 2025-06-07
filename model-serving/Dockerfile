@@ -36,5 +36,12 @@ COPY entrypoint.sh /app/entrypoint.sh
 # Clean up SSH
 RUN rm -rf ~/.ssh
 
+ARG BUILD_DATE
+ENV BUILD_DATE=${BUILD_DATE}
+
+ARG GIT_HASH
+ENV GIT_HASH=${GIT_HASH}
+
+
 # Run application
 CMD ["/app/entrypoint.sh"]
