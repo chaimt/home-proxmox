@@ -64,5 +64,20 @@ services:
       ports:
         - "8080:80"
       volumes:
-        - ./data::/books
+        - ./data:/books
       restart: unless-stopped
+
+  stirling-pdf:
+      image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
+      container_name: ${DOCKER_CONTAINER_NAME_PREFIX}stirling-pdf
+      ports:
+        - "8090:80"
+      volumes:
+        - ./StirlingPDF/trainingData:/usr/share/tessdata # Required for extra OCR languages
+        - ./StirlingPDF/extraConfigs:/configs
+        - ./StirlingPDF/customFiles:/customFiles/
+        - ./StirlingPDF/logs:/logs/
+        - ./StirlingPDF/pipeline:/pipeline/
+      restart: unless-stopped
+
+
