@@ -28,6 +28,15 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+# Configure maximum file size to remove limitations (100GB)
+app.add_middleware(
+    "fastapi.middleware.cors.CORSMiddleware",
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 @app.get("/")
 async def root():
     """Health check endpoint"""
@@ -50,4 +59,10 @@ app.include_router(gemini.router)
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(
+        app, 
+        host="0.0.0.0", 
+        port=8000,
+        limit_concurrency=1000,
+        timeout_keep_alive=30
+    )

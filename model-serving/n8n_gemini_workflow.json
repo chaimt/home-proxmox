@@ -1,0 +1,214 @@
+{
+  "name": "Gemini File Processing Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "url": "http://localhost:8000/gemini/execute",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "multipart/form-data"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "file",
+              "value": "={{ $json.file }}",
+              "parameterType": "formData"
+            },
+            {
+              "name": "prompt",
+              "value": "Translate this audio clip in hebrew. Note there are two people in it, and transcribe the conversation in detail in hebrew.",
+              "parameterType": "formData"
+            },
+            {
+              "name": "mime_type",
+              "value": "audio/mpeg",
+              "parameterType": "formData"
+            },
+            {
+              "name": "local_model",
+              "value": "gemini-2.5-flash",
+              "parameterType": "formData"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "gemini-request",
+      "name": "Call Gemini Execute",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// This node can be used to prepare the file data before sending to Gemini\n// For example, reading a file from disk or processing file data\n\n// Example: Read file from disk (uncomment and modify as needed)\n// const fs = require('fs');\n// const filePath = '/path/to/your/audio.mp3';\n// const fileBuffer = fs.readFileSync(filePath);\n// const fileName = 'audio.mp3';\n\n// For this example, we'll create a mock file object\n// In a real scenario, you might get this from a previous node\nconst mockFile = {\n  name: 'audio.mp3',\n  type: 'audio/mpeg',\n  size: 1024,\n  data: Buffer.from('mock audio data')\n};\n\nreturn [{\n  json: {\n    file: mockFile,\n    timestamp: new Date().toISOString(),\n    workflowId: 'gemini-file-processing'\n  }\n}];"
+      },
+      "id": "prepare-data",
+      "name": "Prepare File Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        60,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Process the response from Gemini\nconst response = $input.first().json;\n\n// Extract the text response\nconst geminiText = response.text;\n\n// You can add additional processing here\n// For example, save to database, send notifications, etc.\n\nreturn [{\n  json: {\n    originalResponse: response,\n    processedText: geminiText,\n    wordCount: geminiText.split(' ').length,\n    processedAt: new Date().toISOString(),\n    status: 'success'\n  }\n}];"
+      },
+      "id": "process-response",
+      "name": "Process Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "check-success",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "success",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "success-check",
+      "name": "Check Success",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        600,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Handle successful processing\nconst data = $input.first().json;\n\n// Example: Send notification or log success\nconsole.log('Gemini processing successful:', data.processedText.substring(0, 100) + '...');\n\nreturn [{\n  json: {\n    message: 'Gemini processing completed successfully',\n    summary: data.processedText.substring(0, 200) + '...',\n    wordCount: data.wordCount,\n    timestamp: data.processedAt\n  }\n}];"
+      },
+      "id": "success-handler",
+      "name": "Success Handler",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Handle errors or failures\nconst error = $input.first().json;\n\n// Example: Send error notification or log error\nconsole.error('Gemini processing failed:', error);\n\nreturn [{\n  json: {\n    message: 'Gemini processing failed',\n    error: error,\n    timestamp: new Date().toISOString(),\n    status: 'error'\n  }\n}];"
+      },
+      "id": "error-handler",
+      "name": "Error Handler",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        400
+      ]
+    }
+  ],
+  "connections": {
+    "Prepare File Data": {
+      "main": [
+        [
+          {
+            "node": "Call Gemini Execute",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Gemini Execute": {
+      "main": [
+        [
+          {
+            "node": "Process Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Response": {
+      "main": [
+        [
+          {
+            "node": "Check Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Success": {
+      "main": [
+        [
+          {
+            "node": "Success Handler",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error Handler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "id": "gemini-file-processing",
+  "tags": [
+    {
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z",
+      "id": "gemini",
+      "name": "gemini"
+    },
+    {
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z",
+      "id": "file-processing",
+      "name": "file-processing"
+    }
+  ]
+} 
