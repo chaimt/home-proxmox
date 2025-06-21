@@ -16,6 +16,7 @@ services:
     environment:
       - TZ=${DOCKER_TZ}
       - log_level=${log_level:-info}
+      - gemini_api=${gemini_api}
 
   duplicati:
     image: duplicati/duplicati:2.1.0.119
