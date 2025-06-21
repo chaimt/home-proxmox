@@ -1,0 +1,48 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "FastAPI",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "src.main:app",
+                "--reload",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8040"
+            ],
+            "jinja": true,
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE": "Delta",
+                "SPANNER_ENABLE_END_TO_END_TRACING": "true"
+            }
+        },        
+        {
+            "name": "Python: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE": "Delta",
+                "SPANNER_ENABLE_END_TO_END_TRACING": "true",
+                "OTEL_EXPORTER_OTLP_METRICS_TIMEOUT": "60000",
+                "OTEL_EXPORTER_OTLP_TIMEOUT": "60000"
+    
+            }
+        }
+
+
+
+    ]
+}

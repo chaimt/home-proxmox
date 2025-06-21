@@ -50,7 +50,7 @@ async def execute(
         temp_file.write(content)
         temp_file_path = temp_file.name
 
-        myfile = client.files.upload(file=temp_file_path, config=UploadFileConfig(mime_type=mime_type))
+        myfile = client.files.upload(file=temp_file_path)#, config=UploadFileConfig(mime_type=mime_type))
 
         response = client.models.generate_content(
             model=local_model, contents=[prompt, myfile]
