@@ -25,14 +25,15 @@ async def execute(
 ):
     if not local_model:
         local_model = "gemini-2.5-flash"
+    config = None
+    if not mime_type:
+        mime_type, _ = mimetypes.guess_type(file.filename)
+    config=UploadFileConfig(mime_type=mime_type)        
     client = genai.Client(api_key=AppSettings().gemini_api)
     file_extension = os.path.splitext(file.filename)[1]
     logger.info(f"Processing file: {file.filename} with model: {local_model} and mime_type: {mime_type}")
     logger.info(f"Using prompt: {prompt}")
     
-    config = None
-    if mime_type:
-        config=UploadFileConfig(mime_type=mime_type)        
 
     with tempfile.NamedTemporaryFile(delete=False, suffix=file_extension) as temp_file:
         logger.info(f"Writing temporary file to: {temp_file.name}")
