@@ -1,5 +1,6 @@
 import logging
 from google import genai
+from google.genai.types import UploadFileConfig
 from fastapi import APIRouter, File, UploadFile, HTTPException
 import tempfile
 import os
@@ -25,6 +26,8 @@ async def execute(
         local_model = "gemini-2.5-flash"
     client = genai.Client(api_key=AppSettings().gemini_api)
     file_extension = os.path.splitext(file.filename)[1]
+    logger.info(f"Processing file: {file.filename} with model: {local_model}")
+    logger.info(f"Using prompt: {prompt}")
     
     # Determine MIME type based on file extension
     mime_type, _ = mimetypes.guess_type(file.filename)
@@ -34,6 +37,7 @@ async def execute(
             '.mp3': 'audio/mpeg',
             '.wav': 'audio/wav',
             '.m4a': 'audio/mp4',
+            '.m4a': 'audio/mp4a-latm',
             '.aac': 'audio/aac',
             '.ogg': 'audio/ogg',
             '.flac': 'audio/flac',
@@ -46,7 +50,7 @@ async def execute(
         temp_file.write(content)
         temp_file_path = temp_file.name
 
-        myfile = client.files.upload(file=temp_file_path, mime_type=mime_type)
+        myfile = client.files.upload(file=temp_file_path, config=UploadFileConfig(mime_type=mime_type))
 
         response = client.models.generate_content(
             model=local_model, contents=[prompt, myfile]
