@@ -42,7 +42,7 @@ async def root():
     tags=["Health"],
 )
 def get_env():
-    return {"env": dict(os.environ)}
+    return {"env": dict(os.environ), "settings": AppSettings().model_dump()}
 
 # Include routers
 app.include_router(ivrit.router)

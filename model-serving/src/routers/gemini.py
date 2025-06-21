@@ -15,13 +15,13 @@ logger = logging.getLogger(__name__)
 
 
 @router.post("/execute")
-async def health_check(
-    prompt: str = "Translate this audio clip in hebrew. Note there are two people in it, and transcribe the conversation in detail in hebrew.",
-    local_model=None,
+async def execute(
     file: UploadFile = File(...),
+    prompt: str = "Translate this audio clip in hebrew. Note there are two people in it, and transcribe the conversation in detail in hebrew.",
+    local_model=None,    
 ):
     if not local_model:
-        local_model = "gemini-2.0-flash"
+        local_model = "gemini-2.5-flash"
     client = genai.Client(api_key=AppSettings().gemini_api)
     file_extension = os.path.splitext(file.filename)[1]
     with tempfile.NamedTemporaryFile(delete=False, suffix=file_extension) as temp_file:
