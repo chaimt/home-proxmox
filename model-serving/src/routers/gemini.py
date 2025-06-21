@@ -27,8 +27,8 @@ async def execute(
         local_model = "gemini-2.5-flash"
     config = None
     if not mime_type:
+        logger.info(f"No mime_type provided, attempting to guess from filename: {file.filename}")
         mime_type, _ = mimetypes.guess_type(file.filename)
-    config=UploadFileConfig(mime_type=mime_type)        
     client = genai.Client(api_key=AppSettings().gemini_api)
     file_extension = os.path.splitext(file.filename)[1]
     logger.info(f"Processing file: {file.filename} with model: {local_model} and mime_type: {mime_type}")
@@ -41,7 +41,7 @@ async def execute(
         temp_file.write(content)
         temp_file_path = temp_file.name
 
-        myfile = client.files.upload(file=temp_file_path, config=config)
+        myfile = client.files.upload(file=temp_file_path, config=UploadFileConfig(mime_type=mime_type))
 
         response = client.models.generate_content(
             model=local_model, contents=[prompt, myfile]
