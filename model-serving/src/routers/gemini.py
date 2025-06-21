@@ -68,7 +68,6 @@ async def execute(
     """
     if not local_model:
         local_model = "gemini-2.5-flash"
-    config = None
     if not mime_type:
         logger.info(f"No mime_type provided, attempting to guess from filename: {file.filename}")
         mime_type, _ = mimetypes.guess_type(file.filename)
