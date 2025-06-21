@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 from config import AppSettings
 from routers import ivrit
 from routers import gemini
+from fastapi.middleware.cors import CORSMiddleware
 # Set up logging
 logging.basicConfig(level=AppSettings().log_level)
 logger = logging.getLogger(__name__)
@@ -28,14 +29,6 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Configure maximum file size to remove limitations (100GB)
-app.add_middleware(
-    "fastapi.middleware.cors.CORSMiddleware",
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 @app.get("/")
 async def root():
