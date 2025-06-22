@@ -16,6 +16,11 @@ router = APIRouter(
 logger = logging.getLogger(__name__)
 
 
+from starlette.formparsers import MultiPartParser
+
+MultiPartParser.max_part_size = 100 * 1024 * 1024  # 10MB
+MultiPartParser.max_file_size = 200 * 1024 * 1024   # 20MB
+
 @router.post("/execute")
 async def execute(
     file: UploadFile = File(...),
