@@ -88,5 +88,9 @@ if __name__ == "__main__":
         app, 
         host="0.0.0.0", 
         port=8080,
-        log_level="debug"
+        log_level="debug",
+        limit_concurrency=  1000,
+        timeout_keep_alive= 30,
+        limit_max_requests= 10000,
+
     )

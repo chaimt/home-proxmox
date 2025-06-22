@@ -22,10 +22,4 @@ exec uvicorn src.main:app \
     --log-level debug \
     --limit-concurrency 1000 \
     --timeout-keep-alive 30 \
-    --limit-max-requests 10000 \
-    --limit-max-requests-jitter 1000 \
-    --limit-request-line 8192 \
-    --limit-request-fields 100 \
-    --limit-request-field-size 8192 \
-    --http httptools \
-    --loop uvloop 
+    --limit-max-requests 10000 
