@@ -7,9 +7,25 @@ from config import AppSettings
 from routers import ivrit
 from routers import gemini
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.requests import Request
+from starlette.responses import Response
 # Set up logging
 logging.basicConfig(level=AppSettings().log_level)
 logger = logging.getLogger(__name__)
+
+
+class LargeFileMiddleware(BaseHTTPMiddleware):
+    """Middleware to handle large file uploads"""
+    
+    async def dispatch(self, request: Request, call_next):
+        # Set larger limits for multipart form data
+        if request.method == "POST" and "multipart/form-data" in request.headers.get("content-type", ""):
+            # Increase the maximum size for multipart requests
+            request.scope["max_content_size"] = 200 * 1024 * 1024  # 200MB
+        
+        response = await call_next(request)
+        return response
 
 
 @asynccontextmanager
@@ -28,6 +44,22 @@ app = FastAPI(
     docs_url="/swagger",
     lifespan=lifespan
 )
+
+# Add middleware for large file uploads
+app.add_middleware(LargeFileMiddleware)
+
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Set file size limits for FastAPI
+app.state.max_file_size = 200 * 1024 * 1024  # 200MB
+app.state.max_part_size = 100 * 1024 * 1024  # 100MB
 
 
 @app.get("/")
@@ -56,6 +88,5 @@ if __name__ == "__main__":
         app, 
         host="0.0.0.0", 
         port=8080,
-        limit_concurrency=1000,
-        timeout_keep_alive=30
+        log_level="debug"
     )

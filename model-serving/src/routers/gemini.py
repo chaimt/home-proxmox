@@ -1,10 +1,11 @@
 import logging
 from google import genai
 from google.genai.types import UploadFileConfig
-from fastapi import APIRouter, File, UploadFile, HTTPException
+from fastapi import APIRouter, File, UploadFile, HTTPException, Form
 import tempfile
 import os
 import mimetypes
+from starlette.formparsers import MultiPartParser
 
 from config import AppSettings
 
@@ -15,18 +16,32 @@ router = APIRouter(
 
 logger = logging.getLogger(__name__)
 
+# Configure multipart parser for large files
+MultiPartParser.max_file_size = 200 * 1024 * 1024  # 200MB
+MultiPartParser.max_part_size = 100 * 1024 * 1024  # 100MB
 
-from starlette.formparsers import MultiPartParser
-
-MultiPartParser.max_part_size = 100 * 1024 * 1024  # 10MB
-MultiPartParser.max_file_size = 200 * 1024 * 1024   # 20MB
+@router.post("/test-upload")
+async def test_upload(file: UploadFile = File(...)):
+    """Test endpoint to verify file upload limits"""
+    try:
+        content = await file.read()
+        file_size = len(content)
+        return {
+            "filename": file.filename,
+            "size_bytes": file_size,
+            "size_mb": round(file_size / (1024 * 1024), 2),
+            "content_type": file.content_type,
+            "status": "success"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Upload failed: {str(e)}")
 
 @router.post("/execute")
 async def execute(
     file: UploadFile = File(...),
-    prompt: str = "Translate this audio clip in hebrew. Note there are two people in it, and transcribe the conversation in detail in hebrew.",
-    mime_type: str = None,    
-    local_model=None,    
+    prompt: str = Form("Translate this audio clip in hebrew. Note there are two people in it, and transcribe the conversation in detail in hebrew."),
+    mime_type: str = Form(default=None),    
+    local_model: str = Form(default=None),    
 ):
     """
     Execute Gemini model inference on an uploaded file with a custom prompt.
@@ -71,6 +86,13 @@ async def execute(
              -F "file=@/path/to/your/audio.mp3"
         ```
     """
+    # Validate file size (200MB limit)
+    MAX_FILE_SIZE = 200 * 1024 * 1024  # 200MB
+    
+    logger.info(f"Received file upload request: {file.filename}")
+    logger.info(f"Content-Type: {file.content_type}")
+    logger.info(f"File size: {file.size if hasattr(file, 'size') else 'unknown'}")
+    
     if not local_model:
         local_model = "gemini-2.5-flash"
     if not mime_type:
@@ -86,6 +108,14 @@ async def execute(
         with tempfile.NamedTemporaryFile(delete=False, suffix=file_extension) as temp_file:
             logger.info(f"Writing temporary file to: {temp_file.name}")
             content = await file.read()
+            
+            # Check file size
+            if len(content) > MAX_FILE_SIZE:
+                raise HTTPException(
+                    status_code=413, 
+                    detail=f"File size ({len(content)} bytes) exceeds maximum allowed size of {MAX_FILE_SIZE} bytes"
+                )
+            
             temp_file.write(content)
             temp_file_path = temp_file.name
 
@@ -98,6 +128,12 @@ async def execute(
         return {
             "text": response.text
         }
+    except HTTPException:
+        # Re-raise HTTP exceptions as-is
+        raise
+    except Exception as e:
+        logger.error(f"Error processing file: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
     finally:
         # Clean up temporary file
         if temp_file_path and os.path.exists(temp_file_path):
