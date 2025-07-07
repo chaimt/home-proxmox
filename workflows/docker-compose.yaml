@@ -8,7 +8,7 @@ networks:
 
 services:
   duplicati:
-    image: duplicati/duplicati:2.1.0.119
+    image: duplicati/duplicati:2.1.0.122
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -42,7 +42,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v8.13.1
+    image: amir20/dozzle:v8.13.4
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -50,7 +50,7 @@ services:
       - 9999:8080
 
   n8n:
-    image: n8nio/n8n:1.98.2
+    image: n8nio/n8n:1.100.1
     restart: unless-stopped
     user: "1000:1000"
     # user: "${UID}:${GID}"
