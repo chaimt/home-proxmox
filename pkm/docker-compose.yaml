@@ -1,0 +1,77 @@
+volumes:
+  mealie-data:                                  # Declares a named volume for persisting application data.
+
+networks:
+  zabbix-network:
+    driver: bridge
+services:
+  duplicati:
+    image: duplicati/duplicati:2.1.1.0
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
+    hostname: duplicati
+    restart: unless-stopped
+    # Recommendation: Duplicati needs root user to get access to all files
+    user: "${DOCKER_ROOTPUID:-0}:${DOCKER_ROOTPGID:-0}"
+    network_mode: bridge
+    ports:
+      - 8200:8200
+    volumes:
+      - ${DOCKER_PATH_PERSISTENT}/duplicati_data:/data:rw
+      - /docker/backups:/backups:rw
+      - ${DOCKER_PATH_PERSISTENT}:/source:ro
+      - ${CONFIG_PATH}:/config:ro      
+    environment:
+      - TZ=${DOCKER_TZ}
+
+  watchtower:
+    image: containrrr/watchtower:1.7.1
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    environment:
+      - WATCHTOWER_POLL_INTERVAL=86400
+      - WATCHTOWER_TRACE=true
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_MONITOR_ONLY=true
+      - WATCHTOWER_DEBUG=true
+      - WATCHTOWER_NOTIFICATIONS=shoutrrr
+      - WATCHTOWER_NOTIFICATION_URL=telegram://${BOT_TOKEN}@telegram/?channels=${CHAT_ID}
+
+  dozzle:
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
+    image: amir20/dozzle:v8.13.8
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9999:8080
+
+  zabbix-agent:
+    image: zabbix/zabbix-agent:alpine-latest
+    container_name: zabbix-agent
+    restart: unless-stopped
+    environment:
+      - ZBX_SERVER_HOST=10.0.0.105  # replace with your actual Zabbix server hostname or IP
+      - ZBX_HOSTNAME=zabbix-mealie
+    networks:
+      - zabbix-network
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+
+
+  siyuan:
+    image: b3log/siyuan:v3.1.32           
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_siyuan 
+    command: ['--workspace=/siyuan/workspace/', '--accessAuthCode=${AuthCode}']
+    ports:
+      - 6806:6806
+    volumes:
+      - - ${DOCKER_PATH_PERSISTENT}/siyuan:/siyuan/workspace
+    restart: unless-stopped
+    environment:
+      # A list of time zone identifiers can be found at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+      - TZ=${YOUR_TIME_ZONE}
+      - PUID=${YOUR_USER_PUID}  # Customize user ID
+      - PGID=${YOUR_USER_PGID}  # Customize group ID
+
