@@ -61,7 +61,7 @@ services:
 
 
   siyuan:
-    image: b3log/siyuan:v3.1.32           
+    image: b3log/siyuan:v3.2.1     
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_siyuan 
     command: ['--workspace=/siyuan/workspace/', '--accessAuthCode=${AuthCode}']
     ports:
