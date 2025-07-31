@@ -1,5 +1,5 @@
 volumes:
-  mealie-data:                                  # Declares a named volume for persisting application data.
+  siyuan-data:                                  # Declares a named volume for persisting application data.
 
 networks:
   zabbix-network:
@@ -67,7 +67,7 @@ services:
     ports:
       - 6806:6806
     volumes:
-      - - ${DOCKER_PATH_PERSISTENT}/siyuan:/siyuan/workspace
+      - ${DOCKER_PATH_PERSISTENT}/siyuan:/siyuan/workspace
     restart: unless-stopped
     environment:
       # A list of time zone identifiers can be found at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
