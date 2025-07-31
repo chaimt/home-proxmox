@@ -1,6 +1,6 @@
 services:
   duplicati:
-    image: duplicati/duplicati:2.1.0.122
+    image: duplicati/duplicati:2.1.1.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -35,7 +35,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v8.13.4
+    image: amir20/dozzle:v8.13.8
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
