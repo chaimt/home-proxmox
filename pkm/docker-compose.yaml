@@ -71,7 +71,7 @@ services:
     restart: unless-stopped
     environment:
       # A list of time zone identifiers can be found at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-      - TZ=${YOUR_TIME_ZONE}
-      - PUID=${YOUR_USER_PUID}  # Customize user ID
-      - PGID=${YOUR_USER_PGID}  # Customize group ID
+      - TZ=${DOCKER_TZ}
+      - PUID=1000  # Customize user ID
+      - PGID=1000  # Customize group ID
 
