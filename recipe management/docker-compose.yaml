@@ -73,7 +73,7 @@ services:
 
 
   mealie:
-    image: ghcr.io/mealie-recipes/mealie:v2.8.0             # Specifies the Mealie Docker image and version.
+    image: ghcr.io/mealie-recipes/mealie:v3.0.2             # Specifies the Mealie Docker image and version.
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_mealie  # Names the container for easier management.
     restart: unless-stopped
     ports:
