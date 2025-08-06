@@ -21,9 +21,8 @@ services:
       - 8200:8200
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/duplicati_data:/data:rw
-      - /docker/backups:/backups:rw
+      - ${DOCKER_PATH_PERSISTENT}/duplicati_config/:/config:ro            
       - ${DOCKER_PATH_PERSISTENT}:/source:ro      
-      - ${CONFIG_PATH}:/config:ro      
     environment:
       - TZ=${DOCKER_TZ}
 

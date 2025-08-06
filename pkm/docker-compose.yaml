@@ -17,8 +17,8 @@ services:
       - 8200:8200
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/duplicati_data:/data:rw
-      - ${DOCKER_PATH_PERSISTENT}:/source:ro
-      - ${DOCKER_PATH_PERSISTENT}/duplicati_config/:/config:ro      
+      - ${DOCKER_PATH_PERSISTENT}/duplicati_config/:/config:ro            
+      - ${DOCKER_PATH_PERSISTENT}:/source:ro      
     environment:
       - TZ=${DOCKER_TZ}
 
