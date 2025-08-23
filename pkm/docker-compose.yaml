@@ -74,3 +74,20 @@ services:
       - PUID=1000  # Customize user ID
       - PGID=1000  # Customize group ID
 
+
+  resilio-sync:
+    image: lscr.io/linuxserver/resilio-sync:latest
+    container_name: resilio-sync
+    environment:
+      - PUID=1000            # your user id on the host
+      - PGID=1000            # your group id on the host
+      - UMASK=002            # optional (permissions)
+      - TZ=Etc/UTC           # or your timezone
+    volumes:
+      - ${DOCKER_PATH_PERSISTENT}/resilio-sync:/config           # persistent app config
+      - ${DOCKER_PATH_PERSISTENT}/siyuan:/sync               # the folder(s) you want to sync
+    ports:
+      - "8888:8888"         # Web UI
+      - "55555:55555"       # data port TCP
+      - "55555:55555/udp"   # data port UDP
+    restart: unless-stopped
