@@ -1,4 +1,13 @@
 
+volumes: 
+  wallabag-images:
+    external: true
+  wallabag-db:
+    external: true
+
+networks:
+  zabbix-network:
+    driver: bridge    
 services:
 
   duplicati:
@@ -97,12 +106,3 @@ services:
       interval: 20s
       timeout: 3s
 
-volumes: 
-  wallabag-images:
-    external: true
-  wallabag-db:
-    external: true
-
-networks:
-  zabbix-network:
-    driver: bridge    
