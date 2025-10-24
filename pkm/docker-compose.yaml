@@ -52,7 +52,7 @@ services:
     restart: unless-stopped
     environment:
       - ZBX_SERVER_HOST=10.0.0.105  # replace with your actual Zabbix server hostname or IP
-      - ZBX_HOSTNAME=zabbix-mealie
+      - ZBX_HOSTNAME=zabbix-siyuan
     networks:
       - zabbix-network
     volumes:
