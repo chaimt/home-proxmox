@@ -37,7 +37,7 @@ services:
             # - ../HTMLawed:/var/www/html/vendor/fossar/htmlawed
             # - ../PHPePub:/var/www/html/vendor/wallabag/phpepub
             # - ../guzzle-site-authenticator:/var/www/html/vendor/bdunogier/guzzle-site-authenticator
-        env_file:
+        # env_file:
             # Copy docker/php/env.example to docker/php/env and customize
             # - ./docker/php/env
             # Uncomment the database engine you want, it will use sqlite if both are commented
