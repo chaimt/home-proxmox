@@ -1,7 +1,7 @@
 networks:
   zabbix-network:
     driver: bridge
-    
+
 volumes:
     db-data:
         driver: local
@@ -53,17 +53,17 @@ services:
     ports:
       - 9999:8080
 
-  zabbix-agent:
-    image: zabbix/zabbix-agent:alpine-latest
-    container_name: zabbix-agent
-    restart: unless-stopped
-    environment:
-      - ZBX_SERVER_HOST=10.0.0.105  # replace with your actual Zabbix server hostname or IP
-      - ZBX_HOSTNAME=zabbix-siyuan
-    networks:
-      - zabbix-network
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
+  # zabbix-agent:
+  #   image: zabbix/zabbix-agent:alpine-latest
+  #   container_name: zabbix-agent
+  #   restart: unless-stopped
+  #   environment:
+  #     - ZBX_SERVER_HOST=10.0.0.105  # replace with your actual Zabbix server hostname or IP
+  #     - ZBX_HOSTNAME=zabbix-wallabag
+  #   networks:
+  #     - zabbix-network
+  #   volumes:
+  #     - /etc/localtime:/etc/localtime:ro
 
     php:
         build:
