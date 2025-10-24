@@ -26,8 +26,6 @@ services:
   wallabag_db:
     image: docker.io/postgres:14
     container_name: wallabag_db
-    env_file:
-      - ./configuration_wallabag.env
     volumes:
       - wallabag-db:/var/lib/postgresql/data
     healthcheck:
