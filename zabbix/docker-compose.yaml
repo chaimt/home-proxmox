@@ -58,6 +58,7 @@ services:
       - "DIUN_PROVIDERS_DOCKER=true"
       - "DIUN_NOTIF_TELEGRAM_TOKEN=${BOT_TOKEN}"
       - "DIUN_NOTIF_TELEGRAM_CHATIDS=${CHAT_ID}"
+      - "DIUN_NOTIF_TELEGRAM_TEMPLATETITLE=[${DOCKER_CONTAINER_NAME_PREFIX}] {{ .Entry.Image }} released"
     labels:
       - "diun.enable=true"
 
