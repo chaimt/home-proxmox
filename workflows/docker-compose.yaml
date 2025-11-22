@@ -41,6 +41,7 @@ services:
 
   diun:
     image: crazymax/diun:4.30
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_diun
     command: serve
     volumes:
       - "./data:/data"
