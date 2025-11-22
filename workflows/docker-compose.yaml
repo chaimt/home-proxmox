@@ -67,7 +67,7 @@ services:
       - 9999:8080
 
   n8n:
-    image: n8nio/n8n:1.120.3
+    image: n8nio/n8n:1.121.2
     restart: unless-stopped
     user: "1000:1000"
     # user: "${UID}:${GID}"
