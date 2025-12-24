@@ -6,7 +6,7 @@ networks:
     driver: bridge
 services:
   duplicati:
-    image: duplicati/duplicati:2.2.0.100
+    image: duplicati/duplicati:2.2.0.102
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -39,7 +39,7 @@ services:
 
 
   diun:
-    image: crazymax/diun:4.30
+    image: crazymax/diun:4.30.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_diun
     command: serve
     volumes:
@@ -81,7 +81,7 @@ services:
 
 
   siyuan:
-    image: b3log/siyuan:v3.5.0
+    image: b3log/siyuan:v3.5.1
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_siyuan 
     command: ['--workspace=/siyuan/workspace/', '--accessAuthCode=${AuthCode}']
     ports:
@@ -97,7 +97,7 @@ services:
 
 
   resilio-sync:
-    image: lscr.io/linuxserver/resilio-sync:3.1.0
+    image: lscr.io/linuxserver/resilio-sync:3.1.2
     container_name: resilio-sync
     environment:
       - PUID=1000            # your user id on the host

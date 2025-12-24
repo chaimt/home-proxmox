@@ -1,6 +1,6 @@
 services:
   duplicati:
-    image: duplicati/duplicati:2.2.0.100
+    image: duplicati/duplicati:2.2.0.102
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -33,7 +33,7 @@ services:
 
 
   diun:
-    image: crazymax/diun:4.30
+    image: crazymax/diun:4.30.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_diun
     command: serve
     volumes:
@@ -85,7 +85,7 @@ services:
     restart: unless-stopped
 
   authelia:
-    image: authelia/authelia:4.38.8
+    image: authelia/authelia:4.39.15
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_authelia
     environment:
       - PUID=1000
@@ -125,7 +125,7 @@ services:
 
   glances:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
-    image: nicolargo/glances:4.3.1
+    image: nicolargo/glances:4.4.1
     restart: unless-stopped
     pid: host
     ports:
