@@ -77,11 +77,12 @@ services:
     ports:
       - 6379:6379
     restart: unless-stopped
-    command: redis-server --appendonly yes
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
     environment:
       - TZ=America/Vancouver
       - PUID=1000
       - PGID=1000
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
 
   n8n:
     image: n8nio/n8n:2.2.1
