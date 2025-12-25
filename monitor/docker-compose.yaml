@@ -1,6 +1,9 @@
 networks:
   zabbix-network:
     driver: bridge
+
+volumes:
+  pulse_data:
 services:
   duplicati:
     image: duplicati/duplicati:2.2.0.102
@@ -96,6 +99,19 @@ services:
     ports:
       - '7575:7575'      
 
+
+  pulse:
+    image: rcourtman/pulse:latest
+    container_name: pulse
+    restart: unless-stopped
+    ports:
+      - "7655:7655"
+    volumes:
+      - pulse_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock # Optional: Monitor local Docker
+    environment:
+      - PULSE_AUTH_USER=admin
+      - PULSE_AUTH_PASS=secret123
   zabbix-agent:
     image: zabbix/zabbix-agent:alpine-latest
     container_name: zabbix-agent
