@@ -174,7 +174,7 @@ def check_image(image_name: str, current_tag: str) -> Tuple[bool, Optional[str]]
 def main():
     # Extract images from docker-compose files
     images = [
-        ("portainer/portainer-ce", "2.33.2"),
+        ("portainer/portainer-ce", "2.37.0-alpine"),
         ("nicolargo/glances", "4.3.1"),
         ("duplicati/duplicati", "2.2.0.100"),
         ("crazymax/diun", "4.30"),
