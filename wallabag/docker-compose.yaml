@@ -5,7 +5,7 @@ networks:
 services:
 
   duplicati:
-    image: duplicati/duplicati:2.2.0.102
+    image: duplicati/duplicati:2.2.0.103
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -38,7 +38,7 @@ services:
 
 
   diun:
-    image: crazymax/diun:4.30.0
+    image: crazymax/diun:4.31.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_diun
     command: serve
     volumes:
@@ -59,7 +59,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v8.14.12
+    image: amir20/dozzle:v9.0.1
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -115,7 +115,7 @@ services:
       interval: 20s
       timeout: 3s
   redis:
-    image: redis:alpine
+    image: redis:8.4-alpine3.22
     restart: unless-stopped    
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]

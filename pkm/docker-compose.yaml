@@ -6,7 +6,7 @@ networks:
     driver: bridge
 services:
   duplicati:
-    image: duplicati/duplicati:2.2.0.102
+    image: duplicati/duplicati:2.2.0.103
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -39,7 +39,7 @@ services:
 
 
   diun:
-    image: crazymax/diun:4.30.0
+    image: crazymax/diun:4.31.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_diun
     command: serve
     volumes:
@@ -60,7 +60,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v8.14.12
+    image: amir20/dozzle:v9.0.1
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -81,7 +81,7 @@ services:
 
 
   siyuan:
-    image: b3log/siyuan:v3.5.2
+    image: b3log/siyuan:v3.5.3
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_siyuan 
     command: ['--workspace=/siyuan/workspace/', '--accessAuthCode=${AuthCode}']
     ports:

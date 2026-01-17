@@ -19,7 +19,7 @@ services:
       - 8080:8080
 
   ollama:
-    image: ollama/ollama:latest
+    image: ollama/ollama:0.14.2
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_ollama
     restart: unless-stopped
     hostname: ollama
