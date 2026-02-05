@@ -68,7 +68,7 @@ services:
     image: alpine/openclaw:2026.2.2
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_openclaw
     ports:
-      - 8000:8000
+      - 18789:18789
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/openclaw/config:/root/.openclaw
       - ${DOCKER_PATH_PERSISTENT}/openclaw/workspace:/root/openclaw/workspace
