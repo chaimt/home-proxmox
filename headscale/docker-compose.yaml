@@ -1,6 +1,6 @@
 services:
   duplicati:
-    image: duplicati/duplicati:2.2.0.103
+    image: duplicati/duplicati:2.2.0.104
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -50,7 +50,7 @@ services:
       - "diun.enable=true"
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v9.0.3
+    image: amir20/dozzle:v10.0.1
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock

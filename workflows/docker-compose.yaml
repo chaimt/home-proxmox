@@ -8,7 +8,7 @@ networks:
 
 services:
   duplicati:
-    image: duplicati/duplicati:2.2.0.103
+    image: duplicati/duplicati:2.2.0.104
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -61,7 +61,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v9.0.3
+    image: amir20/dozzle:v10.0.1
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -70,7 +70,7 @@ services:
 
 
   redis:
-    image: redis:8.4-alpine3.22
+    image: redis:8.6.0-alpine3.23
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_redis
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/redis:/data
@@ -85,7 +85,7 @@ services:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
 
   n8n:
-    image: n8nio/n8n:2.6.3
+    image: n8nio/n8n:2.7.5
     restart: unless-stopped
     user: "1000:1000"
     # user: "${UID}:${GID}"
