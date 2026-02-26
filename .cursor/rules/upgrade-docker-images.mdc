@@ -1,0 +1,61 @@
+---
+description: Upgrade Docker images across docker-compose files using the version checker scripts
+alwaysApply: false
+---
+
+# Upgrade Docker Images
+
+## Overview
+
+This project manages multiple Docker services via `docker-compose.yaml` files in subdirectories. Two scripts exist to check for newer image versions:
+
+- `check_image_versions.py` — Python script that queries Docker Hub and GHCR APIs for the latest tags
+- `check_image_versions.sh` — Bash script with the same purpose
+
+## Upgrade Workflow
+
+### Step 1: Run the version checker
+
+Run the Python checker (preferred — it has better version comparison logic):
+
+```bash
+python3 check_image_versions.py
+```
+
+Or the bash alternative:
+
+```bash
+bash check_image_versions.sh
+```
+
+Capture the output and identify images that have updates available.
+
+### Step 2: Update docker-compose files
+
+For each image with an available update:
+
+1. Find the `docker-compose.yaml` file containing the outdated `image:` line using grep
+2. Update the tag in the `image:` field to the new version
+3. Keep the image name and registry prefix unchanged — only update the tag after the `:`
+
+Example: `image: amir20/dozzle:v9.0.3` → `image: amir20/dozzle:v10.0.1`
+
+### Step 3: Update the checker scripts
+
+After updating docker-compose files, sync the hardcoded image lists in both scripts:
+
+- In `check_image_versions.py`, update the `images` list in `main()`
+- In `check_image_versions.sh`, update the `images` array
+
+### Step 4: Verify
+
+Run the checker again to confirm all images now report "Up to date".
+
+## Important Notes
+
+- Skip images tagged `latest` or `main` — these are rolling tags with no version to bump
+- Do NOT change the image name or registry prefix, only the tag
+- Preserve the tag format (e.g., if current tag has a `v` prefix like `v9.0.3`, keep the `v` prefix)
+- Preserve tag suffixes (e.g., `-alpine`, `-alpine3.22`) only if the new version also publishes that suffix variant; otherwise use the plain version tag
+- Be cautious with major version bumps — flag them to the user for review
+- The `lscr.io/linuxserver/*` images map to `linuxserver/*` on Docker Hub

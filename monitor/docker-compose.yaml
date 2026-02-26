@@ -6,7 +6,7 @@ volumes:
   pulse_data:
 services:
   duplicati:
-    image: duplicati/duplicati:2.2.0.104
+    image: duplicati/duplicati:2.2.0.105
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -56,7 +56,7 @@ services:
       - "diun.enable=true"
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.0.1
+    image: amir20/dozzle:v10.0.4
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -65,7 +65,7 @@ services:
 
   uptime-kuma:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_uptime-kuma
-    image: louislam/uptime-kuma:2.1.1
+    image: louislam/uptime-kuma:2.1.3
     restart: unless-stopped
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/kuma:/app/data

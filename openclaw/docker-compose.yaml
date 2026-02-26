@@ -6,7 +6,7 @@ networks:
     driver: bridge
 services:
   duplicati:
-    image: duplicati/duplicati:2.2.0.104
+    image: duplicati/duplicati:2.2.0.105
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -45,7 +45,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.0.1
+    image: amir20/dozzle:v10.0.4
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -65,7 +65,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
 
   openclaw:
-    image: alpine/openclaw:2026.2.2
+    image: alpine/openclaw:2026.2.23
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_openclaw
     ports:
       - 18789:18789
