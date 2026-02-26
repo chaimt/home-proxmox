@@ -65,7 +65,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
 
   openclaw:
-    image: alpine/openclaw:2026.2.23
+    image: alpine/openclaw:2026.2.25
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_openclaw
     ports:
       - 18789:18789

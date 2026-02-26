@@ -174,7 +174,7 @@ def check_image(image_name: str, current_tag: str) -> Tuple[bool, Optional[str]]
 def main():
     # Extract images from docker-compose files
     images = [
-        ("portainer/portainer-ce", "2.38.1-alpine"),
+        ("portainer/portainer-ce", "2.39.0-alpine"),
         ("nicolargo/glances", "4.5.0.5"),
         ("duplicati/duplicati", "2.2.0.105"),
         ("crazymax/diun", "4.31.0"),
@@ -186,15 +186,15 @@ def main():
         ("lscr.io/linuxserver/pairdrop", "1.11.2"),
         ("b3log/siyuan", "v3.5.8"),
         ("lscr.io/linuxserver/resilio-sync", "3.1.2"),
-        ("ghcr.io/mealie-recipes/mealie", "v3.10.2"),
-        ("ghcr.io/linuxserver/swag", "5.3.0"),
+        ("ghcr.io/mealie-recipes/mealie", "v3.11.0"),
+        ("ghcr.io/linuxserver/swag", "5.3.1-ls441"),
         ("authelia/authelia", "4.39.15"),
         ("redis", "8.6.0-alpine3.23"),
         ("wallabag/wallabag", "2.6.14"),
         ("mariadb", "latest"),
-        ("n8nio/n8n", "2.10.0"),
-        ("ollama/ollama", "0.17.0"),
-        ("alpine/openclaw", "2026.2.23"),
+        ("n8nio/n8n", "2.10.1"),
+        ("ollama/ollama", "0.17.1"),
+        ("alpine/openclaw", "2026.2.25"),
     ]
     
     print("=" * 60)
