@@ -94,7 +94,7 @@ images=(
     "nicolargo/glances:4.5.0.5"
     "duplicati/duplicati:2.2.0.105"
     "crazymax/diun:4.31.0"
-    "amir20/dozzle:v10.0.4"
+    "amir20/dozzle:v10.0.6"
     "headscale/headscale:v0.28.0"
     "ghcr.io/gurucomputing/headscale-ui:latest"
     "louislam/uptime-kuma:2.1.3"
@@ -111,10 +111,10 @@ images=(
     "docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest"
     "wallabag/wallabag:2.6.14"
     "mariadb:latest"
-    "n8nio/n8n:2.10.1"
+    "n8nio/n8n:2.10.2"
     "ghcr.io/open-webui/open-webui:main"
-    "ollama/ollama:0.17.1"
-    "alpine/openclaw:2026.2.25"
+    "ollama/ollama:0.17.5"
+    "alpine/openclaw:2026.2.26"
 )
 
 for image_tag in "${images[@]}"; do
