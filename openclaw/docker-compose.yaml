@@ -45,7 +45,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.0.7
+    image: amir20/dozzle:v10.1.1
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -65,7 +65,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
 
   openclaw:
-    image: alpine/openclaw:2026.3.2
+    image: alpine/openclaw:2026.3.8
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_openclaw
     ports:
       - 18789:18789
