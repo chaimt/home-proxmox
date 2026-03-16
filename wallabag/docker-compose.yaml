@@ -104,7 +104,7 @@ services:
       - redis
 
   db:
-    image: mariadb
+    image: mariadb:12.2-ubi10
     restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD=wallaroot
@@ -115,7 +115,7 @@ services:
       interval: 20s
       timeout: 3s
   redis:
-    image: redis:8.6.0-alpine3.23
+    image: redis:8.6-alpine3.23
     restart: unless-stopped    
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]

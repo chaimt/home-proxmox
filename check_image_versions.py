@@ -175,7 +175,7 @@ def main():
     # Extract images from docker-compose files
     images = [
         ("portainer/portainer-ce", "2.39.0-alpine"),
-        ("nicolargo/glances", "4.5.1"),
+        ("nicolargo/glances", "4.5.2"),
         ("duplicati/duplicati", "2.2.1.0"),
         ("crazymax/diun", "4.31.0"),
         ("amir20/dozzle", "v10.1.1"),
@@ -184,17 +184,17 @@ def main():
         ("linuxserver/heimdall", "2.7.6"),
         ("ghcr.io/ajnart/homarr", "0.16.0"),
         ("lscr.io/linuxserver/pairdrop", "1.11.2"),
-        ("b3log/siyuan", "v3.5.10"),
+        ("b3log/siyuan", "v3.6.0"),
         ("lscr.io/linuxserver/resilio-sync", "3.1.2"),
         ("ghcr.io/mealie-recipes/mealie", "v3.12.0"),
         ("ghcr.io/linuxserver/swag", "5.4.0"),
-        ("authelia/authelia", "4.39.15"),
-        ("redis", "8.6.0-alpine3.23"),
+        ("authelia/authelia", "4.39.16"),
+        ("redis", "8.6-alpine3.23"),
         ("wallabag/wallabag", "2.6.14"),
-        ("mariadb", "latest"),
-        ("n8nio/n8n", "2.12.1"),
-        ("ollama/ollama", "0.17.7"),
-        ("alpine/openclaw", "2026.3.8"),
+        ("mariadb", "12.2-ubi10"),
+        ("n8nio/n8n", "2.13.0"),
+        ("ollama/ollama", "0.18.0"),
+        ("alpine/openclaw", "2026.3.13-1"),
     ]
     
     print("=" * 60)
