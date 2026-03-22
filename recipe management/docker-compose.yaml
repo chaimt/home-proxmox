@@ -60,40 +60,17 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.1.1
+    image: amir20/dozzle:v10.1.2
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - 9999:8080
 
-  zabbix-agent:
-    image: zabbix/zabbix-agent:alpine-latest
-    container_name: zabbix-agent
-    restart: unless-stopped
-    environment:
-      - ZBX_SERVER_HOST=10.0.0.105  # replace with your actual Zabbix server hostname or IP
-      - ZBX_HOSTNAME=zabbix-mealie
-    networks:
-      - zabbix-network
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-
-  # glances:
-  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
-  #   image: nicolargo/glances:4.3.1
-  #   restart: unless-stopped
-  #   pid: host
-  #   ports:
-  #     - 61208:61208
-  #   command: ["glances", "-w"]
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
-  #     - /var/docker/glances:/glances/conf
 
 
   mealie:
-    image: ghcr.io/mealie-recipes/mealie:v3.12.0            # Specifies the Mealie Docker image and version.
+    image: ghcr.io/mealie-recipes/mealie:v3.13.1            # Specifies the Mealie Docker image and version.
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_mealie  # Names the container for easier management.
     restart: unless-stopped
     ports:

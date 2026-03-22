@@ -64,7 +64,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.1.1
+    image: amir20/dozzle:v10.1.2
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -154,17 +154,7 @@ services:
       zabbix-server:
         condition: service_healthy
 
-  zabbix-agent:
-    image: ${ZABBIX_AGENT_IMAGE_TAG}
-    environment:
-      ZBX_HOSTNAME: Zabbix server
-      ZBX_SERVER_HOST: 10.0.0.105
-    networks:
-      - zabbix-network
-    restart: unless-stopped
-    depends_on:
-      - postgres
-      - zabbix-server
+
 
   backups:
     image: ${ZABBIX_POSTGRES_IMAGE_TAG}

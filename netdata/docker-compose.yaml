@@ -1,29 +1,4 @@
-networks:
-  zabbix-network:
-    driver: bridge
 services:
-
-  model-serving:
-    image: chaimt/model-server:main
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_model_serving
-    restart: unless-stopped
-    network_mode: bridge
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./models:/app/models
-      - ./config:/app/config
-    environment:
-      - TZ=${DOCKER_TZ}
-      - log_level=${log_level:-info}
-      - gemini_api=${gemini_api}
-      - PYTHONUNBUFFERED=1
-    # Add ulimits for large file handling
-    ulimits:
-      nofile:
-        soft: 65536
-        hard: 65536
-
   duplicati:
     image: duplicati/duplicati:2.2.1.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
@@ -41,21 +16,6 @@ services:
     environment:
       - TZ=${DOCKER_TZ}
 
-  # watchtower:
-  #   image: containrrr/watchtower:1.7.1
-  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_watchtower
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #   restart: unless-stopped
-  #   environment:
-  #     - WATCHTOWER_POLL_INTERVAL=86400
-  #     - WATCHTOWER_TRACE=true
-  #     - WATCHTOWER_CLEANUP=true
-  #     - WATCHTOWER_MONITOR_ONLY=true
-  #     - WATCHTOWER_DEBUG=true
-  #     - WATCHTOWER_NOTIFICATIONS=shoutrrr
-  #     - WATCHTOWER_NOTIFICATION_URL=telegram://${BOT_TOKEN}@telegram/?channels=${CHAT_ID}
-
   diun:
     image: crazymax/diun:4.31.0
     command: serve
@@ -71,7 +31,6 @@ services:
       - "DIUN_PROVIDERS_DOCKER=true"
       - "DIUN_NOTIF_TELEGRAM_TOKEN=${BOT_TOKEN}"
       - "DIUN_NOTIF_TELEGRAM_CHATIDS=${CHAT_ID}"
-      - "DIUN_NOTIF_TELEGRAM_TEMPLATETITLE=[${DOCKER_CONTAINER_NAME_PREFIX}] {{ .Entry.Image }} released"
     labels:
       - "diun.enable=true"
   dozzle:
@@ -83,6 +42,40 @@ services:
     ports:
       - 9999:8080
 
-  
+  netdata:
+    image: netdata/netdata:v2.9.0
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_netdata
+    hostname: netdata
+    pid: host
+    restart: unless-stopped
+    cap_add:
+      - SYS_PTRACE
+      - PERFMON
+      - NET_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - ${DOCKER_PATH_PERSISTENT}/netdata/config:/etc/netdata
+      - ${DOCKER_PATH_PERSISTENT}/netdata/lib:/var/lib/netdata
+      - ${DOCKER_PATH_PERSISTENT}/netdata/cache:/var/cache/netdata
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - TZ=${DOCKER_TZ}
+    ports:
+      - 19999:19999
+    networks:
+      - traefik-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.netdata.rule=Host(`netdata.domain.com`)"
+      - "traefik.http.routers.netdata.entrypoints=https"
+      - "traefik.http.services.netdata.loadbalancer.server.port=19999"
 
-
+networks:
+  traefik-net:
+    external: true

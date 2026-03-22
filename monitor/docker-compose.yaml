@@ -22,20 +22,6 @@ services:
     environment:
       - TZ=${DOCKER_TZ}
 
-  # watchtower:
-  #   image: containrrr/watchtower:1.7.1
-  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_watchtower
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #   restart: unless-stopped
-  #   environment:
-  #     - WATCHTOWER_POLL_INTERVAL=86400
-  #     - WATCHTOWER_TRACE=true
-  #     - WATCHTOWER_CLEANUP=true
-  #     - WATCHTOWER_MONITOR_ONLY=true
-  #     - WATCHTOWER_DEBUG=true
-  #     - WATCHTOWER_NOTIFICATIONS=shoutrrr
-  #     - WATCHTOWER_NOTIFICATION_URL=telegram://${BOT_TOKEN}@telegram/?channels=${CHAT_ID}
 
   diun:
     image: crazymax/diun:4.31.0
@@ -56,7 +42,7 @@ services:
       - "diun.enable=true"
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.1.1
+    image: amir20/dozzle:v10.1.2
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -73,19 +59,6 @@ services:
       - 3001:3001
 
 
-
-  # heimdall:
-  #   image: linuxserver/heimdall:2.7.6
-  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_heimdall
-  #   restart: unless-stopped
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Asia/Jerusalem
-  #   volumes:
-  #     - ${DOCKER_PATH_PERSISTENT}/heimdall:/config
-  #   ports:
-  #     - 8070:80
 
   homarr:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_homarr
@@ -109,14 +82,4 @@ services:
     volumes:
       - pulse_data:/data
       - /var/run/docker.sock:/var/run/docker.sock # Optional: Monitor local Docker
-  zabbix-agent:
-    image: zabbix/zabbix-agent:alpine-latest
-    container_name: zabbix-agent
-    restart: unless-stopped
-    environment:
-      - ZBX_SERVER_HOST=10.0.0.105  # replace with your actual Zabbix server hostname or IP
-      - ZBX_HOSTNAME=zabbix-monitor
-    networks:
-      - zabbix-network
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
+

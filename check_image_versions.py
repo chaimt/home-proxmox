@@ -44,6 +44,7 @@ def get_latest_version_tag(tags: List[str], current_tag: str) -> Optional[str]:
         r'arm64', r'amd64', r'armv7', r'windows', r'linux',
         r'beta', r'alpha', r'rc', r'canary', r'debug',
         r'ls\d+', r'-ls\d+',  # LinuxServer.io build numbers
+        r'-rocm$',  # AMD GPU build; plain semver tag is the default image
     ]
     
     for tag in tags:
@@ -174,26 +175,26 @@ def check_image(image_name: str, current_tag: str) -> Tuple[bool, Optional[str]]
 def main():
     # Extract images from docker-compose files
     images = [
-        ("portainer/portainer-ce", "2.39.0-alpine"),
+        ("portainer/portainer-ce", "2.39.1-alpine"),
         ("nicolargo/glances", "4.5.2"),
         ("duplicati/duplicati", "2.2.1.0"),
         ("crazymax/diun", "4.31.0"),
-        ("amir20/dozzle", "v10.1.1"),
+        ("amir20/dozzle", "v10.1.2"),
         ("headscale/headscale", "v0.28.0"),
         ("louislam/uptime-kuma", "2.2.1"),
         ("linuxserver/heimdall", "2.7.6"),
         ("ghcr.io/ajnart/homarr", "0.16.0"),
         ("lscr.io/linuxserver/pairdrop", "1.11.2"),
-        ("b3log/siyuan", "v3.6.0"),
+        ("b3log/siyuan", "v3.6.1"),
         ("lscr.io/linuxserver/resilio-sync", "3.1.2"),
-        ("ghcr.io/mealie-recipes/mealie", "v3.12.0"),
-        ("ghcr.io/linuxserver/swag", "5.4.0"),
+        ("ghcr.io/mealie-recipes/mealie", "v3.13.1"),
+        ("ghcr.io/linuxserver/swag", "5.4.0-ls447"),
         ("authelia/authelia", "4.39.16"),
         ("redis", "8.6-alpine3.23"),
         ("wallabag/wallabag", "2.6.14"),
         ("mariadb", "12.2-ubi10"),
-        ("n8nio/n8n", "2.13.0"),
-        ("ollama/ollama", "0.18.0"),
+        ("n8nio/n8n", "2.13.2"),
+        ("ollama/ollama", "0.18.2"),
         ("alpine/openclaw", "2026.3.13-1"),
     ]
     

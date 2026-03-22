@@ -60,28 +60,18 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.1.1
+    image: amir20/dozzle:v10.1.2
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - 9999:8080
 
-  zabbix-agent:
-    image: zabbix/zabbix-agent:alpine-latest
-    container_name: zabbix-agent
-    restart: unless-stopped
-    environment:
-      - ZBX_SERVER_HOST=10.0.0.105  # replace with your actual Zabbix server hostname or IP
-      - ZBX_HOSTNAME=zabbix-siyuan
-    networks:
-      - zabbix-network
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
+
 
 
   siyuan:
-    image: b3log/siyuan:v3.6.0
+    image: b3log/siyuan:v3.6.1
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_siyuan 
     command: ['--workspace=/siyuan/workspace/', '--accessAuthCode=${AuthCode}']
     ports:
