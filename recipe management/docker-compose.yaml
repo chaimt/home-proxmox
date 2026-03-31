@@ -60,7 +60,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.1.2
+    image: amir20/dozzle:v10.2.1
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -70,7 +70,7 @@ services:
 
 
   mealie:
-    image: ghcr.io/mealie-recipes/mealie:v3.13.1            # Specifies the Mealie Docker image and version.
+    image: ghcr.io/mealie-recipes/mealie:v3.14.0            # Specifies the Mealie Docker image and version.
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_mealie  # Names the container for easier management.
     restart: unless-stopped
     ports:
