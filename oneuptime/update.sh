@@ -17,20 +17,6 @@ services:
       - TZ=${DOCKER_TZ}
 
 
-  watchtower:
-    image: containrrr/watchtower:1.7.1
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    restart: unless-stopped
-    environment:
-      - WATCHTOWER_POLL_INTERVAL=86400
-      - WATCHTOWER_TRACE=true
-      - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_MONITOR_ONLY=true
-      - WATCHTOWER_DEBUG=true
-      - WATCHTOWER_NOTIFICATIONS=shoutrrr
-      - WATCHTOWER_NOTIFICATION_URL=telegram://${BOT_TOKEN}@telegram/?channels=${CHAT_ID}
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
