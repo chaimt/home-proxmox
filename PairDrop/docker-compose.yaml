@@ -53,7 +53,7 @@ services:
       - "DIUN_PROVIDERS_DOCKER=true"
       - "DIUN_NOTIF_TELEGRAM_TOKEN=${BOT_TOKEN}"
       - "DIUN_NOTIF_TELEGRAM_CHATIDS=${CHAT_ID}"
-      - "DIUN_NOTIF_TELEGRAM_TEMPLATETITLE=[${DOCKER_CONTAINER_NAME_PREFIX}] {{ .Entry.Image }} released"
+      - "DIUN_NOTIF_TELEGRAM_TEMPLATEBODY=[${DOCKER_CONTAINER_NAME_PREFIX}] {{ .Entry.Image }} has been {{ if (eq .Entry.Status \"new\") }}newly added{{ else }}updated{{ end }}."
     labels:
       - "diun.enable=true"
 

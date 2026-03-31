@@ -33,6 +33,7 @@ services:
 
   diun:
     image: crazymax/diun:4.31.0
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_diun
     command: serve
     volumes:
       - "./data:/data"
@@ -46,6 +47,7 @@ services:
       - "DIUN_PROVIDERS_DOCKER=true"
       - "DIUN_NOTIF_TELEGRAM_TOKEN=${BOT_TOKEN}"
       - "DIUN_NOTIF_TELEGRAM_CHATIDS=${CHAT_ID}"
+      - "DIUN_NOTIF_TELEGRAM_TEMPLATEBODY=[${DOCKER_CONTAINER_NAME_PREFIX}] {{ .Entry.Image }} has been {{ if (eq .Entry.Status \"new\") }}newly added{{ else }}updated{{ end }}."
     labels:
       - "diun.enable=true"
   dozzle:
