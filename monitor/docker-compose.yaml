@@ -39,6 +39,7 @@ services:
       - "DIUN_NOTIF_TELEGRAM_TEMPLATEBODY=[${DOCKER_CONTAINER_NAME_PREFIX}] {{ .Entry.Image }} has been {{ if (eq .Entry.Status \"new\") }}newly added{{ else }}updated{{ end }}."
     labels:
       - "diun.enable=true"
+      
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
     image: amir20/dozzle:v10.2.1
