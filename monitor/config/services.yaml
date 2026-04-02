@@ -1,0 +1,169 @@
+# =============================================================================
+# Homepage Services Configuration
+# =============================================================================
+# Host IPs - update these to match your Proxmox VM/LXC addresses:
+#   MONITOR_HOST  = 10.0.0.98  (monitor stack)
+#   TOOLS_HOST    = <ip>        (tools stack)
+#   WALLABAG_HOST = <ip>        (wallabag stack)
+#   PKM_HOST      = <ip>        (stacks/pkm)
+#   WORKFLOW_HOST = <ip>        (stacks/workflows)
+#   SWAG_HOST     = <ip>        (swag stack)
+#   OLLAMA_HOST   = <ip>        (olama stack)
+#   MODEL_HOST    = <ip>        (model-serving stack)
+#   HEADSCALE_HOST= <ip>        (headscale stack)
+#   ZABBIX_HOST   = <ip>        (zabbix stack)
+#   NETDATA_HOST  = <ip>        (netdata stack)
+#   PAIRDROP_HOST = <ip>        (PairDrop stack)
+#   MEALIE_HOST   = <ip>        (recipe management stack)
+#   OPENCLAW_HOST = <ip>        (openclaw stack)
+#   ELASTIC_HOST  = <ip>        (elasticsearch stack)
+#   PORTAINER_HOST= <ip>        (base_image stack)
+#   DOCKGE_HOST   = <ip>        (dockge stack)
+# =============================================================================
+
+- Monitoring:
+    - Uptime Kuma:
+        icon: uptime-kuma.png
+        href: http://10.0.0.98:3001
+        description: Service uptime monitoring
+        widget:
+          type: uptimekuma
+          url: http://10.0.0.98:3001
+          slug: default
+    - Dozzle:
+        icon: dozzle.png
+        href: http://10.0.0.98:9999
+        description: Real-time Docker log viewer
+    - Pulse:
+        icon: mdi-pulse
+        href: http://10.0.0.98:7655
+        description: Docker container monitoring
+    - Zabbix:
+        icon: zabbix.png
+        href: http://ZABBIX_HOST:80
+        description: Network monitoring
+    - Netdata:
+        icon: netdata.png
+        href: http://NETDATA_HOST:19999
+        description: Real-time performance monitoring
+        widget:
+          type: netdata
+          url: http://NETDATA_HOST:19999
+    - Glances:
+        icon: glances.png
+        href: http://SWAG_HOST:61208
+        description: System monitoring
+
+- AI & ML:
+    - Open WebUI:
+        icon: open-webui.png
+        href: http://OLLAMA_HOST:8080
+        description: Chat UI for Ollama LLMs
+    - Ollama:
+        icon: ollama.png
+        href: http://OLLAMA_HOST:11434
+        description: Local LLM serving
+    - Model Server:
+        icon: mdi-robot
+        href: http://MODEL_HOST:8080
+        description: Custom model serving
+
+- Tools:
+    - Stirling PDF:
+        icon: stirling-pdf.png
+        href: http://TOOLS_HOST:8090
+        description: PDF manipulation tools
+    - OpenBooks:
+        icon: mdi-book-search
+        href: http://TOOLS_HOST:8080
+        description: Book search and download
+    - PairDrop:
+        icon: pairdrop.png
+        href: http://PAIRDROP_HOST:3000
+        description: Local file sharing
+    - Mealie:
+        icon: mealie.png
+        href: http://MEALIE_HOST:9000
+        description: Recipe management
+        widget:
+          type: mealie
+          url: http://MEALIE_HOST:9000
+          key: MEALIE_API_KEY
+    - OpenClaw:
+        icon: mdi-claw
+        href: http://OPENCLAW_HOST:18789
+        description: OpenClaw service
+
+- Knowledge & Media:
+    - SiYuan:
+        icon: siyuan.png
+        href: http://PKM_HOST:6806
+        description: Personal knowledge management
+    - Wallabag:
+        icon: wallabag.png
+        href: http://WALLABAG_HOST:8080
+        description: Read-it-later / article saving
+    - Resilio Sync:
+        icon: resilio-sync.png
+        href: http://PKM_HOST:8888
+        description: File synchronization
+
+- Networking:
+    - SWAG:
+        icon: swag.png
+        href: https://SWAG_HOST
+        description: Reverse proxy with SSL
+    - Authelia:
+        icon: authelia.png
+        href: http://SWAG_HOST:9092
+        description: SSO & 2FA authentication
+    - Headscale:
+        icon: headscale.png
+        href: http://HEADSCALE_HOST:8080
+        description: Self-hosted Tailscale control server
+    - Headscale UI:
+        icon: headscale.png
+        href: http://HEADSCALE_HOST:8081
+        description: Headscale web management
+
+- Infrastructure:
+    - Portainer:
+        icon: portainer.png
+        href: http://PORTAINER_HOST:9000
+        description: Docker management UI
+        widget:
+          type: portainer
+          url: http://PORTAINER_HOST:9000
+          env: 1
+          key: PORTAINER_API_KEY
+    - Dockge:
+        icon: dockge.png
+        href: http://DOCKGE_HOST:5001
+        description: Docker compose manager
+    - n8n:
+        icon: n8n.png
+        href: http://WORKFLOW_HOST:5678
+        description: Workflow automation
+    - Duplicati:
+        icon: duplicati.png
+        href: http://10.0.0.98:8200
+        description: Backup management
+    - Heimdall:
+        icon: heimdall.png
+        href: http://SWAG_HOST:8070
+        description: Application dashboard
+    - Elasticsearch:
+        icon: elasticsearch.png
+        href: http://ELASTIC_HOST:9200
+        description: Search & analytics engine
+    - Kibana:
+        icon: kibana.png
+        href: http://ELASTIC_HOST:5601
+        description: Elasticsearch dashboard
+        widget:
+          type: kibana
+          url: http://ELASTIC_HOST:5601
+    - Homarr:
+        icon: homarr.png
+        href: http://10.0.0.98:7575
+        description: Previous dashboard

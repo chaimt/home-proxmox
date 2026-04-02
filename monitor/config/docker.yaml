@@ -1,0 +1,4 @@
+# Homepage can discover services via Docker socket
+# This is mounted read-only in the docker-compose.yaml
+local:
+  socket: /var/run/docker.sock

@@ -1,0 +1,17 @@
+- search:
+    provider: google
+    target: _blank
+
+- datetime:
+    text_size: xl
+    format:
+      dateStyle: long
+      timeStyle: short
+      hourCycle: h23
+
+- openmeteo:
+    label: Home
+    latitude: 31.7683
+    longitude: 35.2137
+    units: metric
+    cache: 5

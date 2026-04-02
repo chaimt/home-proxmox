@@ -1,0 +1,33 @@
+title: Home Proxmox
+favicon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/proxmox.png
+
+theme: dark
+color: slate
+
+headerStyle: clean
+
+layout:
+  Monitoring:
+    style: row
+    columns: 4
+    icon: mdi-monitor-dashboard
+  AI & ML:
+    style: row
+    columns: 3
+    icon: mdi-brain
+  Tools:
+    style: row
+    columns: 4
+    icon: mdi-tools
+  Knowledge & Media:
+    style: row
+    columns: 3
+    icon: mdi-book-open-page-variant
+  Networking:
+    style: row
+    columns: 3
+    icon: mdi-lan
+  Infrastructure:
+    style: row
+    columns: 4
+    icon: mdi-server
