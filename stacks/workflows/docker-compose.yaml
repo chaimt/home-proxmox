@@ -2,9 +2,6 @@ volumes:
   n8n_storage:
     external: true
 
-networks:
-  zabbix-network:
-    external: true
 
 services:
   duplicati:

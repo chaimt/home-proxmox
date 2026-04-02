@@ -1,9 +1,4 @@
-volumes:
-  siyuan-data:                                  # Declares a named volume for persisting application data.
 
-networks:
-  zabbix-network:
-    driver: bridge
 services:
   duplicati:
     image: duplicati/duplicati:2.2.1.0

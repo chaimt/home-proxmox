@@ -1,6 +1,3 @@
-networks:
-  zabbix-network:
-    driver: bridge
 
 volumes:
   pulse_data:
@@ -61,6 +58,16 @@ services:
       - 3001:3001
 
 
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_homepage
+    ports:
+      - 3000:3000
+    volumes:
+      - /path/to/config:/app/config # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: turel.cloud # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
 
   homarr:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_homarr
