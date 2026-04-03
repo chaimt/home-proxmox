@@ -13,6 +13,7 @@
 #   MEALIE_HOST    = 10.0.0.97   (Mealie)
 #   NAS_HOST       = 10.0.0.100  (TrueNAS)
 #   MEDIA_HOST     = 10.0.0.95   (MediaServer)
+#   PROXMOX_HOST   = 10.0.0.91   (Proxmox cluster - home1)
 # =============================================================================
 
 - Monitoring:
@@ -36,6 +37,14 @@
         icon: glances.png
         href: http://10.0.0.98:61208
         description: System monitoring
+    - Home Assistant:
+        icon: home-assistant.png
+        href: http://10.0.0.2:8123
+        description: Smart home automation
+        widget:
+          type: homeassistant
+          url: http://10.0.0.2:8123
+          key: HOMEASSISTANT_API_TOKEN
 
 - AI & ML:
     - Open WebUI:
@@ -86,20 +95,36 @@
         icon: mdi-book-open-page-variant
         href: http://10.0.0.100:30260
         description: Book library management
+        widget:
+          type: booklore
+          url: http://10.0.0.100:30260
+          username: BOOKLORE_USERNAME
+          password: BOOKLORE_PASSWORD
 
 - Media:
     - Jellyfin:
         icon: jellyfin.png
         href: http://10.0.0.100:30013
         description: Media streaming server
+        widget:
+          type: jellyfin
+          url: http://10.0.0.100:30013
+          key: JELLYFIN_API_KEY
     - Transmission:
         icon: transmission.png
         href: http://10.0.0.100:30096/transmission/web/
         description: BitTorrent client
+        widget:
+          type: transmission
+          url: http://10.0.0.100:30096
     - Immich:
         icon: immich.png
         href: http://10.0.0.100:30041
         description: Photo & video management
+        widget:
+          type: immich
+          url: http://10.0.0.100:30041
+          key: IMMICH_API_KEY
 
 - Networking:
     - Authelia:
@@ -114,8 +139,34 @@
         icon: headscale.png
         href: http://10.0.0.104:8081
         description: Headscale web management
+    - UniFi Controller:
+        icon: unifi.png
+        href: https://UNIFI_HOST:8443
+        description: Network management
+        widget:
+          type: unifi
+          url: https://UNIFI_HOST:8443
+          username: UNIFI_USERNAME
+          password: UNIFI_PASSWORD
 
 - Infrastructure:
+    - Proxmox:
+        icon: proxmox.png
+        href: https://10.0.0.91:8006
+        description: Proxmox VE cluster management
+        widget:
+          type: proxmox
+          url: https://10.0.0.91:8006
+          username: PROXMOX_API_TOKEN_ID
+          password: PROXMOX_API_TOKEN_SECRET
+    - TrueNAS:
+        icon: truenas.png
+        href: http://10.0.0.100
+        description: Network-attached storage
+        widget:
+          type: truenas
+          url: http://10.0.0.100
+          key: TRUENAS_API_KEY
     - Portainer:
         icon: portainer.png
         href: http://PORTAINER_HOST:9000
@@ -141,6 +192,11 @@
         icon: nextcloud.png
         href: https://nextcloud.turel.cloud
         description: File sync & collaboration
+        widget:
+          type: nextcloud
+          url: https://nextcloud.turel.cloud
+          username: NEXTCLOUD_USERNAME
+          password: NEXTCLOUD_PASSWORD
     - Heimdall:
         icon: heimdall.png
         href: http://10.0.0.98:8070
