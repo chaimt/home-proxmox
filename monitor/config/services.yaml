@@ -127,18 +127,6 @@
           key: IMMICH_API_KEY
 
 - Networking:
-    - Authelia:
-        icon: authelia.png
-        href: http://10.0.0.4:9092
-        description: SSO & 2FA authentication
-    - Headscale:
-        icon: headscale.png
-        href: http://10.0.0.104:8080
-        description: Self-hosted Tailscale control server
-    - Headscale UI:
-        icon: headscale.png
-        href: http://10.0.0.104:8081
-        description: Headscale web management
     - UniFi Controller:
         icon: unifi.png
         href: https://UNIFI_HOST:8443
@@ -176,10 +164,6 @@
           url: http://PORTAINER_HOST:9000
           env: 1
           key: PORTAINER_API_KEY
-    - Dockge:
-        icon: dockge.png
-        href: http://DOCKGE_HOST:5001
-        description: Docker compose manager
     - n8n:
         icon: n8n.png
         href: http://10.0.0.99:5678
@@ -201,18 +185,3 @@
         icon: heimdall.png
         href: http://10.0.0.98:8070
         description: Application dashboard
-    - Elasticsearch:
-        icon: elasticsearch.png
-        href: http://ELASTIC_HOST:9200
-        description: Search & analytics engine
-    - Kibana:
-        icon: kibana.png
-        href: http://ELASTIC_HOST:5601
-        description: Elasticsearch dashboard
-        widget:
-          type: kibana
-          url: http://ELASTIC_HOST:5601
-    - Homarr:
-        icon: homarr.png
-        href: http://10.0.0.98:7575
-        description: Previous dashboard
