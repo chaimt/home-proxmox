@@ -58,9 +58,12 @@
     - Speedtest:
         icon: mdi-speedometer
         href: http://10.0.0.98:8765/
-        description: 
-        version: 2
-        key: {{HOME_SPEEDTEST_TRACKER_APP_KEY}}
+        description: Network throughput
+        widget:
+          type: speedtest
+          version: 2
+          url: http://10.0.0.98:8765/
+          key: {{HOME_SPEEDTEST_TRACKER_APP_KEY}}
 
 - Infrastructure:
     - Proxmox:
