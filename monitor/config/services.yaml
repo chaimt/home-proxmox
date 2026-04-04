@@ -63,6 +63,8 @@
           type: speedtest
           version: 2
           url: http://10.0.0.98:8765/
+          # Bearer token from Speedtest Tracker → /admin/api-tokens with "Read Results" (results:read).
+          # Not SPEEDTEST_TRACKER_APP_KEY — that is Laravel APP_KEY for the container only.
           key: {{HOME_SPEEDTEST_TRACKER_APP_KEY}}
 
 - Infrastructure:
