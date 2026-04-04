@@ -100,8 +100,9 @@ images=(
     "louislam/uptime-kuma:2.2.1"
     "linuxserver/heimdall:2.7.6"
     "ghcr.io/ajnart/homarr:0.16.0"
-    "lscr.io/linuxserver/pairdrop:1.11.2"
-    "b3log/siyuan:v3.6.2"
+    "lscr.io/linuxserver/pairdrop:v1.11.2-ls134"
+    "lscr.io/linuxserver/resilio-sync:3.1.2.1076-1-ls239"
+    "b3log/siyuan:v3.6.3"
     "lscr.io/linuxserver/resilio-sync:3.1.2"
     "ghcr.io/mealie-recipes/mealie:v3.14.0"
     "ghcr.io/linuxserver/swag:5.4.0-ls448"
@@ -113,8 +114,8 @@ images=(
     "mariadb:12.2-ubi10"
     "n8nio/n8n:2.15.0"
     "ghcr.io/open-webui/open-webui:main"
-    "ollama/ollama:0.19.0"
-    "alpine/openclaw:2026.3.28"
+    "ollama/ollama:0.20.2"
+    "alpine/openclaw:2026.4.2"
 )
 
 for image_tag in "${images[@]}"; do

@@ -43,7 +43,7 @@ def get_latest_version_tag(tags: List[str], current_tag: str) -> Optional[str]:
         r'latest', r'main', r'master', r'dev', r'nightly',
         r'arm64', r'amd64', r'armv7', r'windows', r'linux',
         r'beta', r'alpha', r'rc', r'canary', r'debug',
-        r'ls\d+', r'-ls\d+',  # LinuxServer.io build numbers
+        r'ls\d+', r'-ls\d+',  # LinuxServer.io build numbers (plain semver is the default image)
         r'-rocm$',  # AMD GPU build; plain semver tag is the default image
     ]
     
@@ -129,6 +129,24 @@ def get_ghcr_tags(owner: str, repo: str) -> List[str]:
     except (URLError, json.JSONDecodeError):
         return []
 
+def get_latest_same_upstream_ls_tag(tags: List[str], current_tag: str) -> Optional[str]:
+    """For LinuxServer -lsNNN tags, return the newest build with the same upstream prefix."""
+    m = re.match(r"^(.+)-ls(\d+)$", current_tag)
+    if not m:
+        return None
+    prefix = m.group(1)
+    best: Optional[str] = None
+    best_n = -1
+    esc = re.escape(prefix)
+    for tag in tags:
+        mm = re.match(rf"^{esc}-ls(\d+)$", tag)
+        if mm:
+            n = int(mm.group(1))
+            if n > best_n:
+                best_n = n
+                best = tag
+    return best
+
 def check_image(image_name: str, current_tag: str) -> Tuple[bool, Optional[str]]:
     """Check if image has newer version available"""
     # Handle GHCR images
@@ -164,7 +182,11 @@ def check_image(image_name: str, current_tag: str) -> Tuple[bool, Optional[str]]
     tags = get_dockerhub_tags(namespace, repo)
     if not tags:
         return False, None
-    
+
+    ls_latest = get_latest_same_upstream_ls_tag(tags, current_tag)
+    if ls_latest is not None:
+        return ls_latest != current_tag, ls_latest
+
     latest_tag = get_latest_version_tag(tags, current_tag)
     if not latest_tag:
         return False, None
@@ -184,9 +206,9 @@ def main():
         ("louislam/uptime-kuma", "2.2.1"),
         ("linuxserver/heimdall", "2.7.6"),
         ("ghcr.io/ajnart/homarr", "0.16.0"),
-        ("lscr.io/linuxserver/pairdrop", "1.11.2"),
-        ("b3log/siyuan", "v3.6.2"),
-        ("lscr.io/linuxserver/resilio-sync", "3.1.2"),
+        ("lscr.io/linuxserver/pairdrop", "v1.11.2-ls134"),
+        ("b3log/siyuan", "v3.6.3"),
+        ("lscr.io/linuxserver/resilio-sync", "3.1.2.1076-1-ls239"),
         ("ghcr.io/mealie-recipes/mealie", "v3.14.0"),
         ("ghcr.io/linuxserver/swag", "5.4.0-ls448"),
         ("authelia/authelia", "4.39.16"),
@@ -194,8 +216,8 @@ def main():
         ("wallabag/wallabag", "2.6.14"),
         ("mariadb", "12.2-ubi10"),
         ("n8nio/n8n", "2.15.0"),
-        ("ollama/ollama", "0.19.0"),
-        ("alpine/openclaw", "2026.3.28"),
+        ("ollama/ollama", "0.20.2"),
+        ("alpine/openclaw", "2026.4.2"),
     ]
     
     print("=" * 60)

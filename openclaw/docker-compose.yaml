@@ -49,7 +49,7 @@ services:
 
 
   openclaw:
-    image: alpine/openclaw:2026.3.28
+    image: alpine/openclaw:2026.4.2
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_openclaw
     ports:
       - 18789:18789
