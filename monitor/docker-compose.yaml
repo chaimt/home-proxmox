@@ -60,7 +60,7 @@ services:
 
 
   homepage:
-    image: ghcr.io/gethomepage/homepage:latest
+    image: ghcr.io/gethomepage/homepage:v1.12.3
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_homepage
     ports:
       - 3000:3000
