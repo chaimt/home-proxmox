@@ -52,15 +52,13 @@
           url: https://10.0.1.1
           username: {{UNIFI_USERNAME}}
           password: {{UNIFI_PASSWORD}}
+    # speedtest widget: url must be a self-hosted Speedtest Tracker base URL
+    # (alexjustesen/speedtest-tracker or henrywhitaker3/Speedtest-Tracker), not speedtest.net.
+    # See https://gethomepage.dev/widgets/services/speedtest-tracker/
     - Speedtest:
         icon: mdi-speedometer
         href: https://www.speedtest.net
-        description: Network throughput (LibreSpeed / speedtest tracker)
-        widget:
-          type: speedtest
-          url: https://www.speedtest.net
-          version: 1
-          bitratePrecision: 3
+        description: Manual speed test (Ookla); Homepage widget needs Speedtest Tracker
 
 - Infrastructure:
     - Proxmox:
@@ -80,7 +78,7 @@
           type: truenas
           url: http://10.0.0.100
           version: 2 # TrueNAS Scale 25.04+ websocket API (default v1 is REST)
-          key: {{TRUENAS_API_KEY}}
+          key: "{{HOMEPAGE_VAR_TRUENAS_API_KEY}}"
     - Portainer:
         icon: portainer.png
         href: http://10.0.0.98:9000
