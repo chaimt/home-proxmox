@@ -50,8 +50,7 @@
         widget:
           type: unifi
           url: https://10.0.1.1
-          username: {{UNIFI_USERNAME}}
-          password: {{UNIFI_PASSWORD}}
+          key: "{{HOME_VAR_UNIFI_API_KEY}}"
     # speedtest widget: url must be a self-hosted Speedtest Tracker base URL
     # (alexjustesen/speedtest-tracker or henrywhitaker3/Speedtest-Tracker), not speedtest.net.
     # See https://gethomepage.dev/widgets/services/speedtest-tracker/
@@ -63,8 +62,6 @@
           type: speedtest
           version: 2
           url: http://10.0.0.98:8765/
-          # Bearer token from Speedtest Tracker → /admin/api-tokens with "Read Results" (results:read).
-          # Not SPEEDTEST_TRACKER_APP_KEY — that is Laravel APP_KEY for the container only.
           key: "{{HOME_VAR_SPEEDTEST_TRACKER_APP_KEY}}"
 
 - Infrastructure:
