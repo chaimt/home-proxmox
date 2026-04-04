@@ -154,6 +154,7 @@
         widget:
           type: truenas
           url: http://10.0.0.100
+          version: 2 # TrueNAS Scale 25.04+ websocket API (default v1 is REST)
           key: TRUENAS_API_KEY
     - Portainer:
         icon: portainer.png
