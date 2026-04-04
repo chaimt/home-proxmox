@@ -24,7 +24,7 @@
         widget:
           type: uptimekuma
           url: http://10.0.0.98:3001
-          slug: http://10.0.0.98:3001/status/services
+          slug: services
     - Dozzle:
         icon: dozzle.png
         href: http://10.0.0.98:9999
