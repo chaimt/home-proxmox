@@ -154,7 +154,7 @@
         widget:
           type: truenas
           url: http://10.0.0.100
-          key: TRUENAS_API_KEY
+          key: "{{TRUENAS_API_KEY}}"
     - Portainer:
         icon: portainer.png
         href: http://PORTAINER_HOST:9000
@@ -181,7 +181,3 @@
           url: https://nextcloud.turel.cloud
           username: NEXTCLOUD_USERNAME
           password: NEXTCLOUD_PASSWORD
-    - Heimdall:
-        icon: heimdall.png
-        href: http://10.0.0.98:8070
-        description: Application dashboard
