@@ -104,7 +104,7 @@
         widget:
           type: jellyfin
           url: http://10.0.0.100:30013
-          key: JELLYFIN_API_KEY
+          key: "{{JELLYFIN_API_KEY}}"
     - Transmission:
         icon: transmission.png
         href: http://10.0.0.100:30096/transmission/web/
