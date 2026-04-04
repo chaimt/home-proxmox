@@ -25,7 +25,7 @@
         widget:
           type: jellyfin
           url: http://10.0.0.100:30013
-          key: "{{HOMEPAGE_VAR_JELLYFIN_API_KEY}}"
+          key: {{HOMEPAGE_VAR_JELLYFIN_API_KEY}}
     - Transmission:
         icon: transmission.png
         href: http://10.0.0.100:30096/transmission/web/
@@ -40,18 +40,18 @@
         widget:
           type: immich
           url: http://10.0.0.100:30041
-          key: IMMICH_API_KEY
+          key: {{IMMICH_API_KEY}}
 
 - Networking:
     - UniFi Controller:
         icon: unifi.png
-        href: https://UNIFI_HOST:8443
+        href: https://10.0.1.1
         description: Network management
         widget:
           type: unifi
-          url: https://UNIFI_HOST:8443
-          username: UNIFI_USERNAME
-          password: UNIFI_PASSWORD
+          url: https://10.0.1.1
+          username: {{UNIFI_USERNAME}}
+          password: {{UNIFI_PASSWORD}}
     - Speedtest:
         icon: mdi-speedometer
         href: http://speedtest.host.or.ip
@@ -71,8 +71,8 @@
         widget:
           type: proxmox
           url: https://10.0.0.91:8006
-          username: PROXMOX_USERNAME
-          password: PROXMOX_PASSWORD
+          username: {{PROXMOX_USERNAME}}
+          password: {{PROXMOX_PASSWORD}}
     - TrueNAS:
         icon: truenas.png
         href: http://10.0.0.100
@@ -81,7 +81,7 @@
           type: truenas
           url: http://10.0.0.100
           version: 2 # TrueNAS Scale 25.04+ websocket API (default v1 is REST)
-          key: "{{TRUENAS_API_KEY}}"
+          key: {{TRUENAS_API_KEY}}
     - Portainer:
         icon: portainer.png
         href: http://10.0.0.98:9000
@@ -90,7 +90,7 @@
           type: portainer
           url: http://10.0.0.98:9000
           env: 1
-          key: "{{PORTAINER_API_KEY}}"
+          key: {{PORTAINER_API_KEY}}
     - n8n:
         icon: n8n.png
         href: http://10.0.0.99:5678
@@ -106,5 +106,5 @@
         widget:
           type: nextcloud
           url: https://nextcloud.turel.cloud
-          username: NEXTCLOUD_USERNAME
-          password: NEXTCLOUD_PASSWORD
+          username: {{NEXTCLOUD_USERNAME}}
+          password: {{NEXTCLOUD_PASSWORD}}
