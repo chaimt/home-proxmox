@@ -150,8 +150,8 @@
         widget:
           type: proxmox
           url: https://10.0.0.91:8006
-          username: PROXMOX_API_TOKEN_ID
-          password: PROXMOX_API_TOKEN_SECRET
+          username: PROXMOX_USERNAME
+          password: PROXMOX_PASSWORD
     - TrueNAS:
         icon: truenas.png
         href: http://10.0.0.100
