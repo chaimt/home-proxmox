@@ -54,13 +54,12 @@
           password: {{UNIFI_PASSWORD}}
     - Speedtest:
         icon: mdi-speedometer
-        href: http://speedtest.host.or.ip
+        href: https://www.speedtest.net
         description: Network throughput (LibreSpeed / speedtest tracker)
         widget:
           type: speedtest
-          url: http://speedtest.host.or.ip
+          url: https://www.speedtest.net
           version: 1
-          key: speedtestapikey
           bitratePrecision: 3
 
 - Infrastructure:
