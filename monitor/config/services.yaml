@@ -62,7 +62,7 @@
           type: speedtest
           version: 2
           url: http://10.0.0.98:8765/
-          key: "{{HOME_VAR_SPEEDTEST_TRACKER_APP_KEY}}"
+          key: "{{HOMEPAGE_VAR_SPEEDTEST_TRACKER_API_KEY}}"
 
 - Infrastructure:
     - Proxmox:

@@ -104,7 +104,8 @@ services:
       - UNIFI_PASSWORD=${UNIFI_PASSWORD}
       - UNIFI_USERNAME=${UNIFI_USERNAME}
       # Speedtest Tracker Sanctum API token (Read Results), from UI /admin/api-tokens — not Laravel APP_KEY.
-      - HOME_VAR_SPEEDTEST_TRACKER_APP_KEY=${HOME_SPEEDTEST_TRACKER_APP_KEY}
+      # Same pattern as TRUENAS/Jellyfin: HOMEPAGE_VAR_* in .env, with shorter aliases.
+      - HOMEPAGE_VAR_SPEEDTEST_TRACKER_API_KEY=${HOMEPAGE_VAR_SPEEDTEST_TRACKER_API_KEY:-${HOME_SPEEDTEST_TRACKER_APP_KEY:-${SPEEDTEST_TRACKER_API_KEY}}}
       - HOME_VAR_UNIFI_API_KEY=${HOME_VAR_UNIFI_API_KEY:-${UNIFI_API_KEY}}
 
   homarr:
