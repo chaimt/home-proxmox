@@ -158,11 +158,11 @@
           key: TRUENAS_API_KEY
     - Portainer:
         icon: portainer.png
-        href: http://PORTAINER_HOST:9000
+        href: http://10.0.0.98:9000
         description: Docker management UI
         widget:
           type: portainer
-          url: http://PORTAINER_HOST:9000
+          url: http://10.0.0.98:9000
           env: 1
           key: PORTAINER_API_KEY
     - n8n:
