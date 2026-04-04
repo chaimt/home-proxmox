@@ -57,8 +57,10 @@
     # See https://gethomepage.dev/widgets/services/speedtest-tracker/
     - Speedtest:
         icon: mdi-speedometer
-        href: https://www.speedtest.net
-        description: Manual speed test (Ookla); Homepage widget needs Speedtest Tracker
+        href: http://10.0.0.98:8765/
+        description: 
+        version: 2
+        key: {{SPEEDTEST_TRACKER_APP_KEY}}
 
 - Infrastructure:
     - Proxmox:

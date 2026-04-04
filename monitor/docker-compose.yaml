@@ -69,7 +69,8 @@ services:
       - PGID=1000
       - TZ=${DOCKER_TZ}
       - DISPLAY_TIMEZONE=${DOCKER_TZ}
-      - APP_KEY=${SPEEDTEST_TRACKER_APP_KEY}
+      # Required: generate with `echo -n 'base64:'; openssl rand -base64 32` (see docs.speedtest-tracker.dev).
+      - APP_KEY=${SPEEDTEST_TRACKER_APP_KEY:?Set SPEEDTEST_TRACKER_APP_KEY in .env - empty APP_KEY causes HTTP 500}
       - APP_URL=${SPEEDTEST_TRACKER_APP_URL:-http://10.0.0.98:8765}
       - DB_CONNECTION=sqlite
       - SPEEDTEST_SCHEDULE=${SPEEDTEST_TRACKER_SCHEDULE:-0 */6 * * *}
