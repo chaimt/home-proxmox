@@ -69,6 +69,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
     environment:
       - HOMEPAGE_ALLOWED_HOSTS=10.0.0.98:3000
+      - PORTAINER_HOST=10.0.0.98
       - BOOKLORE_PASSWORD=${BOOKLORE_PASSWORD}
       - BOOKLORE_USERNAME=${BOOKLORE_USERNAME}
       - HOMEASSISTANT_API_TOKEN=${HOMEASSISTANT_API_TOKEN}
