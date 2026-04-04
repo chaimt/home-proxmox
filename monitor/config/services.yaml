@@ -46,11 +46,6 @@
           url: http://10.0.0.2:8123
           key: "{{HOMEASSISTANT_API_TOKEN}}"
 
-- AI & ML:
-    - Open WebUI:
-        icon: open-webui.png
-        href: http://10.0.0.89:8080
-        description: Chat UI for Ollama LLMs
 
 - Tools:
     - Stirling PDF:
@@ -136,6 +131,16 @@
           url: https://UNIFI_HOST:8443
           username: UNIFI_USERNAME
           password: UNIFI_PASSWORD
+    - Speedtest:
+        icon: mdi-speedometer
+        href: http://speedtest.host.or.ip
+        description: Network throughput (LibreSpeed / speedtest tracker)
+        widget:
+          type: speedtest
+          url: http://speedtest.host.or.ip
+          version: 1
+          key: speedtestapikey
+          bitratePrecision: 3
 
 - Infrastructure:
     - Proxmox:
