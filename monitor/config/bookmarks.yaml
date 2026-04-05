@@ -8,6 +8,9 @@
     - Homepage:
         - icon: mdi-view-dashboard
           href: https://homepage.turel.cloud
+    - "3D Printer":
+        - icon: mdi-printer-3d-nozzle
+          href: https://3dprinter.turel.cloud
 
 - Social:
     - Facebook:
