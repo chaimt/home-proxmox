@@ -80,12 +80,14 @@
           key: "{{HOMEPAGE_VAR_SPEEDTEST_TRACKER_API_KEY}}"
     - AdGuard Home:
         icon: adguard-home.png
-        href: http://10.0.0.2:8123/app/a0d7b954_adguard
+        href: https://10.0.0.2:3000
         description: DNS & ad blocking
-        siteMonitor: http://10.0.0.2:8123/app/a0d7b954_adguard
+        siteMonitor: https://10.0.0.2:3000
         widget:
           type: adguard
-          url: http://10.0.0.2:8123/app/a0d7b954_adguard
+          url: https://10.0.0.2:3000
+          username: "{{HOMEPAGE_VAR_HA_USERNAME}}"
+          password: "{{HOMEPAGE_VAR_HA_PASSWORD}}"          
 
 - Infrastructure:
     - Home_I:
