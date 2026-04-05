@@ -52,11 +52,11 @@
         siteMonitor: https://media.turel.cloud
 
 - Entertainment:
-    - Books:
+    - BookLore:
         icon: mdi-book-multiple
-        href: https://books.turel.cloud
-        description: Books library
-        siteMonitor: https://books.turel.cloud
+        href: https://books.turel.cloud/dashboard
+        description: Self-hosted book library
+        siteMonitor: http://10.0.0.100:30260/login
 
 - Networking:
     - UniFi Controller:
