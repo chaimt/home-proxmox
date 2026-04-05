@@ -40,7 +40,7 @@
         widget:
           type: immich
           url: http://10.0.0.100:30041
-          version: 2
+          version: 1
           key: {{IMMICH_API_KEY}}
 
 - Networking:
