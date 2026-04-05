@@ -57,6 +57,11 @@
         href: https://books.turel.cloud/dashboard
         description: Self-hosted book library
         siteMonitor: http://10.0.0.100:30260
+        widget:
+            type: booklore
+            url: http://10.0.0.100:30260
+            username: "{{HOMEPAGE_VAR_BOOKLORE_USERNAME}}"
+            password: "{{HOMEPAGE_VAR_BOOKLORE_PASSWORD}}"
 
 - Networking:
     - UniFi Controller:
