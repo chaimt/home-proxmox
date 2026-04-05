@@ -51,7 +51,7 @@
         widget:
           type: unifi
           url: https://10.0.1.1
-          key: "{{HOME_VAR_UNIFI_API_KEY}}"
+          key: "{{HOMEPAGE_VAR_UNIFI_API_KEY}}"
     # speedtest widget: url must be a self-hosted Speedtest Tracker base URL
     # (alexjustesen/speedtest-tracker or henrywhitaker3/Speedtest-Tracker), not speedtest.net.
     # See https://gethomepage.dev/widgets/services/speedtest-tracker/
