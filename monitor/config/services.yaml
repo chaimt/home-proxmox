@@ -39,9 +39,9 @@
         description: Photo & video management
         widget:
           type: immich
-          url: http://10.0.0.100:30041
-          version: 1
-          key: {{IMMICH_API_KEY}}
+          url: http://10.0.0.100:30041          
+          key: {{HOMEPAGE_VAR_IMMICH_API_KEY}}
+          version: 2
 
 - Networking:
     - UniFi Controller:
