@@ -92,7 +92,7 @@
           type: portainer
           url: http://10.0.0.98:9000
           env: 2
-          key: "{{HOME_VAR_PORTAINER_API_KEY}}"
+          key: "{{HOMEPAGE_VAR_PORTAINER_API_KEY}}"
     - n8n:
         icon: n8n.png
         href: http://10.0.0.99:5678
