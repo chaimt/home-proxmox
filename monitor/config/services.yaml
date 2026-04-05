@@ -93,14 +93,14 @@
         icon: kuma.png
         href: https://kuma.turel.cloud/dashboard
         description: Monitoring Server
-        siteMonitor: https://kuma.turel.cloud/dashboard
+        siteMonitor: http://10.0.0.98:3001/dashboard
         proxmoxNode: pve
         proxmoxVMID: 102
         proxmoxType: lxc
 
     - TrueNAS:
         icon: truenas.png
-        href: http://10.0.0.100
+        href: https://nas.turel.cloud
         description: Network-attached storage
         siteMonitor: http://10.0.0.100
         widget:
@@ -110,7 +110,7 @@
           key: "{{HOMEPAGE_VAR_TRUENAS_API_KEY}}"
     - Portainer:
         icon: portainer.png
-        href: http://10.0.0.98:9000
+        href: https://portainer.turel.cloud
         description: Docker management UI
         siteMonitor: http://10.0.0.98:9000
         widget:
@@ -125,7 +125,7 @@
         siteMonitor: http://10.0.0.99:5678
     - Duplicati:
         icon: duplicati.png
-        href: http://10.0.0.98:8200
+        href: https://n8n.turel.cloud
         description: Backup management
         siteMonitor: http://10.0.0.98:8200
     - NextCloud:
@@ -135,7 +135,7 @@
         siteMonitor: https://nextcloud.turel.cloud
         widget:
           type: nextcloud
-          url: https://nextcloud.turel.cloud
+          url: http://10.0.0.100:30027
           username: {{HOMEPAGE_VAR_NEXTCLOUD_USERNAME}}
           password: {{HOMEPAGE_VAR_NEXTCLOUD_PASSWORD}}
 
@@ -143,10 +143,10 @@
         icon: vaultwarden.png
         href: https://pass.turel.cloud/#/login
         description: Password manager
-        siteMonitor: https://pass.turel.cloud
+        siteMonitor: https://10.0.0.2:7277
 
     - Vacumn:
         icon: cloudflare.png
         href: https://vacumn.turel.cloud/
         description: App (Cloudflare Access)
-        siteMonitor: https://vacumn.turel.cloud/
+        siteMonitor: http://10.0.0.30

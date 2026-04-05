@@ -2,13 +2,37 @@
     - GitHub:
         - icon: si-github
           href: https://github.com
+    - Docs:
+        - icon: mdi-book-open-page-variant
+          href: https://docs.turel.cloud
+    - Homepage:
+        - icon: mdi-view-dashboard
+          href: https://homepage.turel.cloud
 
 - Social:
+    - Facebook:
+        - icon: si-facebook
+          href: https://facebook.com
+    - LinkedIn:
+        - icon: si-linkedin
+          href: https://linkedin.com
+    - X:
+        - icon: si-x
+          href: https://x.com
     - Reddit:
         - icon: si-reddit
           href: https://reddit.com
 
 - Entertainment:
+    - Books:
+        - icon: mdi-book-multiple
+          href: https://books.turel.cloud
+    - Media:
+        - icon: mdi-play-box-multiple
+          href: https://media.turel.cloud
+    - Photos:
+        - icon: mdi-image-multiple
+          href: https://photos.turel.cloud
     - YouTube:
         - icon: si-youtube
           href: https://youtube.com
