@@ -138,3 +138,15 @@
           url: https://nextcloud.turel.cloud
           username: {{HOMEPAGE_VAR_NEXTCLOUD_USERNAME}}
           password: {{HOMEPAGE_VAR_NEXTCLOUD_PASSWORD}}
+
+    - Vaultwarden:
+        icon: vaultwarden.png
+        href: https://pass.turel.cloud/#/login
+        description: Password manager
+        siteMonitor: https://pass.turel.cloud
+
+    - Vacumn:
+        icon: cloudflare.png
+        href: https://vacumn.turel.cloud/
+        description: App (Cloudflare Access)
+        siteMonitor: https://vacumn.turel.cloud/
