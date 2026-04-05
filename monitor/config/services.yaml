@@ -73,12 +73,23 @@
           version: 2
           username: "{{HOMEPAGE_VAR_PROXMOX_USERNAME}}"
           password: "{{HOMEPAGE_VAR_PROXMOX_PASSWORD}}"
+
     - HomeAssistant:
       icon: home-assistant.png
       href: http://10.0.0.2:8123/
       description: Home automation
       proxmoxNode: pve
       proxmoxVMID: 103   
+      proxmoxType: qemu
+
+    - Nginx:
+      icon: nginx.png
+      href: http://nginx.local/
+      description: Web server
+      proxmoxNode: pve
+      proxmoxVMID: 102
+      proxmoxType: lxc      
+
     - TrueNAS:
         icon: truenas.png
         href: http://10.0.0.100
