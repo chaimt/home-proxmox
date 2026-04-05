@@ -18,7 +18,7 @@
 
 - openmeteo:
     label: Home
-    latitude: 32.06663020
-    longitude: 34.781599
+    latitude: 32.1184749    
+    longitude: 35.1301673
     units: metric
     cache: 5
