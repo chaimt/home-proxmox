@@ -108,5 +108,5 @@
         widget:
           type: nextcloud
           url: https://nextcloud.turel.cloud
-          username: {{NEXTCLOUD_USERNAME}}
-          password: {{NEXTCLOUD_PASSWORD}}
+          username: {{HOMEPAGE_VAR_NEXTCLOUD_USERNAME}}
+          password: {{HOMEPAGE_VAR_NEXTCLOUD_PASSWORD}}
