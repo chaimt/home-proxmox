@@ -89,11 +89,11 @@
         proxmoxVMID: 103
         proxmoxType: qemu
 
-    - Nginx:
-        icon: nginx.png
-        href: http://nginx.local/
-        description: Web server
-        siteMonitor: http://nginx.local/
+    - kuma:
+        icon: kuma.png
+        href: https://kuma.turel.cloud/dashboard
+        description: Monitoring Server
+        siteMonitor: https://kuma.turel.cloud/dashboard
         proxmoxNode: pve
         proxmoxVMID: 102
         proxmoxType: lxc
