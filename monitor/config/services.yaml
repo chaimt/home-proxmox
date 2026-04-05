@@ -233,4 +233,4 @@
         icon: mdi-book-open-page-variant
         href: https://docs.turel.cloud
         description: Documentation
-        siteMonitor: https://docs.turel.cloud
+        siteMonitor: http://10.0.0.100:30070/
