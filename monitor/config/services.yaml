@@ -85,9 +85,7 @@
         siteMonitor: http://10.0.0.2:8123/app/a0d7b954_adguard
         widget:
           type: adguard
-          url: http://10.0.0.2:3000
-          username: "{{HOMEPAGE_VAR_ADGUARD_USERNAME}}"
-          password: "{{HOMEPAGE_VAR_ADGUARD_PASSWORD}}"
+          url: http://10.0.0.2:8123/app/a0d7b954_adguard
 
 - Infrastructure:
     - Home_I:
