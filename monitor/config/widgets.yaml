@@ -9,6 +9,13 @@
       timeStyle: short
       hourCycle: h23
 
+- resources:
+    cpu: true
+    memory: true
+    disk: /
+    uptime: true
+    network: true
+
 - openmeteo:
     label: Home
     latitude: 32.06663020
