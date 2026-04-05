@@ -2,15 +2,6 @@
     - GitHub:
         - icon: si-github
           href: https://github.com
-    - Docs:
-        - icon: mdi-book-open-page-variant
-          href: https://docs.turel.cloud
-    - Homepage:
-        - icon: mdi-view-dashboard
-          href: https://homepage.turel.cloud
-    - "3D Printer":
-        - icon: mdi-printer-3d-nozzle
-          href: https://3dprinter.turel.cloud
 
 - Social:
     - Facebook:
@@ -27,15 +18,6 @@
           href: https://reddit.com
 
 - Entertainment:
-    - Books:
-        - icon: mdi-book-multiple
-          href: https://books.turel.cloud
-    - Media:
-        - icon: mdi-play-box-multiple
-          href: https://media.turel.cloud
-    - Photos:
-        - icon: mdi-image-multiple
-          href: https://photos.turel.cloud
     - YouTube:
         - icon: si-youtube
           href: https://youtube.com

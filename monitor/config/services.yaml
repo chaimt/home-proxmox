@@ -37,7 +37,7 @@
           url: http://10.0.0.100:30096
     - Immich:
         icon: immich.png
-        href: http://10.0.0.100:30041
+        href: https://photos.turel.cloud
         description: Photo & video management
         siteMonitor: http://10.0.0.100:30041
         widget:
@@ -45,6 +45,18 @@
           url: http://10.0.0.100:30041          
           key: {{HOMEPAGE_VAR_IMMICH_API_KEY}}
           version: 2
+    - Media Portal:
+        icon: mdi-play-box-multiple
+        href: https://media.turel.cloud
+        description: Media portal
+        siteMonitor: https://media.turel.cloud
+
+- Entertainment:
+    - Books:
+        icon: mdi-book-multiple
+        href: https://books.turel.cloud
+        description: Books library
+        siteMonitor: https://books.turel.cloud
 
 - Networking:
     - UniFi Controller:
@@ -55,7 +67,7 @@
         widget:
           type: unifi
           url: https://10.0.1.1
-          key: "{{HOMEPAGE_VAR_UNIFI_API_KEY}}"
+          key: {{HOMEPAGE_VAR_UNIFI_API_KEY}}
     - Speedtest:
         icon: mdi-speedometer
         href: http://10.0.0.98:8765/
@@ -65,7 +77,7 @@
           type: speedtest          
           url: http://10.0.0.98:8765/
           version: 2
-          key: "{{HOMEPAGE_VAR_SPEEDTEST_TRACKER_API_KEY}}"
+          key: {{HOMEPAGE_VAR_SPEEDTEST_TRACKER_API_KEY}}
 
 - Infrastructure:
     - Proxmox:
@@ -89,6 +101,12 @@
         proxmoxVMID: 103
         proxmoxType: qemu
 
+    - "3D Printer":
+        icon: mdi-printer-3d-nozzle
+        href: https://3dprinter.turel.cloud
+        description: 3D printer control
+        siteMonitor: https://3dprinter.turel.cloud
+
     - kuma:
         icon: kuma.png
         href: https://kuma.turel.cloud/dashboard
@@ -97,6 +115,12 @@
         proxmoxNode: pve
         proxmoxVMID: 102
         proxmoxType: lxc
+
+    - Homepage:
+        icon: mdi-view-dashboard
+        href: https://homepage.turel.cloud
+        description: This dashboard (Homepage)
+        siteMonitor: http://10.0.0.98:3000
 
     - TrueNAS:
         icon: truenas.png
@@ -107,7 +131,7 @@
           type: truenas
           url: http://10.0.0.100
           version: 2 # TrueNAS Scale 25.04+ websocket API (default v1 is REST)
-          key: "{{HOMEPAGE_VAR_TRUENAS_API_KEY}}"
+          key: {{HOMEPAGE_VAR_TRUENAS_API_KEY}}
     - Portainer:
         icon: portainer.png
         href: https://portainer.turel.cloud
@@ -117,7 +141,7 @@
           type: portainer
           url: http://10.0.0.98:9000
           env: 2
-          key: "{{HOMEPAGE_VAR_PORTAINER_API_KEY}}"
+          key: {{HOMEPAGE_VAR_PORTAINER_API_KEY}}
     - n8n:
         icon: n8n.png
         href: http://10.0.0.99:5678
@@ -150,3 +174,10 @@
         href: https://vacumn.turel.cloud/
         description: App (Cloudflare Access)
         siteMonitor: http://10.0.0.30
+
+- Developer:
+    - Docs:
+        icon: mdi-book-open-page-variant
+        href: https://docs.turel.cloud
+        description: Documentation
+        siteMonitor: https://docs.turel.cloud
