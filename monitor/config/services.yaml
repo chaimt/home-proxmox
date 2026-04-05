@@ -135,15 +135,15 @@
 
     - Grafana:
         icon: grafana.png
-        href: http://10.0.0.2:8123/app/a0d7b954_grafana
+        href: https://10.0.0.2:2000
         description: Metrics & dashboards (Home Assistant add-on)
-        siteMonitor: http://10.0.0.2:8123/app/a0d7b954_grafana
+        siteMonitor: https://10.0.0.2:2000
         widget:
           type: grafana
           version: 2
-          url: http://10.0.0.2:8123/app/a0d7b954_grafana
-          username: "{{HOMEPAGE_VAR_GRAFANA_USERNAME}}"
-          password: "{{HOMEPAGE_VAR_GRAFANA_PASSWORD}}"
+          url: https://10.0.0.2:2000
+          username: "{{HOMEPAGE_VAR_HA_USERNAME}}"
+          password: "{{HOMEPAGE_VAR_HA_PASSWORD}}"
 
     - "3D Printer":
         icon: mdi-printer-3d-nozzle
