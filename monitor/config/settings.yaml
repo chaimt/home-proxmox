@@ -4,7 +4,16 @@ favicon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/proxmox.png
 theme: dark
 color: slate
 
-headerStyle: clean
+# Wallpaper + frosted cards (cardBlur cannot be combined with background blur/saturate/brightness).
+# Swap `image` for any URL or `/images/your.png` if you mount files under /app/public/images.
+background:
+  image: https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2560&q=80
+  opacity: 58
+
+cardBlur: md
+
+fullWidth: true
+headerStyle: boxed
 
 layout:
   Monitoring:

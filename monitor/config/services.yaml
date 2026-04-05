@@ -22,6 +22,7 @@
         icon: jellyfin.png
         href: http://10.0.0.100:30013
         description: Media streaming server
+        siteMonitor: http://10.0.0.100:30013
         widget:
           type: jellyfin
           url: http://10.0.0.100:30013
@@ -30,6 +31,7 @@
         icon: transmission.png
         href: http://10.0.0.100:30096/transmission/web/
         description: BitTorrent client
+        siteMonitor: http://10.0.0.100:30096/transmission/web/
         widget:
           type: transmission
           url: http://10.0.0.100:30096
@@ -37,6 +39,7 @@
         icon: immich.png
         href: http://10.0.0.100:30041
         description: Photo & video management
+        siteMonitor: http://10.0.0.100:30041
         widget:
           type: immich
           url: http://10.0.0.100:30041          
@@ -48,6 +51,7 @@
         icon: unifi.png
         href: https://10.0.1.1
         description: Network management
+        siteMonitor: https://10.0.1.1
         widget:
           type: unifi
           url: https://10.0.1.1
@@ -56,6 +60,7 @@
         icon: mdi-speedometer
         href: http://10.0.0.98:8765/
         description: Network throughput
+        siteMonitor: http://10.0.0.98:8765/
         widget:
           type: speedtest          
           url: http://10.0.0.98:8765/
@@ -67,6 +72,7 @@
         icon: proxmox.png
         href: https://10.0.0.91:8006
         description: Proxmox VE cluster management
+        siteMonitor: https://10.0.0.91:8006
         widget:
           type: proxmox
           url: https://10.0.0.91:8006
@@ -75,25 +81,28 @@
           password: "{{HOMEPAGE_VAR_PROXMOX_PASSWORD}}"
 
     - HomeAssistant:
-      icon: home-assistant.png
-      href: http://10.0.0.2:8123/
-      description: Home automation
-      proxmoxNode: pve
-      proxmoxVMID: 103   
-      proxmoxType: qemu
+        icon: home-assistant.png
+        href: http://10.0.0.2:8123/
+        description: Home automation
+        siteMonitor: http://10.0.0.2:8123/
+        proxmoxNode: pve
+        proxmoxVMID: 103
+        proxmoxType: qemu
 
     - Nginx:
-      icon: nginx.png
-      href: http://nginx.local/
-      description: Web server
-      proxmoxNode: pve
-      proxmoxVMID: 102
-      proxmoxType: lxc      
+        icon: nginx.png
+        href: http://nginx.local/
+        description: Web server
+        siteMonitor: http://nginx.local/
+        proxmoxNode: pve
+        proxmoxVMID: 102
+        proxmoxType: lxc
 
     - TrueNAS:
         icon: truenas.png
         href: http://10.0.0.100
         description: Network-attached storage
+        siteMonitor: http://10.0.0.100
         widget:
           type: truenas
           url: http://10.0.0.100
@@ -103,6 +112,7 @@
         icon: portainer.png
         href: http://10.0.0.98:9000
         description: Docker management UI
+        siteMonitor: http://10.0.0.98:9000
         widget:
           type: portainer
           url: http://10.0.0.98:9000
@@ -112,14 +122,17 @@
         icon: n8n.png
         href: http://10.0.0.99:5678
         description: Workflow automation
+        siteMonitor: http://10.0.0.99:5678
     - Duplicati:
         icon: duplicati.png
         href: http://10.0.0.98:8200
         description: Backup management
+        siteMonitor: http://10.0.0.98:8200
     - NextCloud:
         icon: nextcloud.png
         href: https://nextcloud.turel.cloud
         description: File sync & collaboration
+        siteMonitor: https://nextcloud.turel.cloud
         widget:
           type: nextcloud
           url: https://nextcloud.turel.cloud

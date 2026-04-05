@@ -1,0 +1,41 @@
+/* Visual polish: background motion, depth, and card interaction (gethomepage/homepage). */
+
+#page_wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #background {
+    animation: homepage-bg-drift 90s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  @keyframes homepage-bg-drift {
+    0% {
+      transform: scale(1) translate3d(0, 0, 0);
+    }
+    100% {
+      transform: scale(1.07) translate3d(-0.75%, -0.5%, 0);
+    }
+  }
+}
+
+.service-card {
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 14px 36px -14px rgb(0 0 0 / 0.55),
+    0 0 0 1px rgb(255 255 255 / 0.06);
+}
+
+.dark .service-card:hover {
+  box-shadow:
+    0 16px 40px -12px rgb(0 0 0 / 0.65),
+    0 0 0 1px rgb(255 255 255 / 0.08);
+}
