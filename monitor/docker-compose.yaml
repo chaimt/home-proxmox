@@ -129,7 +129,8 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-      - ./homarr/appdata:/appdata
+      - ${DOCKER_PATH_PERSISTENT}/homarr_labs/configs:/appdata
+      - ${DOCKER_PATH_PERSISTENT}/homarr_labs/data:/data
     environment:
       - SECRET_ENCRYPTION_KEY=90027e50db0157bf0d6a745c71248592da0099492e163ba658462f70cde46959
     ports:
