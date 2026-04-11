@@ -126,13 +126,3 @@ services:
       - '7575:7575'
 
 
-  # pulse:
-  #   image: rcourtman/pulse:latest
-  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_pulse
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7655:7655"
-  #   volumes:
-  #     - pulse_data:/data
-  #     - /var/run/docker.sock:/var/run/docker.sock # Optional: Monitor local Docker
-
