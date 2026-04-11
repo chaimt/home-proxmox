@@ -110,17 +110,17 @@ services:
       - HOMEPAGE_VAR_HA_USERNAME=${HOMEPAGE_VAR_HA_USERNAME:-${HA_USERNAME}}
       - HOMEPAGE_VAR_HA_PASSWORD=${HOMEPAGE_VAR_HA_PASSWORD:-${HA_PASSWORD}}
 
-  homarr:
-    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_homarr
-    image: ghcr.io/ajnart/homarr:0.16.1
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-      - ${DOCKER_PATH_PERSISTENT}/homarr/configs:/app/data/configs
-      - ${DOCKER_PATH_PERSISTENT}/homarr/icons:/app/public/icons
-      - ${DOCKER_PATH_PERSISTENT}/homarr/data:/data
-    ports:
-      - '7575:7575'      
+  # homarr:
+  #   container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_homarr
+  #   image: ghcr.io/ajnart/homarr:0.16.1
+  #   restart: unless-stopped
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
+  #     - ${DOCKER_PATH_PERSISTENT}/homarr/configs:/app/data/configs
+  #     - ${DOCKER_PATH_PERSISTENT}/homarr/icons:/app/public/icons
+  #     - ${DOCKER_PATH_PERSISTENT}/homarr/data:/data
+  #   ports:
+  #     - '7575:7575'      
 
 
   homarr-labs:
