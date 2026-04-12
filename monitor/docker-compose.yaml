@@ -88,7 +88,7 @@ services:
       - /root/home-proxmox/monitor/config:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
     environment:
-      - HOMEPAGE_ALLOWED_HOSTS=10.0.0.98:3000,homepage.turel.cloud
+      - HOMEPAGE_ALLOWED_HOSTS=10.0.0.98:3000,turel.cloud
       - HOMEPAGE_VAR_BOOKLORE_PASSWORD=${HOMEPAGE_VAR_BOOKLORE_PASSWORD:-${BOOKLORE_PASSWORD}}
       - HOMEPAGE_VAR_BOOKLORE_USERNAME=${HOMEPAGE_VAR_BOOKLORE_USERNAME:-${BOOKLORE_USERNAME}}
       - HOMEPAGE_VAR_HOMEASSISTANT_API_TOKEN=${HOMEASSISTANT_API_TOKEN}
