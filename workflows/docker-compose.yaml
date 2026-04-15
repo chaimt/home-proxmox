@@ -5,7 +5,7 @@ volumes:
 
 services:
   duplicati:
-    image: duplicati/duplicati:2.2.1.0
+    image: duplicati/duplicati:2.3.0.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -44,7 +44,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.3.1
+    image: amir20/dozzle:v10.3.3
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -68,7 +68,7 @@ services:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
 
   n8n:
-    image: n8nio/n8n:2.16.0
+    image: n8nio/n8n:2.16.1
     restart: unless-stopped
     user: "1000:1000"
     # user: "${UID}:${GID}"
