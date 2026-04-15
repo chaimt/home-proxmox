@@ -158,6 +158,7 @@
         widget:
           type: moonraker
           url: http://10.0.0.157:7125
+          key: "{{HOMEPAGE_VAR_MOONRAKER_API_KEY}}"
 
     - kuma:
         icon: kuma.png
