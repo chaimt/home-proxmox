@@ -169,12 +169,6 @@
         proxmoxVMID: 102
         proxmoxType: lxc
 
-    - Homepage:
-        icon: mdi-view-dashboard
-        href: https://homepage.turel.cloud
-        description: This dashboard (Homepage)
-        siteMonitor: http://10.0.0.98:3000
-
     - TrueNAS:
         icon: truenas.png
         href: https://nas.turel.cloud
@@ -185,6 +179,7 @@
           url: http://10.0.0.100
           version: 2 # TrueNAS Scale 25.04+ websocket API (default v1 is REST)
           key: "{{HOMEPAGE_VAR_TRUENAS_API_KEY}}"
+
     - Portainer:
         icon: portainer.png
         href: https://portainer.turel.cloud
@@ -195,16 +190,19 @@
           url: http://10.0.0.98:9000
           env: 2
           key: "{{HOMEPAGE_VAR_PORTAINER_API_KEY}}"
+
     - n8n:
         icon: n8n.png
         href: http://10.0.0.99:5678
         description: Workflow automation
         siteMonitor: http://10.0.0.99:5678
+
     - Duplicati:
         icon: duplicati.png
         href: https://n8n.turel.cloud
         description: Backup management
         siteMonitor: http://10.0.0.98:8200
+
     - NextCloud:
         icon: nextcloud.png
         href: https://nextcloud.turel.cloud
