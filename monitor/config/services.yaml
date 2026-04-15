@@ -140,13 +140,13 @@
 
     - Grafana:
         icon: grafana.png
-        href: https://10.0.0.2:2000
+        href: https://10.0.0.2:4000
         description: Metrics & dashboards (Home Assistant add-on)
-        siteMonitor: https://10.0.0.2:2000
+        siteMonitor: https://10.0.0.2:4000
         widget:
           type: grafana
           version: 2
-          url: https://10.0.0.2:2000
+          url: https://10.0.0.2:4000
           username: "{{HOMEPAGE_VAR_HA_USERNAME}}"
           password: "{{HOMEPAGE_VAR_HA_PASSWORD}}"
 
