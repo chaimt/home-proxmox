@@ -154,10 +154,10 @@
         icon: mdi-printer-3d-nozzle
         href: https://3dprinter.turel.cloud
         description: Klipper (Moonraker)
-        siteMonitor: http://10.0.0.157
+        siteMonitor: http://10.0.0.156:7125
         widget:
           type: moonraker
-          url: http://10.0.0.157:7125
+          url: http://10.0.0.156:7125
           key: "{{HOMEPAGE_VAR_MOONRAKER_API_KEY}}"
 
     - kuma:
