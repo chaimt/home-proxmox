@@ -232,7 +232,7 @@
         description: App (Cloudflare Access)
         siteMonitor: http://10.0.0.30
 
-    - RDP:
+    - Barilan_Shut:
         icon: mdi-remote-desktop
         href: https://shut.turel.cloud/rdp/7cfe8745-3b16-4daf-a7c7-31f02d994548/10.0.0.231/3389
         description: Remote Desktop (Cloudflare Access)
