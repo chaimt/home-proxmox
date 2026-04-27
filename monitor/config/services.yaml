@@ -237,6 +237,11 @@
         href: https://shut.turel.cloud/rdp/7cfe8745-3b16-4daf-a7c7-31f02d994548/10.0.0.231/3389
         description: Remote Desktop (Cloudflare Access)
 
+    - Cloudflare_Launcher:
+        icon: cloudflare.png
+        href: https://turel.cloudflareaccess.com/#/Launcher
+        description: App Launcher (Cloudflare Access)
+
 - Developer:
     - Docs:
         icon: mdi-book-open-page-variant
