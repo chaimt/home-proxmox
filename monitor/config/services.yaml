@@ -214,6 +214,11 @@
           username: {{HOMEPAGE_VAR_NEXTCLOUD_USERNAME}}
           password: {{HOMEPAGE_VAR_NEXTCLOUD_PASSWORD}}
 
+    - Cloudflare_Launcher:
+        icon: cloudflare.png
+        href: https://turel.cloudflareaccess.com/#/Launcher
+        description: App Launcher (Cloudflare Access)
+
     - Paperless:
         icon: paperless-ngx.png
         href: http://10.0.0.100:30070
@@ -237,10 +242,6 @@
         href: https://shut.turel.cloud/rdp/7cfe8745-3b16-4daf-a7c7-31f02d994548/10.0.0.231/3389
         description: Remote Desktop (Cloudflare Access)
 
-    - Cloudflare_Launcher:
-        icon: cloudflare.png
-        href: https://turel.cloudflareaccess.com/#/Launcher
-        description: App Launcher (Cloudflare Access)
 
 - Developer:
     - Docs:
