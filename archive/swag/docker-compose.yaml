@@ -1,6 +1,6 @@
 services:
   duplicati:
-    image: duplicati/duplicati:2.3.0.0
+    image: duplicati/duplicati:2.3.0.1-stable
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -40,7 +40,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.3.3
+    image: amir20/dozzle:v10.5.0
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -48,7 +48,7 @@ services:
       - 9999:8080
 
   swag:
-    image: ghcr.io/linuxserver/swag:5.4.0-ls448
+    image: ghcr.io/linuxserver/swag:5.5.0-ls453
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_swag
     cap_add:
       - NET_ADMIN
@@ -111,7 +111,7 @@ services:
 
   glances:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
-    image: nicolargo/glances:4.5.3.2
+    image: nicolargo/glances:4.5.4
     restart: unless-stopped
     pid: host
     ports:
