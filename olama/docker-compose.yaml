@@ -49,14 +49,17 @@ services:
     networks:
       - traefik-net
     restart: unless-stopped
+    # Run as root so the bind-mount volume (created as root on the host) is writable.
+    user: root
     environment:
-      # ivrit-ai/faster-whisper-v2-d4 lacks the `library_name: ctranslate2` HF tag so speaches'
-      # registry filter can't find it — download it directly via huggingface-cli instead.
+      # ivrit-ai/faster-whisper-v2-d4 lacks `library_name: ctranslate2` in its HF metadata so
+      # speaches' registry filter can't find it — download it directly via huggingface-cli instead.
       HF_HUB_DISABLE_PROGRESS_BARS: "1"
+      HF_HOME: /home/ubuntu/.cache/huggingface
+      PATH: /home/ubuntu/speaches/.venv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     command: >
       sh -c "huggingface-cli download ivrit-ai/faster-whisper-v2-d4
-      --local-dir /home/ubuntu/.cache/huggingface/hub/models--ivrit-ai--faster-whisper-v2-d4/snapshots/main
-      && uvicorn speaches.main:create_app --factory --host 0.0.0.0 --port 8000"
+      && uvicorn --factory speaches.main:create_app"
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/speaches-hf-cache:/home/ubuntu/.cache/huggingface/hub
     ports:
