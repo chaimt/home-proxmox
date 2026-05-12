@@ -50,7 +50,13 @@ services:
       - traefik-net
     restart: unless-stopped
     environment:
-      PRELOAD_MODELS: '["ivrit-ai/faster-whisper-v2-d4"]'
+      # ivrit-ai/faster-whisper-v2-d4 lacks the `library_name: ctranslate2` HF tag so speaches'
+      # registry filter can't find it — download it directly via huggingface-cli instead.
+      HF_HUB_DISABLE_PROGRESS_BARS: "1"
+    command: >
+      sh -c "huggingface-cli download ivrit-ai/faster-whisper-v2-d4
+      --local-dir /home/ubuntu/.cache/huggingface/hub/models--ivrit-ai--faster-whisper-v2-d4/snapshots/main
+      && uvicorn speaches.main:create_app --factory --host 0.0.0.0 --port 8000"
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/speaches-hf-cache:/home/ubuntu/.cache/huggingface/hub
     ports:
