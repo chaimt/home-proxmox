@@ -20,6 +20,7 @@ services:
       OLLAMA_BASE_URLS: http://ollama:11434
     ports:
       - 8080:8080
+      - 11434:11434
 
   ollama:
     image: ollama/ollama:0.23.2
