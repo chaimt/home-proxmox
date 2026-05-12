@@ -42,6 +42,29 @@ services:
       timeout: 10s
       retries: 5
       start_period: 40s
+  speaches:
+    image: ghcr.io/speaches-ai/speaches:v0.8.3-cpu
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_speaches
+    hostname: speaches
+    networks:
+      - traefik-net
+    restart: unless-stopped
+    volumes:
+      - ${DOCKER_PATH_PERSISTENT}/speaches-hf-cache:/home/ubuntu/.cache/huggingface/hub
+    ports:
+      - 8000:8000
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://0.0.0.0:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.speaches.rule=Host(`speaches.domain.com`)"
+      - "traefik.http.routers.speaches.entrypoints=https"
+      - "traefik.http.services.speaches.loadbalancer.server.port=8000"
+
 networks:
   traefik-net:
     external: true
