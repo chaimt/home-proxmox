@@ -43,7 +43,7 @@ services:
       retries: 5
       start_period: 40s
   speaches:
-    image: ghcr.io/speaches-ai/speaches:v0.8.3-cpu
+    image: ghcr.io/speaches-ai/speaches:0.8.3-cpu
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_speaches
     hostname: speaches
     networks:
