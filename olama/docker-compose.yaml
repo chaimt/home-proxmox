@@ -1,6 +1,6 @@
 services:
   openWebUI:
-    image: ghcr.io/open-webui/open-webui:v0.6.5
+    image: ghcr.io/open-webui/open-webui:v0.9.5
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_openwebui
     hostname: openwebui
     networks:
