@@ -1,11 +1,14 @@
 services:
   openWebUI:
-    image: ghcr.io/open-webui/open-webui:main
+    image: ghcr.io/open-webui/open-webui:v0.6.5
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_openwebui
     hostname: openwebui
     networks:
       - traefik-net
     restart: unless-stopped
+    depends_on:
+      ollama:
+        condition: service_healthy
     volumes:
       - ./open-webui-local:/app/backend/data
     labels:
@@ -19,7 +22,7 @@ services:
       - 8080:8080
 
   ollama:
-    image: ollama/ollama:0.21.2
+    image: ollama/ollama:0.23.2
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_ollama
     restart: unless-stopped
     hostname: ollama
@@ -27,6 +30,23 @@ services:
       - traefik-net
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/ollama-local:/root/.ollama
+    environment:
+      OLLAMA_KEEP_ALIVE: 30m
+      OLLAMA_NUM_PARALLEL: 2
+    healthcheck:
+      # Official image is minimal (no curl); ollama CLI talks to the local API.
+      test: ["CMD", "/usr/bin/ollama", "list"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 networks:
   traefik-net:
     external: true

@@ -197,27 +197,27 @@ def check_image(image_name: str, current_tag: str) -> Tuple[bool, Optional[str]]
 def main():
     # Extract images from docker-compose files
     images = [
-        ("portainer/portainer-ce", "2.40.0-alpine"),
+        ("portainer/portainer-ce", "2.41.1-alpine"),
         ("nicolargo/glances", "4.5.4"),
         ("duplicati/duplicati", "2.3.0.1-stable"),
         ("crazymax/diun", "4.31.0"),
-        ("amir20/dozzle", "v10.5.0"),
+        ("amir20/dozzle", "v10.5.3"),
         ("headscale/headscale", "v0.28.0"),
-        ("louislam/uptime-kuma", "2.2.1"),
+        ("louislam/uptime-kuma", "2.3.2"),
         ("linuxserver/heimdall", "2.7.6"),
         ("ghcr.io/ajnart/homarr", "0.16.0"),
-        ("lscr.io/linuxserver/pairdrop", "v1.11.2-ls136"),
+        ("lscr.io/linuxserver/pairdrop", "v1.11.2-ls137"),
         ("b3log/siyuan", "v3.6.5"),
-        ("lscr.io/linuxserver/resilio-sync", "3.1.2.1076-1-ls243"),
-        ("ghcr.io/mealie-recipes/mealie", "v3.16.0"),
-        ("ghcr.io/linuxserver/swag", "5.5.0-ls453"),
+        ("lscr.io/linuxserver/resilio-sync", "3.1.2.1076-1-ls244"),
+        ("ghcr.io/mealie-recipes/mealie", "v3.17.0"),
+        ("ghcr.io/linuxserver/swag", "5.6.0-ls456"),
         ("authelia/authelia", "4.39.19"),
         ("redis", "8.6-alpine3.23"),
         ("wallabag/wallabag", "2.6.14"),
         ("mariadb", "12.2-ubi10"),
-        ("n8nio/n8n", "2.18.4"),
-        ("ollama/ollama", "0.21.2"),
-        ("alpine/openclaw", "2026.4.22"),
+        ("n8nio/n8n", "2.21.0"),
+        ("ollama/ollama", "0.23.2"),
+        ("alpine/openclaw", "2026.5.7"),
     ]
     
     print("=" * 60)

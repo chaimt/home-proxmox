@@ -41,7 +41,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.5.0
+    image: amir20/dozzle:v10.5.3
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -50,7 +50,7 @@ services:
 
 
   pairdrop:
-    image: lscr.io/linuxserver/pairdrop:v1.11.2-ls136
+    image: lscr.io/linuxserver/pairdrop:v1.11.2-ls137
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_pairdrop
     restart: unless-stopped
     environment:
