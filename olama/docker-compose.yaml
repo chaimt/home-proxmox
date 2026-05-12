@@ -20,7 +20,6 @@ services:
       OLLAMA_BASE_URLS: http://ollama:11434
     ports:
       - 8080:8080
-      - 11434:11434
 
   ollama:
     image: ollama/ollama:0.23.2
@@ -34,6 +33,8 @@ services:
     environment:
       OLLAMA_KEEP_ALIVE: 30m
       OLLAMA_NUM_PARALLEL: 2
+    ports:
+      - 11434:11434
     healthcheck:
       # Official image is minimal (no curl); ollama CLI talks to the local API.
       test: ["CMD", "/usr/bin/ollama", "list"]
