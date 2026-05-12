@@ -49,6 +49,8 @@ services:
     networks:
       - traefik-net
     restart: unless-stopped
+    environment:
+      PRELOAD_MODELS: '["ivrit-ai/faster-whisper-v2-d4"]'
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/speaches-hf-cache:/home/ubuntu/.cache/huggingface/hub
     ports:
