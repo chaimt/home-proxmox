@@ -20,7 +20,7 @@ services:
 
 
   diun:
-    image: crazymax/diun:4.31.0
+    image: crazymax/diun:4.33.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_diun
     command: serve
     volumes:
@@ -41,7 +41,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.5.3
+    image: amir20/dozzle:v10.6.3
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -74,7 +74,7 @@ services:
       - redis
 
   db:
-    image: mariadb:12.2-ubi10
+    image: mariadb:12.3-ubi10
     restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD=wallaroot
@@ -85,7 +85,7 @@ services:
       interval: 20s
       timeout: 3s
   redis:
-    image: redis:8.6-alpine3.23
+    image: redis:8.8-alpine3.23
     restart: unless-stopped    
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]

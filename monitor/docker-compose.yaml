@@ -21,7 +21,7 @@ services:
 
 
   diun:
-    image: crazymax/diun:4.31.0
+    image: crazymax/diun:4.33.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_diun
     command: serve
     volumes:
@@ -42,7 +42,7 @@ services:
       
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.5.3
+    image: amir20/dozzle:v10.6.3
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -51,7 +51,7 @@ services:
 
   uptime-kuma:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_uptime-kuma
-    image: louislam/uptime-kuma:2.3.2
+    image: louislam/uptime-kuma:2.4.0
     restart: unless-stopped
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/kuma:/app/data
@@ -61,7 +61,7 @@ services:
   # https://github.com/alexjustesen/speedtest-tracker — image: linuxserver/docker-speedtest-tracker
   # Set SPEEDTEST_TRACKER_APP_KEY (Laravel base64 key, e.g. from docs.speedtest-tracker.dev Docker install).
   speedtest-tracker:
-    image: lscr.io/linuxserver/speedtest-tracker:1.13.12
+    image: lscr.io/linuxserver/speedtest-tracker:1.14.3
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_speedtest-tracker
     restart: unless-stopped
     environment:
@@ -80,7 +80,7 @@ services:
       - 8765:80
 
   homepage:
-    image: ghcr.io/gethomepage/homepage:v1.12.3
+    image: ghcr.io/gethomepage/homepage:v1.13.1
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_homepage
     ports:
       - 3000:3000

@@ -19,7 +19,7 @@ services:
 
   
   diun:
-    image: crazymax/diun:4.31.0
+    image: crazymax/diun:4.33.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_diun
     command: serve
     volumes:
@@ -40,7 +40,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.5.3
+    image: amir20/dozzle:v10.6.3
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -49,7 +49,7 @@ services:
 
 
   openclaw:
-    image: alpine/openclaw:2026.5.7
+    image: alpine/openclaw:2026.5.27
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_openclaw
     ports:
       - 18789:18789

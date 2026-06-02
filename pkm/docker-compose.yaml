@@ -24,7 +24,7 @@ services:
 
 
   diun:
-    image: crazymax/diun:4.31.0
+    image: crazymax/diun:4.33.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_diun
     command: serve
     volumes:
@@ -45,7 +45,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.5.3
+    image: amir20/dozzle:v10.6.3
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -72,7 +72,7 @@ services:
 
 
   resilio-sync:
-    image: lscr.io/linuxserver/resilio-sync:3.1.2.1076-1-ls244
+    image: lscr.io/linuxserver/resilio-sync:3.1.2.1076-1-ls245
     container_name: resilio-sync
     environment:
       - PUID=1000            # your user id on the host

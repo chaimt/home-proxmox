@@ -20,7 +20,7 @@ services:
 
 
   diun:
-    image: crazymax/diun:4.31.0
+    image: crazymax/diun:4.33.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_diun
     command: serve
     volumes:
@@ -41,7 +41,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.5.3
+    image: amir20/dozzle:v10.6.3
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -50,7 +50,7 @@ services:
 
 
   pairdrop:
-    image: lscr.io/linuxserver/pairdrop:v1.11.2-ls137
+    image: lscr.io/linuxserver/pairdrop:v1.11.2-ls138
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_pairdrop
     restart: unless-stopped
     environment:
