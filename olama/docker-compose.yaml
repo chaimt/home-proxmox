@@ -1,6 +1,6 @@
 services:
   openWebUI:
-    image: ghcr.io/open-webui/open-webui:v0.9.6
+    image: ghcr.io/open-webui/open-webui:v0.10.2
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_openwebui
     hostname: openwebui
     networks:
@@ -22,7 +22,7 @@ services:
       - 8080:8080
 
   ollama:
-    image: ollama/ollama:0.30.0
+    image: ollama/ollama:0.31.1
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_ollama
     restart: unless-stopped
     hostname: ollama

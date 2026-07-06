@@ -1,8 +1,17 @@
 {
   "servers": {
-    "datapilot": {
-      "url": "http://localhost:7700/sse",
-      "type": "sse"
+    "datamate": {
+      "type": "stdio",
+      "command": "/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)",
+      "args": [
+        "/Users/chaimturkel/.vscode/extensions/altimateai.vscode-altimate-mcp-server-0.8.4-darwin-arm64/dist/datamate-cli.js",
+        "start-stdio"
+      ],
+      "env": {
+        "ALTIMATE_EXTENSION_RPC": "/var/folders/w_/57w40xmx53dg5mjg50hrg2x80000gn/T/altimate-mcp-14891.sock",
+        "ELECTRON_RUN_AS_NODE": "1"
+      },
+      "updatedAt": "2026-07-06T17:56:15.451Z"
     }
   }
 }
