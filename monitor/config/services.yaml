@@ -62,6 +62,59 @@
             url: http://10.0.0.100:30260
             username: "{{HOMEPAGE_VAR_BOOKLORE_USERNAME}}"
             password: "{{HOMEPAGE_VAR_BOOKLORE_PASSWORD}}"
+    - Mealie:
+        icon: mealie.png
+        href: https://mealie.turel.cloud
+        description: Recipe management
+        siteMonitor: http://10.0.0.97:9000
+        widget:
+          type: mealie
+          url: http://10.0.0.97:9000
+          key: "{{HOMEPAGE_VAR_MEALIE_API_KEY}}"
+    - OpenBooks:
+        icon: mdi-book-search
+        href: http://10.0.0.120:8080
+        description: Book downloader (IRC)
+        siteMonitor: http://10.0.0.120:8080
+
+- Productivity:
+    - SiYuan:
+        icon: mdi-notebook-outline
+        href: http://10.0.0.108:6806
+        description: Personal knowledge management
+        siteMonitor: http://10.0.0.108:6806
+    - Wallabag:
+        icon: wallabag.png
+        href: http://10.0.0.48:8080
+        description: Read-later service
+        siteMonitor: http://10.0.0.48:8080
+    - PairDrop:
+        icon: mdi-share-variant
+        href: http://10.0.0.109:3000
+        description: Local file sharing
+        siteMonitor: http://10.0.0.109:3000
+    - Resilio-Sync:
+        icon: mdi-sync
+        href: http://10.0.0.108:8888
+        description: File synchronization
+        siteMonitor: http://10.0.0.108:8888
+
+- AI:
+    - Open-WebUI:
+        icon: mdi-brain
+        href: http://10.0.0.89:8080
+        description: Ollama chat interface
+        siteMonitor: http://10.0.0.89:8080
+    - Speaches:
+        icon: mdi-microphone
+        href: http://10.0.0.89:8000
+        description: Speech-to-text service
+        siteMonitor: http://10.0.0.89:8000
+    - OpenClaw:
+        icon: mdi-robot
+        href: http://10.0.0.120:18789
+        description: AI assistant
+        siteMonitor: http://10.0.0.120:18789
 
 - Networking:
     - UniFi Controller:
@@ -125,6 +178,17 @@
         widget:
           type: proxmox
           url: https://10.0.0.93:8006
+          version: 2
+          username: "{{HOMEPAGE_VAR_PROXMOX_USERNAME}}"
+          password: "{{HOMEPAGE_VAR_PROXMOX_PASSWORD}}"
+    - Home_IV:
+        icon: proxmox.png
+        href: https://10.0.0.94:8006
+        description: Proxmox VE cluster management
+        siteMonitor: https://10.0.0.94:8006
+        widget:
+          type: proxmox
+          url: https://10.0.0.94:8006
           version: 2
           username: "{{HOMEPAGE_VAR_PROXMOX_USERNAME}}"
           password: "{{HOMEPAGE_VAR_PROXMOX_PASSWORD}}"
@@ -199,7 +263,7 @@
 
     - Duplicati:
         icon: duplicati.png
-        href: https://n8n.turel.cloud
+        href: http://10.0.0.98:8200
         description: Backup management
         siteMonitor: http://10.0.0.98:8200
 
@@ -249,3 +313,13 @@
         href: https://docs.turel.cloud
         description: Documentation
         siteMonitor: http://10.0.0.100:30070/
+    - Stirling-PDF:
+        icon: mdi-file-pdf-box
+        href: http://10.0.0.120:8090
+        description: PDF manipulation tools
+        siteMonitor: http://10.0.0.120:8090
+    - Dozzle:
+        icon: mdi-text-search
+        href: http://10.0.0.98:9999
+        description: Docker log viewer
+        siteMonitor: http://10.0.0.98:9999
