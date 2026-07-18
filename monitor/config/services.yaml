@@ -233,6 +233,12 @@
         proxmoxVMID: 102
         proxmoxType: lxc
 
+    - Pulse:
+        icon: mdi-heart-pulse
+        href: http://10.0.0.98:7655
+        description: Infrastructure monitoring and AI ops
+        siteMonitor: http://10.0.0.98:7655
+
     - TrueNAS:
         icon: truenas.png
         href: https://nas.turel.cloud
