@@ -71,6 +71,8 @@ services:
       - pulse_data:/data
     environment:
       - TZ=${DOCKER_TZ}
+      - PULSE_AUTH_USER=${PULSE_AUTH_USER:?Set PULSE_AUTH_USER in .env}
+      - PULSE_AUTH_PASS=${PULSE_AUTH_PASS:?Set PULSE_AUTH_PASS in .env}
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:7655/api/health"]
       interval: 30s
