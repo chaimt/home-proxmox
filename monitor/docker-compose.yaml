@@ -58,6 +58,26 @@ services:
     ports:
       - 3001:3001
 
+  pulse:
+    image: ${PULSE_IMAGE:-rcourtman/pulse:6.1.0-rc.3}
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_pulse
+    restart: unless-stopped
+    user: "1000:1000"
+    security_opt:
+      - apparmor=unconfined
+    ports:
+      - 7655:7655
+    volumes:
+      - pulse_data:/data
+    environment:
+      - TZ=${DOCKER_TZ}
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:7655/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
   # https://github.com/alexjustesen/speedtest-tracker — image: linuxserver/docker-speedtest-tracker
   # Set SPEEDTEST_TRACKER_APP_KEY (Laravel base64 key, e.g. from docs.speedtest-tracker.dev Docker install).
   speedtest-tracker:
