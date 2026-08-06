@@ -1,6 +1,6 @@
 services:
   duplicati:
-    image: duplicati/duplicati:2.2.1.0
+    image: duplicati/duplicati:2.3.0.4
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -18,7 +18,7 @@ services:
 
 
   diun:
-    image: crazymax/diun:4.31.0
+    image: crazymax/diun:4.33.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_diun
     command: serve
     volumes:
@@ -39,7 +39,7 @@ services:
       
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.2.1
+    image: amir20/dozzle:v10.6.14
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -49,7 +49,7 @@ services:
   
   glances:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_glances
-    image: nicolargo/glances:4.5.3.2
+    image: nicolargo/glances:4.5.6
     restart: unless-stopped
     pid: host
     ports:

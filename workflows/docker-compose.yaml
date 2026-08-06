@@ -44,7 +44,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.6.11
+    image: amir20/dozzle:v10.6.14
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -53,7 +53,7 @@ services:
 
 
   redis:
-    image: redis:8.8-alpine3.23
+    image: redis:8.10-alpine3.23
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_redis
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/redis:/data
@@ -68,7 +68,7 @@ services:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
 
   n8n:
-    image: n8nio/n8n:2.32.3
+    image: n8nio/n8n:2.34.2
     restart: unless-stopped
     user: "1000:1000"
     # user: "${UID}:${GID}"

@@ -1,6 +1,6 @@
 services:
   duplicati:
-    image: duplicati/duplicati:2.3.0.1-stable
+    image: duplicati/duplicati:2.3.0.4-stable
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -17,7 +17,7 @@ services:
       - TZ=${DOCKER_TZ}
 
   diun:
-    image: crazymax/diun:4.31.0
+    image: crazymax/diun:4.33.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_diun
     command: serve
     volumes:
@@ -37,7 +37,7 @@ services:
       - "diun.enable=true"
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v10.5.0
+    image: amir20/dozzle:v10.6.14
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -45,7 +45,7 @@ services:
       - 9999:8080
 
   netdata:
-    image: netdata/netdata:v2.9.0
+    image: netdata/netdata:v2.10.4
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_netdata
     hostname: netdata
     pid: host
