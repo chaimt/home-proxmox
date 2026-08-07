@@ -210,3 +210,158 @@ task: <Task finished name='mcp.server.fastmcp.server.FastMCP.run_stdio_async' co
 2026-07-24 00:26:04,200 - mcp.server.lowlevel.server - DEBUG - Response sent
 2026-07-24 00:28:16,119 - proxmox-mcp - INFO - Received signal to shutdown...
 2026-07-24 00:28:16,144 - proxmox-mcp - INFO - Received signal to shutdown...
+2026-07-25 10:39:11,898 - proxmox-mcp.proxmox - INFO - Connecting to Proxmox host: 10.0.0.91
+2026-07-25 10:39:11,927 - mcp.server.lowlevel.server - DEBUG - Initializing server 'ProxmoxMCP'
+2026-07-25 10:39:11,927 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListToolsRequest
+2026-07-25 10:39:11,927 - mcp.server.lowlevel.server - DEBUG - Registering handler for CallToolRequest
+2026-07-25 10:39:11,927 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListResourcesRequest
+2026-07-25 10:39:11,927 - mcp.server.lowlevel.server - DEBUG - Registering handler for ReadResourceRequest
+2026-07-25 10:39:11,927 - mcp.server.lowlevel.server - DEBUG - Registering handler for PromptListRequest
+2026-07-25 10:39:11,927 - mcp.server.lowlevel.server - DEBUG - Registering handler for GetPromptRequest
+2026-07-25 10:39:11,927 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListResourceTemplatesRequest
+2026-07-25 10:39:11,939 - proxmox-mcp - INFO - Container command execution enabled (SSH configured for user 'mcp-agent')
+2026-07-25 10:39:11,946 - proxmox-mcp - INFO - Starting Proxmox MCP Server with transport: STDIO
+2026-07-25 10:39:11,949 - asyncio - DEBUG - Using selector: KqueueSelector
+2026-07-25 10:39:11,952 - mcp.server.lowlevel.server - DEBUG - Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-07-25 10:39:11,952 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10918df90>
+2026-07-25 10:39:11,952 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2026-07-25 10:39:11,952 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type ListToolsRequest
+2026-07-25 10:39:11,953 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-07-25 10:39:11,953 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10918de50>
+2026-07-25 10:39:11,953 - mcp.server.lowlevel.server - INFO - Processing request of type ListPromptsRequest
+2026-07-25 10:39:11,953 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type ListPromptsRequest
+2026-07-25 10:39:11,953 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x108f7df30>
+2026-07-25 10:39:11,953 - mcp.server.lowlevel.server - INFO - Processing request of type ListResourcesRequest
+2026-07-25 10:39:11,953 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type ListResourcesRequest
+2026-07-25 10:39:11,953 - mcp.server.fastmcp.resources.resource_manager - DEBUG - Listing resources
+2026-07-25 10:39:11,953 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-07-25 10:39:11,953 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-07-25 10:39:21,698 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x108f7e190>
+2026-07-25 10:39:21,699 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2026-07-25 10:39:21,699 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type CallToolRequest
+2026-07-25 10:39:21,704 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): 10.0.0.91:8006
+2026-07-25 10:39:21,939 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): 10.0.0.91:8006
+2026-07-25 10:39:22,366 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (3): 10.0.0.91:8006
+2026-07-25 10:39:22,385 - proxmox-mcp.nodetools - ERROR - Failed to get nodes: HTTPSConnectionPool(host='10.0.0.91', port=8006): Max retries exceeded with url: /api2/json/nodes (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify f
+2026-07-25 10:39:22,385 - proxmox-mcp.nodetools - ERROR - Failed to get nodes: Failed to get nodes: HTTPSConnectionPool(host='10.0.0.91', port=8006): Max retries exceeded with url: /api2/json/nodes (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED]
+2026-07-25 10:39:22,385 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-07-25 10:39:34,722 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10902f530>
+2026-07-25 10:39:34,722 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2026-07-25 10:39:34,722 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type CallToolRequest
+2026-07-25 10:39:34,724 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (4): 10.0.0.91:8006
+2026-07-25 10:39:34,741 - proxmox-mcp.containertools - DEBUG - Cluster container inventory unavailable, falling back to node scan: HTTPSConnectionPool(host='10.0.0.91', port=8006): Max retries exceeded with url: /api2/json/cluster/resources?type=vm (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)')))
+2026-07-25 10:39:34,742 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (5): 10.0.0.91:8006
+2026-07-25 10:39:34,759 - proxmox-mcp.containertools - WARNING - Skipping node pve while listing containers: HTTPSConnectionPool(host='10.0.0.91', port=8006): Max retries exceeded with url: /api2/json/nodes/pve/lxc (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)')))
+2026-07-25 10:39:34,760 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-07-25 10:39:40,212 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10917c5a0>
+2026-07-25 10:39:40,212 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2026-07-25 10:39:40,212 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type CallToolRequest
+2026-07-25 10:39:40,213 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (6): 10.0.0.91:8006
+2026-07-25 10:39:40,231 - proxmox-mcp.containertools - DEBUG - Cluster container inventory unavailable, falling back to node scan: HTTPSConnectionPool(host='10.0.0.91', port=8006): Max retries exceeded with url: /api2/json/cluster/resources?type=vm (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)')))
+2026-07-25 10:39:40,232 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (7): 10.0.0.91:8006
+2026-07-25 10:39:40,249 - proxmox-mcp.containertools - ERROR - Failed to list containers: HTTPSConnectionPool(host='10.0.0.91', port=8006): Max retries exceeded with url: /api2/json/nodes (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify f
+2026-07-25 10:39:40,249 - proxmox-mcp.containertools - ERROR - Failed to Failed to list containers: Failed to list containers: HTTPSConnectionPool(host='10.0.0.91', port=8006): Max retries exceeded with url: /api2/json/nodes (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_F
+2026-07-25 10:39:40,250 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-07-25 10:43:43,995 - proxmox-mcp - INFO - Received signal to shutdown...
+2026-07-25 10:43:44,009 - proxmox-mcp - INFO - Received signal to shutdown...
+2026-07-25 10:43:47,961 - proxmox-mcp.proxmox - INFO - Connecting to Proxmox host: 10.0.0.91
+2026-07-25 10:43:47,983 - mcp.server.lowlevel.server - DEBUG - Initializing server 'ProxmoxMCP'
+2026-07-25 10:43:47,983 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListToolsRequest
+2026-07-25 10:43:47,983 - mcp.server.lowlevel.server - DEBUG - Registering handler for CallToolRequest
+2026-07-25 10:43:47,983 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListResourcesRequest
+2026-07-25 10:43:47,983 - mcp.server.lowlevel.server - DEBUG - Registering handler for ReadResourceRequest
+2026-07-25 10:43:47,983 - mcp.server.lowlevel.server - DEBUG - Registering handler for PromptListRequest
+2026-07-25 10:43:47,983 - mcp.server.lowlevel.server - DEBUG - Registering handler for GetPromptRequest
+2026-07-25 10:43:47,983 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListResourceTemplatesRequest
+2026-07-25 10:43:47,995 - proxmox-mcp - INFO - Container command execution enabled (SSH configured for user 'mcp-agent')
+2026-07-25 10:43:48,003 - proxmox-mcp - INFO - Starting Proxmox MCP Server with transport: STDIO
+2026-07-25 10:43:48,004 - asyncio - DEBUG - Using selector: KqueueSelector
+2026-07-25 10:43:48,008 - mcp.server.lowlevel.server - DEBUG - Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-07-25 10:43:48,008 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10c659f90>
+2026-07-25 10:43:48,008 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2026-07-25 10:43:48,008 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type ListToolsRequest
+2026-07-25 10:43:48,008 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-07-25 10:43:48,009 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10c659e50>
+2026-07-25 10:43:48,009 - mcp.server.lowlevel.server - INFO - Processing request of type ListPromptsRequest
+2026-07-25 10:43:48,009 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type ListPromptsRequest
+2026-07-25 10:43:48,009 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10c325f30>
+2026-07-25 10:43:48,009 - mcp.server.lowlevel.server - INFO - Processing request of type ListResourcesRequest
+2026-07-25 10:43:48,009 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type ListResourcesRequest
+2026-07-25 10:43:48,009 - mcp.server.fastmcp.resources.resource_manager - DEBUG - Listing resources
+2026-07-25 10:43:48,009 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-07-25 10:43:48,009 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-07-25 10:44:51,347 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10c326190>
+2026-07-25 10:44:51,348 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2026-07-25 10:44:51,348 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type CallToolRequest
+2026-07-25 10:44:51,354 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): 10.0.0.91:8006
+2026-07-25 10:44:51,378 - proxmox-mcp.vmtools - DEBUG - Cluster VM inventory unavailable, falling back to node scan: HTTPSConnectionPool(host='10.0.0.91', port=8006): Max retries exceeded with url: /api2/json/cluster/resources?type=vm (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)')))
+2026-07-25 10:44:51,379 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): 10.0.0.91:8006
+2026-07-25 10:44:51,395 - proxmox-mcp.vmtools - ERROR - Failed to get VMs: HTTPSConnectionPool(host='10.0.0.91', port=8006): Max retries exceeded with url: /api2/json/nodes (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify f
+2026-07-25 10:44:51,395 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-07-25 10:44:51,399 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10c4fb530>
+2026-07-25 10:44:51,399 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2026-07-25 10:44:51,399 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type CallToolRequest
+2026-07-25 10:44:51,400 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (3): 10.0.0.91:8006
+2026-07-25 10:44:51,416 - proxmox-mcp.containertools - DEBUG - Cluster container inventory unavailable, falling back to node scan: HTTPSConnectionPool(host='10.0.0.91', port=8006): Max retries exceeded with url: /api2/json/cluster/resources?type=vm (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)')))
+2026-07-25 10:44:51,417 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (4): 10.0.0.91:8006
+2026-07-25 10:44:51,432 - proxmox-mcp.containertools - ERROR - Failed to list containers: HTTPSConnectionPool(host='10.0.0.91', port=8006): Max retries exceeded with url: /api2/json/nodes (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify f
+2026-07-25 10:44:51,432 - proxmox-mcp.containertools - ERROR - Failed to Failed to list containers: Failed to list containers: HTTPSConnectionPool(host='10.0.0.91', port=8006): Max retries exceeded with url: /api2/json/nodes (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_F
+2026-07-25 10:44:51,432 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-07-25 20:48:25,026 - proxmox-mcp - INFO - Received signal to shutdown...
+2026-07-25 20:48:25,076 - proxmox-mcp - INFO - Received signal to shutdown...
+2026-07-25 20:48:41,327 - proxmox-mcp.proxmox - INFO - Connecting to Proxmox host: 10.0.0.91
+2026-07-25 20:48:41,352 - mcp.server.lowlevel.server - DEBUG - Initializing server 'ProxmoxMCP'
+2026-07-25 20:48:41,352 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListToolsRequest
+2026-07-25 20:48:41,352 - mcp.server.lowlevel.server - DEBUG - Registering handler for CallToolRequest
+2026-07-25 20:48:41,352 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListResourcesRequest
+2026-07-25 20:48:41,352 - mcp.server.lowlevel.server - DEBUG - Registering handler for ReadResourceRequest
+2026-07-25 20:48:41,352 - mcp.server.lowlevel.server - DEBUG - Registering handler for PromptListRequest
+2026-07-25 20:48:41,352 - mcp.server.lowlevel.server - DEBUG - Registering handler for GetPromptRequest
+2026-07-25 20:48:41,352 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListResourceTemplatesRequest
+2026-07-25 20:48:41,364 - proxmox-mcp - INFO - Container command execution enabled (SSH configured for user 'mcp-agent')
+2026-07-25 20:48:41,371 - proxmox-mcp - INFO - Starting Proxmox MCP Server with transport: STDIO
+2026-07-25 20:48:41,373 - asyncio - DEBUG - Using selector: KqueueSelector
+2026-07-25 20:48:41,376 - mcp.server.lowlevel.server - DEBUG - Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-07-25 20:48:41,376 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10cfc5f90>
+2026-07-25 20:48:41,376 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2026-07-25 20:48:41,376 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type ListToolsRequest
+2026-07-25 20:48:41,377 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-07-25 20:48:41,377 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10cfc5e50>
+2026-07-25 20:48:41,377 - mcp.server.lowlevel.server - INFO - Processing request of type ListPromptsRequest
+2026-07-25 20:48:41,377 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type ListPromptsRequest
+2026-07-25 20:48:41,377 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10cc91f30>
+2026-07-25 20:48:41,377 - mcp.server.lowlevel.server - INFO - Processing request of type ListResourcesRequest
+2026-07-25 20:48:41,377 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type ListResourcesRequest
+2026-07-25 20:48:41,377 - mcp.server.fastmcp.resources.resource_manager - DEBUG - Listing resources
+2026-07-25 20:48:41,377 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-07-25 20:48:41,378 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-07-25 20:51:09,861 - proxmox-mcp - INFO - Received signal to shutdown...
+2026-07-25 20:51:09,925 - proxmox-mcp - INFO - Received signal to shutdown...
+2026-08-07 17:09:29,848 - proxmox-mcp.proxmox - INFO - Connecting to Proxmox host: 10.0.0.91
+2026-08-07 17:09:29,873 - mcp.server.lowlevel.server - DEBUG - Initializing server 'ProxmoxMCP'
+2026-08-07 17:09:29,873 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListToolsRequest
+2026-08-07 17:09:29,873 - mcp.server.lowlevel.server - DEBUG - Registering handler for CallToolRequest
+2026-08-07 17:09:29,873 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListResourcesRequest
+2026-08-07 17:09:29,873 - mcp.server.lowlevel.server - DEBUG - Registering handler for ReadResourceRequest
+2026-08-07 17:09:29,873 - mcp.server.lowlevel.server - DEBUG - Registering handler for PromptListRequest
+2026-08-07 17:09:29,873 - mcp.server.lowlevel.server - DEBUG - Registering handler for GetPromptRequest
+2026-08-07 17:09:29,873 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListResourceTemplatesRequest
+2026-08-07 17:09:29,887 - proxmox-mcp - INFO - Container command execution enabled (SSH configured for user 'mcp-agent')
+2026-08-07 17:09:29,896 - proxmox-mcp - INFO - Starting Proxmox MCP Server with transport: STDIO
+2026-08-07 17:09:29,898 - asyncio - DEBUG - Using selector: KqueueSelector
+2026-08-07 17:09:29,901 - mcp.server.lowlevel.server - DEBUG - Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-08-07 17:09:29,901 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10d2c5f90>
+2026-08-07 17:09:29,901 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2026-08-07 17:09:29,901 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type ListToolsRequest
+2026-08-07 17:09:29,902 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-08-07 17:09:29,902 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10d2c5e50>
+2026-08-07 17:09:29,902 - mcp.server.lowlevel.server - INFO - Processing request of type ListPromptsRequest
+2026-08-07 17:09:29,902 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type ListPromptsRequest
+2026-08-07 17:09:29,902 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10cf91f30>
+2026-08-07 17:09:29,903 - mcp.server.lowlevel.server - INFO - Processing request of type ListResourcesRequest
+2026-08-07 17:09:29,903 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type ListResourcesRequest
+2026-08-07 17:09:29,903 - mcp.server.fastmcp.resources.resource_manager - DEBUG - Listing resources
+2026-08-07 17:09:29,903 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-08-07 17:09:29,903 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-08-07 17:24:02,259 - proxmox-mcp - INFO - Received signal to shutdown...
+2026-08-07 17:24:02,327 - proxmox-mcp - INFO - Received signal to shutdown...
