@@ -52,16 +52,11 @@
         siteMonitor: https://media.turel.cloud
 
 - Entertainment:
-    - BookLore:
-        icon: mdi-book-multiple
-        href: https://books.turel.cloud/dashboard
+    - Grimmory:
+        icon: mdi-bookshelf
+        href: http://10.0.0.100:30396
         description: Self-hosted book library
-        siteMonitor: http://10.0.0.100:30260
-        widget:
-            type: booklore
-            url: http://10.0.0.100:30260
-            username: "{{HOMEPAGE_VAR_BOOKLORE_USERNAME}}"
-            password: "{{HOMEPAGE_VAR_BOOKLORE_PASSWORD}}"
+        siteMonitor: http://10.0.0.100:30396
     - Mealie:
         icon: mealie.png
         href: https://mealie.turel.cloud

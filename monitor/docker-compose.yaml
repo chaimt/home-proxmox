@@ -3,7 +3,7 @@ volumes:
   pulse_data:
 services:
   duplicati:
-    image: duplicati/duplicati:2.3.0.4-stable
+    image: duplicati/duplicati:2.3.0.4
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -111,8 +111,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
     environment:
       - HOMEPAGE_ALLOWED_HOSTS=10.0.0.98:3000,turel.cloud
-      - HOMEPAGE_VAR_BOOKLORE_PASSWORD=${HOMEPAGE_VAR_BOOKLORE_PASSWORD:-${BOOKLORE_PASSWORD}}
-      - HOMEPAGE_VAR_BOOKLORE_USERNAME=${HOMEPAGE_VAR_BOOKLORE_USERNAME:-${BOOKLORE_USERNAME}}
       - HOMEPAGE_VAR_HOMEASSISTANT_API_TOKEN=${HOMEASSISTANT_API_TOKEN}
       - HOMEPAGE_VAR_IMMICH_API_KEY=${HOMEPAGE_VAR_IMMICH_API_KEY:-${IMMICH_API_KEY}}
       - HOMEPAGE_VAR_JELLYFIN_API_KEY=${HOMEPAGE_VAR_JELLYFIN_API_KEY:-${JELLYFIN_API_KEY}}
