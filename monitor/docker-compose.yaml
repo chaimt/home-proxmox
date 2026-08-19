@@ -59,7 +59,7 @@ services:
       - 3001:3001
 
   pulse:
-    image: ${PULSE_IMAGE:-rcourtman/pulse:6.1.2}
+    image: ${PULSE_IMAGE:-rcourtman/pulse:6.2.1}
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_pulse
     restart: unless-stopped
     user: "1000:1000"
@@ -83,7 +83,7 @@ services:
   # https://github.com/alexjustesen/speedtest-tracker — image: linuxserver/docker-speedtest-tracker
   # Set SPEEDTEST_TRACKER_APP_KEY (Laravel base64 key, e.g. from docs.speedtest-tracker.dev Docker install).
   speedtest-tracker:
-    image: lscr.io/linuxserver/speedtest-tracker:1.14.7
+    image: lscr.io/linuxserver/speedtest-tracker:1.14.8
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_speedtest-tracker
     restart: unless-stopped
     environment:
@@ -102,7 +102,7 @@ services:
       - 8765:80
 
   homepage:
-    image: ghcr.io/gethomepage/homepage:v1.13.2
+    image: ghcr.io/gethomepage/homepage:v2.0.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_homepage
     ports:
       - 3000:3000
