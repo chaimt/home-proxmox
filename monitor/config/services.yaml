@@ -73,21 +73,11 @@
         siteMonitor: http://10.0.0.120:8080
 
 - Productivity:
-    - SiYuan:
-        icon: mdi-notebook-outline
-        href: http://10.0.0.108:6806
-        description: Personal knowledge management
-        siteMonitor: http://10.0.0.108:6806
     - Wallabag:
         icon: wallabag.png
         href: http://10.0.0.48:8080
         description: Read-later service
         siteMonitor: http://10.0.0.48:8080
-    - PairDrop:
-        icon: mdi-share-variant
-        href: http://10.0.0.109:3000
-        description: Local file sharing
-        siteMonitor: http://10.0.0.109:3000
     - Resilio-Sync:
         icon: mdi-sync
         href: http://10.0.0.108:8888
@@ -97,12 +87,12 @@
 - AI:
     - Open-WebUI:
         icon: mdi-brain
-        href: http://10.0.0.89:8080
+        href: http://10.0.0.132:8080
         description: Ollama chat interface
         siteMonitor: http://10.0.0.89:8080
     - Speaches:
         icon: mdi-microphone
-        href: http://10.0.0.89:8000
+        href: http://10.0.0.132:8000/
         description: Speech-to-text service
         siteMonitor: http://10.0.0.89:8000
     - OpenClaw:
