@@ -56,7 +56,7 @@ services:
       # speaches' registry filter can't find it — download it directly via huggingface-cli instead.
       HF_HUB_DISABLE_PROGRESS_BARS: "1"
       HF_HOME: /home/ubuntu/.cache/huggingface
-      PRELOAD_MODELS: '["ivrit-ai/faster-whisper-v2-d4"]'
+      PRELOAD_MODELS: '["Systran/faster-whisper-large-v3"]'
       # CPU settings
       WHISPER__INFERENCE_DEVICE: cpu
       WHISPER__COMPUTE_TYPE: int8      
