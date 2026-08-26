@@ -56,6 +56,10 @@ services:
       # speaches' registry filter can't find it — download it directly via huggingface-cli instead.
       HF_HUB_DISABLE_PROGRESS_BARS: "1"
       HF_HOME: /home/ubuntu/.cache/huggingface
+      PRELOAD_MODELS: '["ivrit-ai/faster-whisper-v2-d4"]'
+      # CPU settings
+      WHISPER__INFERENCE_DEVICE: cpu
+      WHISPER__COMPUTE_TYPE: int8      
       PATH: /home/ubuntu/speaches/.venv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     command: >
       sh -c "huggingface-cli download ivrit-ai/faster-whisper-v2-d4
