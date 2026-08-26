@@ -102,7 +102,7 @@ services:
       - 8765:80
 
   homepage:
-    image: ghcr.io/gethomepage/homepage:v2.0.0
+    image: ghcr.io/gethomepage/homepage:v2.1.2
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_homepage
     ports:
       - 3000:3000
