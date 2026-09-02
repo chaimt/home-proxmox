@@ -57,7 +57,7 @@ services:
       restart: unless-stopped
 
   stirling-pdf:
-      image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
+      image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:2.14.3
       container_name: ${DOCKER_CONTAINER_NAME_PREFIX}stirling-pdf
       ports:
         - "8090:8080"
