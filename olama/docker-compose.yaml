@@ -54,21 +54,14 @@ services:
     environment:
       HF_HUB_DISABLE_PROGRESS_BARS: "1"
       HF_HOME: /home/ubuntu/.cache/huggingface
-      PRELOAD_MODELS: '[
-          "Systran/faster-whisper-large-v3",
-          "ivrit-ai/faster-whisper-v2-d4"
-        ]'
+      PRELOAD_MODELS: '["Systran/faster-whisper-large-v3"]'
       # CPU settings
       WHISPER__INFERENCE_DEVICE: cpu
       WHISPER__COMPUTE_TYPE: int8      
       PATH: /home/ubuntu/speaches/.venv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     command: >
-      sh -c '
-      MODEL_DIR="$$(hf download ivrit-ai/faster-whisper-v2-d4)"
-      && echo "Downloaded to: $$MODEL_DIR"
-      && sed -i "/^---$$/a library_name: ctranslate2\npipeline_tag: automatic-speech-recognition" "$$MODEL_DIR/README.md"
-      && uvicorn --factory speaches.main:create_app
-      '
+      sh -c "hf download ivrit-ai/faster-whisper-v2-d4
+      && uvicorn --factory speaches.main:create_app"
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/speaches-hf-cache:/home/ubuntu/.cache/huggingface/hub
     ports:
