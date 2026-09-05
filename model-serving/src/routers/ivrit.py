@@ -4,8 +4,9 @@ import tempfile
 import os
 import logging
 import requests
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, PlainTextResponse
 import faster_whisper
+from config import AppSettings
 
 router = APIRouter(
     prefix="/ivrit",
@@ -29,7 +30,8 @@ def load_model():
         model = faster_whisper.WhisperModel(
             "ivrit-ai/whisper-large-v3-turbo-ct2",
             device="cpu",  # Change to "cuda" if you have GPU
-            compute_type="int8"  # Options: int8, int16, float16, float32
+            compute_type="int8",  # Options: int8, int16, float16, float32
+            cpu_threads=AppSettings().cpu_threads
         )
         model_name = "ivrit-ai/whisper-large-v3-turbo-ct2"
         logger.info(f"Model {model_name} loaded successfully!")
@@ -61,23 +63,26 @@ async def transcribe_audio(
     file: UploadFile = File(...),
     language: Optional[str] = None,
     task: str = "transcribe",  # "transcribe" or "translate"
+    response_format: str = "json",  # "json" or "text"
     local_model=None
 ):
     """
     Transcribe audio file to text
-    
+
     Args:
         file: Audio file (WAV, MP3, M4A, etc.)
         language: Language code (e.g., 'en', 'he', 'ar'). Auto-detect if None
         task: Either 'transcribe' or 'translate'
-        
+        response_format: Either 'json' (full details) or 'text' (plain transcribed text)
+
     Returns:
         JSON response containing:
             - detected_language: Detected language code
             - segments: List of transcribed segments with timing and confidence
             - text: Full transcribed text
+        Or, if response_format is 'text', a plain text response with just the transcribed text.
     """
-    logger.info(f"Received transcription request - File: {file.filename}, Language: {language}, Task: {task}")
+    logger.info(f"Received transcription request - File: {file.filename}, Language: {language}, Task: {task}, Format: {response_format}")
     if local_model is None:
         global model
         if model is None:
@@ -138,6 +143,9 @@ async def transcribe_audio(
         os.unlink(temp_file_path)
         
         logger.info("Transcription completed successfully")
+        if response_format == "text":
+            return PlainTextResponse(full_text.strip())
+
         return {
             "filename": file.filename,
             "language": info.language,
@@ -147,7 +155,7 @@ async def transcribe_audio(
             "segments": transcription_segments,
             "task": task
         }
-        
+
     except Exception as e:
         # Clean up temporary file in case of error
         if 'temp_file_path' in locals():
@@ -166,17 +174,19 @@ async def transcribe_from_url(
     audio_url: str,
     language: Optional[str] = None,
     task: str = "transcribe",
+    response_format: str = "json",  # "json" or "text"
     model=None
 ):
     """
     Transcribe audio from URL
-    
+
     Args:
         audio_url: URL to audio file
         language: Language code (e.g., 'en', 'he', 'ar'). Auto-detect if None
         task: Either 'transcribe' or 'translate'
+        response_format: Either 'json' (full details) or 'text' (plain transcribed text)
     """
-    logger.info(f"Received URL transcription request - URL: {audio_url}, Language: {language}, Task: {task}")
+    logger.info(f"Received URL transcription request - URL: {audio_url}, Language: {language}, Task: {task}, Format: {response_format}")
     if model is None:
         logger.error("Model not available for URL transcription")
         raise HTTPException(status_code=503, detail="Model not loaded")
@@ -226,6 +236,9 @@ async def transcribe_from_url(
         os.unlink(temp_file_path)
         
         logger.info("URL transcription completed successfully")
+        if response_format == "text":
+            return PlainTextResponse(full_text.strip())
+
         return {
             "url": audio_url,
             "language": info.language,
@@ -235,7 +248,7 @@ async def transcribe_from_url(
             "segments": transcription_segments,
             "task": task
         }
-        
+
     except Exception as e:
         if 'temp_file_path' in locals():
             try:

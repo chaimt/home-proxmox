@@ -6,6 +6,7 @@ from single_instance_metaclass import singleton
 class AppSettings(BaseSettings):
     gemini_api: str = ""
     log_level: str = "INFO"
+    cpu_threads: int = 4
 
     @field_validator("log_level")
     @classmethod

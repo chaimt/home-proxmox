@@ -134,3 +134,234 @@ CancelTaskRequest.params.taskId
 2026-09-05 21:46:10,937 - mcp.server.lowlevel.server - DEBUG - Response sent
 2026-09-05 21:48:04,552 - proxmox-mcp - INFO - Received signal to shutdown...
 2026-09-05 21:48:04,585 - proxmox-mcp - INFO - Received signal to shutdown...
+2026-09-05 21:57:20,366 - proxmox-mcp.proxmox - INFO - Connecting to Proxmox host: 10.0.0.91
+2026-09-05 21:57:20,391 - mcp.server.lowlevel.server - DEBUG - Initializing server 'ProxmoxMCP'
+2026-09-05 21:57:20,391 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListToolsRequest
+2026-09-05 21:57:20,391 - mcp.server.lowlevel.server - DEBUG - Registering handler for CallToolRequest
+2026-09-05 21:57:20,391 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListResourcesRequest
+2026-09-05 21:57:20,391 - mcp.server.lowlevel.server - DEBUG - Registering handler for ReadResourceRequest
+2026-09-05 21:57:20,391 - mcp.server.lowlevel.server - DEBUG - Registering handler for PromptListRequest
+2026-09-05 21:57:20,391 - mcp.server.lowlevel.server - DEBUG - Registering handler for GetPromptRequest
+2026-09-05 21:57:20,391 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListResourceTemplatesRequest
+2026-09-05 21:57:20,403 - proxmox-mcp - INFO - Container command execution enabled (SSH configured for user 'mcp-agent')
+2026-09-05 21:57:20,410 - proxmox-mcp - INFO - Starting Proxmox MCP Server with transport: STDIO
+2026-09-05 21:57:20,412 - asyncio - DEBUG - Using selector: KqueueSelector
+2026-09-05 21:57:20,413 - root - WARNING - Failed to validate request: 31 validation errors for ClientRequest
+PingRequest.method
+  Input should be 'ping' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+InitializeRequest.method
+  Input should be 'initialize' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+InitializeRequest.params.protocolVersion
+  Field required [type=missing, input_value={'_meta': {'io.modelconte...e}, 'elicitation': {}}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+InitializeRequest.params.capabilities
+  Field required [type=missing, input_value={'_meta': {'io.modelconte...e}, 'elicitation': {}}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+InitializeRequest.params.clientInfo
+  Field required [type=missing, input_value={'_meta': {'io.modelconte...e}, 'elicitation': {}}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+CompleteRequest.method
+  Input should be 'completion/complete' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+CompleteRequest.params.ref
+  Field required [type=missing, input_value={'_meta': {'io.modelconte...e}, 'elicitation': {}}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+CompleteRequest.params.argument
+  Field required [type=missing, input_value={'_meta': {'io.modelconte...e}, 'elicitation': {}}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+SetLevelRequest.method
+  Input should be 'logging/setLevel' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+SetLevelRequest.params.level
+  Field required [type=missing, input_value={'_meta': {'io.modelconte...e}, 'elicitation': {}}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+GetPromptRequest.method
+  Input should be 'prompts/get' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+GetPromptRequest.params.name
+  Field required [type=missing, input_value={'_meta': {'io.modelconte...e}, 'elicitation': {}}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+ListPromptsRequest.method
+  Input should be 'prompts/list' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+ListResourcesRequest.method
+  Input should be 'resources/list' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+ListResourceTemplatesRequest.method
+  Input should be 'resources/templates/list' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+ReadResourceRequest.method
+  Input should be 'resources/read' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+ReadResourceRequest.params.uri
+  Field required [type=missing, input_value={'_meta': {'io.modelconte...e}, 'elicitation': {}}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+SubscribeRequest.method
+  Input should be 'resources/subscribe' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+SubscribeRequest.params.uri
+  Field required [type=missing, input_value={'_meta': {'io.modelconte...e}, 'elicitation': {}}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+UnsubscribeRequest.method
+  Input should be 'resources/unsubscribe' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+UnsubscribeRequest.params.uri
+  Field required [type=missing, input_value={'_meta': {'io.modelconte...e}, 'elicitation': {}}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+CallToolRequest.method
+  Input should be 'tools/call' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+CallToolRequest.params.name
+  Field required [type=missing, input_value={'_meta': {'io.modelconte...e}, 'elicitation': {}}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+ListToolsRequest.method
+  Input should be 'tools/list' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+GetTaskRequest.method
+  Input should be 'tasks/get' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+GetTaskRequest.params.taskId
+  Field required [type=missing, input_value={'_meta': {'io.modelconte...e}, 'elicitation': {}}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+GetTaskPayloadRequest.method
+  Input should be 'tasks/result' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+GetTaskPayloadRequest.params.taskId
+  Field required [type=missing, input_value={'_meta': {'io.modelconte...e}, 'elicitation': {}}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+ListTasksRequest.method
+  Input should be 'tasks/list' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+CancelTaskRequest.method
+  Input should be 'tasks/cancel' [type=literal_error, input_value='server/discover', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+CancelTaskRequest.params.taskId
+  Field required [type=missing, input_value={'_meta': {'io.modelconte...e}, 'elicitation': {}}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+2026-09-05 21:57:20,413 - root - DEBUG - Message that failed validation: method='server/discover' params={'_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'claude-code', 'title': 'Claude Code', 'version': '2.1.236', 'description': "Anthropic's agentic coding tool", 'websiteUrl': 'https://claude.com/claude-code'}, 'io.modelcontextprotocol/clientCapabilities': {'roots': {'listChanged': True}, 'elicitation': {}}}} jsonrpc='2.0' id='server-discover-probe-1'
+2026-09-05 21:57:20,414 - proxmox-mcp - INFO - Received signal to shutdown...
+2026-09-05 21:57:20,673 - proxmox-mcp.proxmox - INFO - Connecting to Proxmox host: 10.0.0.91
+2026-09-05 21:57:20,688 - mcp.server.lowlevel.server - DEBUG - Initializing server 'ProxmoxMCP'
+2026-09-05 21:57:20,688 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListToolsRequest
+2026-09-05 21:57:20,688 - mcp.server.lowlevel.server - DEBUG - Registering handler for CallToolRequest
+2026-09-05 21:57:20,688 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListResourcesRequest
+2026-09-05 21:57:20,688 - mcp.server.lowlevel.server - DEBUG - Registering handler for ReadResourceRequest
+2026-09-05 21:57:20,688 - mcp.server.lowlevel.server - DEBUG - Registering handler for PromptListRequest
+2026-09-05 21:57:20,688 - mcp.server.lowlevel.server - DEBUG - Registering handler for GetPromptRequest
+2026-09-05 21:57:20,688 - mcp.server.lowlevel.server - DEBUG - Registering handler for ListResourceTemplatesRequest
+2026-09-05 21:57:20,701 - proxmox-mcp - INFO - Container command execution enabled (SSH configured for user 'mcp-agent')
+2026-09-05 21:57:20,708 - proxmox-mcp - INFO - Starting Proxmox MCP Server with transport: STDIO
+2026-09-05 21:57:20,710 - asyncio - DEBUG - Using selector: KqueueSelector
+2026-09-05 21:57:20,712 - mcp.server.lowlevel.server - DEBUG - Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-09-05 21:57:20,713 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10b261f90>
+2026-09-05 21:57:20,713 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2026-09-05 21:57:20,713 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type ListToolsRequest
+2026-09-05 21:57:20,713 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-09-05 21:57:20,713 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10b261e50>
+2026-09-05 21:57:20,713 - mcp.server.lowlevel.server - INFO - Processing request of type ListPromptsRequest
+2026-09-05 21:57:20,713 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type ListPromptsRequest
+2026-09-05 21:57:20,714 - mcp.server.lowlevel.server - DEBUG - Received message: <mcp.shared.session.RequestResponder object at 0x10af29f30>
+2026-09-05 21:57:20,714 - mcp.server.lowlevel.server - INFO - Processing request of type ListResourcesRequest
+2026-09-05 21:57:20,714 - mcp.server.lowlevel.server - DEBUG - Dispatching request of type ListResourcesRequest
+2026-09-05 21:57:20,714 - mcp.server.fastmcp.resources.resource_manager - DEBUG - Listing resources
+2026-09-05 21:57:20,714 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-09-05 21:57:20,714 - mcp.server.lowlevel.server - DEBUG - Response sent
+2026-09-05 22:01:48,417 - proxmox-mcp - INFO - Received signal to shutdown...
+2026-09-05 22:01:48,421 - proxmox-mcp - INFO - Received signal to shutdown...
+2026-09-05 22:01:48,422 - asyncio - ERROR - unhandled exception during asyncio.run() shutdown
+task: <Task finished name='mcp.server.fastmcp.server.FastMCP.run_stdio_async' coro=<FastMCP.run_stdio_async() done, defined at /Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py:2457> exception=BaseExceptionGroup('unhandled errors in a TaskGroup', [BaseExceptionGroup('unhandled errors in a TaskGroup', [BaseExceptionGroup('unhandled errors in a TaskGroup', [SystemExit(0)])])])>
+  + Exception Group Traceback (most recent call last):
+  |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 2464, in wrapper
+  |     return await func(*args)
+  |            ^^^^^^^^^^^^^^^^^
+  |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/mcp/server/fastmcp/server.py", line 755, in run_stdio_async
+  |     async with stdio_server() as (read_stream, write_stream):
+  |                ~~~~~~~~~~~~^^
+  |   File "/Users/chaimturkel/.local/share/uv/python/cpython-3.13.13-macos-aarch64-none/lib/python3.13/contextlib.py", line 235, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/mcp/server/stdio.py", line 85, in stdio_server
+  |     async with anyio.create_task_group() as tg:
+  |                ~~~~~~~~~~~~~~~~~~~~~~~^^
+  |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  |         "unhandled errors in a TaskGroup", self._exceptions
+  |     ) from None
+  | BaseExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Exception Group Traceback (most recent call last):
+    |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/mcp/server/stdio.py", line 88, in stdio_server
+    |     yield read_stream, write_stream
+    |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/mcp/server/fastmcp/server.py", line 756, in run_stdio_async
+    |     await self._mcp_server.run(
+    |     ...<3 lines>...
+    |     )
+    |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/mcp/server/lowlevel/server.py", line 662, in run
+    |     async with AsyncExitStack() as stack:
+    |                ~~~~~~~~~~~~~~^^
+    |   File "/Users/chaimturkel/.local/share/uv/python/cpython-3.13.13-macos-aarch64-none/lib/python3.13/contextlib.py", line 768, in __aexit__
+    |     raise exc
+    |   File "/Users/chaimturkel/.local/share/uv/python/cpython-3.13.13-macos-aarch64-none/lib/python3.13/contextlib.py", line 751, in __aexit__
+    |     cb_suppress = await cb(*exc_details)
+    |                   ^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/mcp/shared/session.py", line 238, in __aexit__
+    |     return await self._task_group.__aexit__(exc_type, exc_val, exc_tb)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 815, in __aexit__
+    |     raise BaseExceptionGroup(
+    |         "unhandled errors in a TaskGroup", self._exceptions
+    |     ) from None
+    | BaseExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+    +-+---------------- 1 ----------------
+      | Exception Group Traceback (most recent call last):
+      |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/mcp/server/lowlevel/server.py", line 679, in run
+      |     async with anyio.create_task_group() as tg:
+      |                ~~~~~~~~~~~~~~~~~~~~~~~^^
+      |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 815, in __aexit__
+      |     raise BaseExceptionGroup(
+      |         "unhandled errors in a TaskGroup", self._exceptions
+      |     ) from None
+      | BaseExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+      +-+---------------- 1 ----------------
+        | Traceback (most recent call last):
+        |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/anyio/streams/memory.py", line 118, in receive
+        |     return self.receive_nowait()
+        |            ~~~~~~~~~~~~~~~~~~~^^
+        |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/anyio/streams/memory.py", line 113, in receive_nowait
+        |     raise WouldBlock
+        | anyio.WouldBlock
+        | 
+        | During handling of the above exception, another exception occurred:
+        | 
+        | Traceback (most recent call last):
+        |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/mcp/server/lowlevel/server.py", line 681, in run
+        |     async for message in session.incoming_messages:
+        |     ...<8 lines>...
+        |         )
+        |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/anyio/abc/_streams.py", line 35, in __anext__
+        |     return await self.receive()
+        |            ^^^^^^^^^^^^^^^^^^^^
+        |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/anyio/streams/memory.py", line 126, in receive
+        |     await receive_event.wait()
+        |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 1866, in wait
+        |     await self._event.wait()
+        |   File "/Users/chaimturkel/.local/share/uv/python/cpython-3.13.13-macos-aarch64-none/lib/python3.13/asyncio/locks.py", line 213, in wait
+        |     await fut
+        | asyncio.exceptions.CancelledError
+        | 
+        | During handling of the above exception, another exception occurred:
+        | 
+        | Traceback (most recent call last):
+        |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/mcp/server/lowlevel/server.py", line 696, in run
+        |     tg.cancel_scope.cancel()
+        |     ~~~~~~~~~~~~~~~~~~~~~~^^
+        |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/.venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 659, in cancel
+        |     self._cancel_reason += f" by {task}"
+        |                                  ^^^^^^
+        |   File "/Users/chaimturkel/workspace/mcp/ProxmoxMCP-Plus/src/proxmox_mcp/server.py", line 162, in signal_handler
+        |     sys.exit(0)
+        |     ~~~~~~~~^^^
+        | SystemExit: 0
+        +------------------------------------
+2026-09-05 22:01:48,444 - proxmox-mcp - INFO - Received signal to shutdown...

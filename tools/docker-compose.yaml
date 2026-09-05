@@ -70,6 +70,7 @@ services:
       - TZ=${DOCKER_TZ}
       - log_level=${log_level:-INFO}
       - gemini_api=${gemini_api}
+      - cpu_threads=${cpu_threads:-4}
       - PYTHONUNBUFFERED=1
     # Add ulimits for large file handling
     ulimits:
