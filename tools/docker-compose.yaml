@@ -56,6 +56,28 @@ services:
         - ./data:/books
       restart: unless-stopped
 
+  model-serving:
+    image: chaimt/model-server:main
+    container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_model_serving
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./models:/app/models
+      - ./config:/app/config
+    environment:
+      - TZ=${DOCKER_TZ}
+      - log_level=${log_level:-info}
+      - gemini_api=${gemini_api}
+      - PYTHONUNBUFFERED=1
+    # Add ulimits for large file handling
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+
+
   stirling-pdf:
       image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:2.14.3
       container_name: ${DOCKER_CONTAINER_NAME_PREFIX}stirling-pdf
