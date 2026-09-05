@@ -47,14 +47,14 @@ services:
 
 
 
-  openbooks:
-      image: evanbuss/openbooks
-      container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_openbooks
-      ports:
-        - "8080:8080"
-      volumes:
-        - ./data:/books
-      restart: unless-stopped
+  # openbooks:
+  #     image: evanbuss/openbooks
+  #     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_openbooks
+  #     ports:
+  #       - "8080:8080"
+  #     volumes:
+  #       - ./data:/books
+  #     restart: unless-stopped
 
   model-serving:
     image: chaimt/model-server:main
