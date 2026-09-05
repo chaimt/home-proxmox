@@ -10,6 +10,7 @@ services:
     volumes:
       - ./models:/app/models
       - ./config:/app/config
+      - ./logs:/app/logs
     environment:
       - TZ=${DOCKER_TZ}
       - log_level=${log_level:-INFO}

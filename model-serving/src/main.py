@@ -2,6 +2,7 @@ import os
 from fastapi import FastAPI
 import faster_whisper
 import logging
+from logging.handlers import RotatingFileHandler
 from contextlib import asynccontextmanager
 from config import AppSettings
 from routers import ivrit
@@ -10,9 +11,30 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import Response
-# Set up logging
-logging.basicConfig(level=AppSettings().log_level)
+
+# Set up logging - include a date/time stamp on every line and persist to a
+# file (in addition to stdout) so requests can be debugged after the fact.
+LOG_DIR = os.environ.get("LOG_DIR", "/app/logs")
+os.makedirs(LOG_DIR, exist_ok=True)
+LOG_FORMAT = "%(asctime)s %(levelname)s [%(name)s] %(message)s"
+LOG_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+
+log_file_handler = RotatingFileHandler(
+    os.path.join(LOG_DIR, "model-serving.log"),
+    maxBytes=10 * 1024 * 1024,  # 10MB
+    backupCount=5,
+)
+log_file_handler.setFormatter(logging.Formatter(LOG_FORMAT, datefmt=LOG_DATE_FORMAT))
+
+log_console_handler = logging.StreamHandler()
+log_console_handler.setFormatter(logging.Formatter(LOG_FORMAT, datefmt=LOG_DATE_FORMAT))
+
+logging.basicConfig(
+    level=AppSettings().log_level,
+    handlers=[log_console_handler, log_file_handler],
+)
 logger = logging.getLogger(__name__)
+logger.info(f"Logging initialized - level={AppSettings().log_level}, log file={log_file_handler.baseFilename}")
 
 
 class LargeFileMiddleware(BaseHTTPMiddleware):
