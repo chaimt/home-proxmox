@@ -39,6 +39,45 @@ ADDITIONAL_ALLOWED_CONTENT_TYPES = {
 model = None
 model_name = None
 
+# faster-whisper has no notion of "who is talking" -- it just gives us a
+# stream of segments. Real diarization needs a separate model, so as a
+# lightweight stand-in we treat a silence longer than this many seconds
+# between two segments as a probable turn change and flip the speaker label.
+SPEAKER_GAP_SECONDS = 1.5
+
+
+def _assign_speakers(transcription_segments, gap_seconds=SPEAKER_GAP_SECONDS):
+    """Tag each segment (in place) with a "Speaker N" label.
+
+    This is a heuristic, not diarization: it can't tell voices apart, it just
+    alternates the label whenever the pause between segments is long enough
+    to look like a change of speaker.
+    """
+    previous_end = None
+    speaker = 1
+    for segment in transcription_segments:
+        if previous_end is not None and segment["start"] - previous_end > gap_seconds:
+            speaker = 2 if speaker == 1 else 1
+        segment["speaker"] = f"Speaker {speaker}"
+        previous_end = segment["end"]
+
+
+def _format_speaker_text(transcription_segments):
+    """Render already-speaker-tagged segments as "Speaker N: ..." lines."""
+    lines = []
+    current_speaker = None
+    current_texts = []
+    for segment in transcription_segments:
+        if segment["speaker"] != current_speaker:
+            if current_texts:
+                lines.append(f"{current_speaker}: {' '.join(current_texts)}")
+            current_speaker = segment["speaker"]
+            current_texts = []
+        current_texts.append(segment["text"])
+    if current_texts:
+        lines.append(f"{current_speaker}: {' '.join(current_texts)}")
+    return "\n".join(lines)
+
 
 def load_model():
     global model
@@ -98,9 +137,9 @@ async def transcribe_audio(
     Returns:
         JSON response containing:
             - detected_language: Detected language code
-            - segments: List of transcribed segments with timing and confidence
-            - text: Full transcribed text
-        Or, if response_format is 'text', a plain text response with just the transcribed text.
+            - segments: List of transcribed segments with timing, confidence and speaker label
+            - full_text: Full transcript formatted as "Speaker 1: ...\nSpeaker 2: ..." turns
+        Or, if response_format is 'text', a plain text response in the same "Speaker N: ..." format.
     """
     logger.info(f"Received transcription request - File: {file.filename}, Language: {language}, Task: {task}, Format: {response_format}")
     if local_model is None:
@@ -148,7 +187,6 @@ async def transcribe_audio(
         # Collect results
         logger.debug("Processing transcription results")
         transcription_segments = []
-        full_text = ""
 
         for segment in segments:
             segment_data = {
@@ -158,8 +196,10 @@ async def transcribe_audio(
                 "confidence": getattr(segment, 'avg_logprob', None)
             }
             transcription_segments.append(segment_data)
-            full_text += segment.text.strip() + " "
             logger.debug(f"Segment [{segment.start:.2f}-{segment.end:.2f}]: {segment_data['text']}")
+
+        _assign_speakers(transcription_segments)
+        full_text = _format_speaker_text(transcription_segments)
 
         logger.info(f"Transcribed {len(transcription_segments)} segments, {len(full_text)} characters")
 
@@ -245,7 +285,6 @@ async def transcribe_from_url(
         # Collect results
         logger.debug("Processing transcription results")
         transcription_segments = []
-        full_text = ""
 
         for segment in segments:
             segment_data = {
@@ -255,8 +294,10 @@ async def transcribe_from_url(
                 "confidence": getattr(segment, 'avg_logprob', None)
             }
             transcription_segments.append(segment_data)
-            full_text += segment.text.strip() + " "
             logger.debug(f"Segment [{segment.start:.2f}-{segment.end:.2f}]: {segment_data['text']}")
+
+        _assign_speakers(transcription_segments)
+        full_text = _format_speaker_text(transcription_segments)
 
         logger.info(f"Transcribed {len(transcription_segments)} segments, {len(full_text)} characters")
 
