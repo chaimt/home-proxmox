@@ -62,7 +62,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="Whisper Speech-to-Text API",
     description="FastAPI server for speech-to-text using ivrit-ai/whisper-large-v3-turbo-ct2",
-    version="1.0.0",
+    version="1.0.1",
     docs_url="/swagger",
     lifespan=lifespan
 )
@@ -99,6 +99,21 @@ async def root():
 )
 def get_env():
     return {"env": dict(os.environ), "settings": AppSettings().model_dump()}
+
+
+@app.get(
+    "/version",
+    summary="Get version and build time",
+    description="Returns the API version along with the git commit and build time baked into the image",
+    response_description="A dictionary containing version, git hash and build date",
+    tags=["Health"],
+)
+def get_version():
+    return {
+        "version": app.version,
+        "git_hash": os.environ.get("GIT_HASH", "unknown"),
+        "build_date": os.environ.get("BUILD_DATE", "unknown"),
+    }
 
 # Include routers
 app.include_router(ivrit.router)
