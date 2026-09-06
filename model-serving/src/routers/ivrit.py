@@ -7,6 +7,7 @@ import logging
 import requests
 from fastapi.responses import JSONResponse, PlainTextResponse
 import faster_whisper
+from pyannote.audio import Pipeline as PyannotePipeline
 from config import AppSettings
 
 router = APIRouter(
@@ -39,10 +40,15 @@ ADDITIONAL_ALLOWED_CONTENT_TYPES = {
 model = None
 model_name = None
 
+# Lazily-loaded pyannote diarization pipeline (see load_diarization_pipeline()).
+diarization_pipeline = None
+DIARIZATION_MODEL_NAME = "pyannote/speaker-diarization-community-1"
+
 # faster-whisper has no notion of "who is talking" -- it just gives us a
-# stream of segments. Real diarization needs a separate model, so as a
-# lightweight stand-in we treat a silence longer than this many seconds
-# between two segments as a probable turn change and flip the speaker label.
+# stream of segments. When real diarization (diarize=True) isn't requested we
+# fall back to this lightweight heuristic: treat a silence longer than this
+# many seconds between two segments as a probable turn change and flip the
+# speaker label.
 SPEAKER_GAP_SECONDS = 1.5
 
 
@@ -79,6 +85,40 @@ def _format_speaker_text(transcription_segments):
     return "\n".join(lines)
 
 
+def _diarize(audio_path, num_speakers=None, min_speakers=None, max_speakers=None):
+    """Run the Pyannote Community-1 pipeline and return a list of
+    (start, end, speaker_label) turns for the given audio file."""
+    global diarization_pipeline
+    if diarization_pipeline is None:
+        load_diarization_pipeline()
+
+    kwargs = {}
+    if num_speakers is not None:
+        kwargs["num_speakers"] = num_speakers
+    if min_speakers is not None:
+        kwargs["min_speakers"] = min_speakers
+    if max_speakers is not None:
+        kwargs["max_speakers"] = max_speakers
+
+    output = diarization_pipeline(audio_path, **kwargs)
+    return [(turn.start, turn.end, speaker) for turn, speaker in output.speaker_diarization]
+
+
+def _assign_speakers_from_diarization(transcription_segments, diarization_turns):
+    """Tag each segment (in place) with the Pyannote speaker label that
+    overlaps it the most in time. Segments that overlap no diarized turn
+    (e.g. a VAD false positive) fall back to "Speaker ?"."""
+    for segment in transcription_segments:
+        best_speaker = None
+        best_overlap = 0.0
+        for turn_start, turn_end, speaker in diarization_turns:
+            overlap = min(segment["end"], turn_end) - max(segment["start"], turn_start)
+            if overlap > best_overlap:
+                best_overlap = overlap
+                best_speaker = speaker
+        segment["speaker"] = best_speaker or "Speaker ?"
+
+
 def load_model():
     global model
     global model_name
@@ -96,6 +136,22 @@ def load_model():
         logger.info(f"Model {model_name} loaded successfully!")
     except Exception as e:
         logger.error(f"Failed to load model: {e}", exc_info=True)
+        raise e
+
+
+def load_diarization_pipeline():
+    global diarization_pipeline
+    hf_token = AppSettings().hf_token
+    logger.info("Starting diarization pipeline loading process...")
+    try:
+        logger.info(f"Loading Pyannote diarization pipeline ({DIARIZATION_MODEL_NAME})...")
+        diarization_pipeline = PyannotePipeline.from_pretrained(
+            DIARIZATION_MODEL_NAME,
+            token=hf_token or None,
+        )
+        logger.info("Diarization pipeline loaded successfully!")
+    except Exception as e:
+        logger.error(f"Failed to load diarization pipeline: {e}", exc_info=True)
         raise e
 
 @router.get("/health")
@@ -123,6 +179,10 @@ async def transcribe_audio(
     language: Optional[str] = None,
     task: str = "transcribe",  # "transcribe" or "translate"
     response_format: ResponseFormat = ResponseFormat.json,
+    diarize: bool = False,
+    num_speakers: Optional[int] = None,
+    min_speakers: Optional[int] = None,
+    max_speakers: Optional[int] = None,
     local_model=None
 ):
     """
@@ -133,6 +193,12 @@ async def transcribe_audio(
         language: Language code (e.g., 'en', 'he', 'ar'). Auto-detect if None
         task: Either 'transcribe' or 'translate'
         response_format: Either 'json' (full details) or 'text' (plain transcribed text)
+        diarize: If True, label speakers using the Pyannote Community-1 diarization
+            model instead of the silence-gap heuristic. Slower, but tells actual
+            voices apart rather than just guessing at turn changes.
+        num_speakers: Exact number of speakers, if known (only used when diarize=True)
+        min_speakers: Lower bound on number of speakers (only used when diarize=True)
+        max_speakers: Upper bound on number of speakers (only used when diarize=True)
 
     Returns:
         JSON response containing:
@@ -141,7 +207,7 @@ async def transcribe_audio(
             - full_text: Full transcript formatted as "Speaker 1: ...\nSpeaker 2: ..." turns
         Or, if response_format is 'text', a plain text response in the same "Speaker N: ..." format.
     """
-    logger.info(f"Received transcription request - File: {file.filename}, Language: {language}, Task: {task}, Format: {response_format}")
+    logger.info(f"Received transcription request - File: {file.filename}, Language: {language}, Task: {task}, Format: {response_format}, Diarize: {diarize}")
     if local_model is None:
         global model
         if model is None:
@@ -198,7 +264,17 @@ async def transcribe_audio(
             transcription_segments.append(segment_data)
             logger.debug(f"Segment [{segment.start:.2f}-{segment.end:.2f}]: {segment_data['text']}")
 
-        _assign_speakers(transcription_segments)
+        if diarize:
+            logger.debug("Running Pyannote diarization pipeline")
+            diarization_turns = _diarize(
+                temp_file_path,
+                num_speakers=num_speakers,
+                min_speakers=min_speakers,
+                max_speakers=max_speakers,
+            )
+            _assign_speakers_from_diarization(transcription_segments, diarization_turns)
+        else:
+            _assign_speakers(transcription_segments)
         full_text = _format_speaker_text(transcription_segments)
 
         logger.info(f"Transcribed {len(transcription_segments)} segments, {len(full_text)} characters")
@@ -218,7 +294,8 @@ async def transcribe_audio(
             "duration": info.duration,
             "full_text": full_text.strip(),
             "segments": transcription_segments,
-            "task": task
+            "task": task,
+            "diarization": DIARIZATION_MODEL_NAME if diarize else "heuristic"
         }
 
     except Exception as e:
@@ -239,6 +316,10 @@ async def transcribe_from_url(
     language: Optional[str] = None,
     task: str = "transcribe",
     response_format: ResponseFormat = ResponseFormat.json,
+    diarize: bool = False,
+    num_speakers: Optional[int] = None,
+    min_speakers: Optional[int] = None,
+    max_speakers: Optional[int] = None,
     model=None
 ):
     """
@@ -249,8 +330,13 @@ async def transcribe_from_url(
         language: Language code (e.g., 'en', 'he', 'ar'). Auto-detect if None
         task: Either 'transcribe' or 'translate'
         response_format: Either 'json' (full details) or 'text' (plain transcribed text)
+        diarize: If True, label speakers using the Pyannote Community-1 diarization
+            model instead of the silence-gap heuristic.
+        num_speakers: Exact number of speakers, if known (only used when diarize=True)
+        min_speakers: Lower bound on number of speakers (only used when diarize=True)
+        max_speakers: Upper bound on number of speakers (only used when diarize=True)
     """
-    logger.info(f"Received URL transcription request - URL: {audio_url}, Language: {language}, Task: {task}, Format: {response_format}")
+    logger.info(f"Received URL transcription request - URL: {audio_url}, Language: {language}, Task: {task}, Format: {response_format}, Diarize: {diarize}")
     if model is None:
         logger.error("Model not available for URL transcription")
         raise HTTPException(status_code=503, detail="Model not loaded")
@@ -296,7 +382,17 @@ async def transcribe_from_url(
             transcription_segments.append(segment_data)
             logger.debug(f"Segment [{segment.start:.2f}-{segment.end:.2f}]: {segment_data['text']}")
 
-        _assign_speakers(transcription_segments)
+        if diarize:
+            logger.debug("Running Pyannote diarization pipeline")
+            diarization_turns = _diarize(
+                temp_file_path,
+                num_speakers=num_speakers,
+                min_speakers=min_speakers,
+                max_speakers=max_speakers,
+            )
+            _assign_speakers_from_diarization(transcription_segments, diarization_turns)
+        else:
+            _assign_speakers(transcription_segments)
         full_text = _format_speaker_text(transcription_segments)
 
         logger.info(f"Transcribed {len(transcription_segments)} segments, {len(full_text)} characters")
@@ -316,7 +412,8 @@ async def transcribe_from_url(
             "duration": info.duration,
             "full_text": full_text.strip(),
             "segments": transcription_segments,
-            "task": task
+            "task": task,
+            "diarization": DIARIZATION_MODEL_NAME if diarize else "heuristic"
         }
 
     except Exception as e:
