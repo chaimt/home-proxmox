@@ -7,6 +7,10 @@ class AppSettings(BaseSettings):
     gemini_api: str = ""
     log_level: str = "INFO"
     cpu_threads: int = 4
+    # Needed to download gated pyannote models (e.g. speaker-diarization-community-1)
+    # from Hugging Face. Create one at hf.co/settings/tokens and accept the model's
+    # user conditions on its Hugging Face page.
+    hf_token: str = ""
 
     @field_validator("log_level")
     @classmethod
