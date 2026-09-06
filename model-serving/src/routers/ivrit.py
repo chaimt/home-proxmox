@@ -6,7 +6,9 @@ import os
 import logging
 import requests
 from fastapi.responses import JSONResponse, PlainTextResponse
+import torch
 import faster_whisper
+from faster_whisper.audio import decode_audio
 from pyannote.audio import Pipeline as PyannotePipeline
 from config import AppSettings
 
@@ -50,6 +52,12 @@ DIARIZATION_MODEL_NAME = "pyannote/speaker-diarization-community-1"
 # many seconds between two segments as a probable turn change and flip the
 # speaker label.
 SPEAKER_GAP_SECONDS = 1.5
+
+# pyannote.audio (>=4.0) reads audio via torchcodec, which isn't installed
+# in this image. We decode the file ourselves with faster-whisper's
+# PyAV-based decoder instead and hand pyannote the raw waveform, which it
+# accepts directly without touching torchcodec.
+DIARIZATION_SAMPLE_RATE = 16000
 
 
 def _assign_speakers(transcription_segments, gap_seconds=SPEAKER_GAP_SECONDS):
@@ -100,7 +108,13 @@ def _diarize(audio_path, num_speakers=None, min_speakers=None, max_speakers=None
     if max_speakers is not None:
         kwargs["max_speakers"] = max_speakers
 
-    output = diarization_pipeline(audio_path, **kwargs)
+    waveform = decode_audio(audio_path, sampling_rate=DIARIZATION_SAMPLE_RATE)
+    audio_input = {
+        "waveform": torch.from_numpy(waveform).unsqueeze(0),
+        "sample_rate": DIARIZATION_SAMPLE_RATE,
+    }
+
+    output = diarization_pipeline(audio_input, **kwargs)
     return [(turn.start, turn.end, speaker) for turn, speaker in output.speaker_diarization]
 
 
@@ -145,16 +159,17 @@ def load_diarization_pipeline():
     hf_token = AppSettings().hf_token
     if not hf_token:
         logger.warning("Hugging Face token not set. Diarization may fail for gated models.")
-    try:
-        logger.info(f"Loading Pyannote diarization pipeline ({DIARIZATION_MODEL_NAME})...")
-        diarization_pipeline = PyannotePipeline.from_pretrained(
-            DIARIZATION_MODEL_NAME,
-            token=hf_token or None,
-        )
-        logger.info("Diarization pipeline loaded successfully!")
-    except Exception as e:
-        logger.error(f"Failed to load diarization pipeline: {e}", exc_info=True)
-        raise e
+    else:
+        try:
+            logger.info(f"Loading Pyannote diarization pipeline ({DIARIZATION_MODEL_NAME})...")
+            diarization_pipeline = PyannotePipeline.from_pretrained(
+                DIARIZATION_MODEL_NAME,
+                token=hf_token or None,
+            )
+            logger.info("Diarization pipeline loaded successfully!")
+        except Exception as e:
+            logger.error(f"Failed to load diarization pipeline: {e}", exc_info=True)
+            raise e
 
 @router.get("/health")
 async def health_check(local_model=None):

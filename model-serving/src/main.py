@@ -14,7 +14,7 @@ from starlette.responses import Response
 
 # Set up logging - include a date/time stamp on every line and persist to a
 # file (in addition to stdout) so requests can be debugged after the fact.
-LOG_DIR = os.environ.get("LOG_DIR", "/app/logs")
+LOG_DIR = os.environ.get("LOG_DIR", "./app/logs")
 os.makedirs(LOG_DIR, exist_ok=True)
 LOG_FORMAT = "%(asctime)s %(levelname)s [%(name)s] %(message)s"
 LOG_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
