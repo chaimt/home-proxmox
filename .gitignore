@@ -48,3 +48,4 @@ logs/
 .task/remote/
 
 proxmox*
+proxmox_mcp.log
