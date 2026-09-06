@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - diarization
     paths:
       - 'model-serving/**'
       - '.github/workflows/media-server.yml'
