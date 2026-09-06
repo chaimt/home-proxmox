@@ -1,6 +1,6 @@
-FROM python:3.13-slim
+FROM python:3.13-slim AS builder
 
-# Install system dependencies
+# Install build-time system dependencies
 RUN apt-get update && \
     apt-get install -y curl openssh-client git && \
     pip install --no-cache-dir --upgrade pip && \
@@ -22,22 +22,30 @@ RUN pip install uv
 # Install dependencies (SSH key is mounted only for this layer, never persisted)
 COPY pyproject.toml uv.lock /app/
 RUN --mount=type=secret,id=ssh_private_key,target=$SSH_DIR/id_rsa,mode=0600 \
-    uv sync --frozen
-
-# Copy application code
-RUN mkdir -p /app/src
-COPY src /app/src
-COPY entrypoint.sh /app/entrypoint.sh
+    uv sync --frozen --no-dev
 
 # Clean up SSH
 RUN rm -rf ~/.ssh
+
+# --- Runtime image: no compilers, no git/ssh, no uv, just the venv ---
+FROM python:3.13-slim
+
+WORKDIR /app
+ENV VIRTUAL_ENV=/app/.venv \
+    PATH="/app/.venv/bin:$PATH"
+
+# Copy the resolved virtual environment from the builder stage
+COPY --from=builder /app/.venv /app/.venv
+
+# Copy application code
+COPY src /app/src
+COPY entrypoint.sh /app/entrypoint.sh
 
 ARG BUILD_DATE
 ENV BUILD_DATE=${BUILD_DATE}
 
 ARG GIT_HASH
 ENV GIT_HASH=${GIT_HASH}
-
 
 # Run application
 CMD ["/app/entrypoint.sh"]
