@@ -140,9 +140,11 @@ def load_model():
 
 
 def load_diarization_pipeline():
-    global diarization_pipeline
-    hf_token = AppSettings().hf_token
+    global diarization_pipeline    
     logger.info("Starting diarization pipeline loading process...")
+    hf_token = AppSettings().hf_token
+    if not hf_token:
+        logger.warning("Hugging Face token not set. Diarization may fail for gated models.")
     try:
         logger.info(f"Loading Pyannote diarization pipeline ({DIARIZATION_MODEL_NAME})...")
         diarization_pipeline = PyannotePipeline.from_pretrained(
