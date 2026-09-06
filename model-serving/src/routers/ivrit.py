@@ -175,6 +175,49 @@ async def health_check(local_model=None):
     logger.info("Health check successful")
     return {"status": "healthy", "message": "Model is ready", "model_name": model_name} 
 
+@router.post("/load_model")
+async def load_whisper_model():
+    """Load (or reload) the Whisper transcription model.
+
+    Useful for testing that the model loads correctly without having to
+    run a full transcription request.
+    """
+    global model, model_name
+    logger.info("Whisper model load requested")
+    try:
+        load_model()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to load model: {str(e)}")
+
+    return {
+        "status": "loaded",
+        "model_name": model_name,
+        "loaded": model is not None,
+    }
+
+
+@router.post("/load_diarization")
+async def load_diarization():
+    """Load (or reload) the Pyannote diarization pipeline.
+
+    Useful for testing that DIARIZATION_MODEL_NAME loads correctly and
+    that the HF token has access, without having to run a full
+    transcription with diarize=True.
+    """
+    global diarization_pipeline
+    logger.info("Diarization pipeline load requested")
+    try:
+        load_diarization_pipeline()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to load diarization pipeline: {str(e)}")
+
+    return {
+        "status": "loaded",
+        "model_name": DIARIZATION_MODEL_NAME,
+        "loaded": diarization_pipeline is not None,
+    }
+
+
 @router.post("/transcribe")
 async def transcribe_audio(
     file: UploadFile = File(...),
