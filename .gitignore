@@ -46,3 +46,5 @@ log/
 .env.bak
 logs/
 .task/remote/
+
+proxmox*
