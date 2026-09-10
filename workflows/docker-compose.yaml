@@ -86,6 +86,9 @@ services:
       # Git / Read-Write-File nodes may only touch paths under this dir (n8n default is ~/.n8n-files).
       # It must exist inside the container, so it is bind-mounted below.
       - N8N_RESTRICT_FILE_ACCESS_TO=/home/node/.n8n-files
+      # n8n 2.x disables Execute Command + Local File Trigger by default. Re-enable only Execute Command
+      # (needed to wipe the vault clone dir before each git clone); keep Local File Trigger disabled.
+      - NODES_EXCLUDE=["n8n-nodes-base.localFileTrigger"]
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/n8n/.n8n:/home/node/.n8n
       - ${DOCKER_PATH_PERSISTENT}/n8n/.n8n-files:/home/node/.n8n-files
