@@ -83,7 +83,11 @@ services:
       - VUE_APP_URL_BASE_API=https://n8n.turel.cloud    
       - N8N_SECURE_COOKIE=false  
       - N8N_RUNNERS_ENABLED=true
+      # Git / Read-Write-File nodes may only touch paths under this dir (n8n default is ~/.n8n-files).
+      # It must exist inside the container, so it is bind-mounted below.
+      - N8N_RESTRICT_FILE_ACCESS_TO=/home/node/.n8n-files
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/n8n/.n8n:/home/node/.n8n
+      - ${DOCKER_PATH_PERSISTENT}/n8n/.n8n-files:/home/node/.n8n-files
 
   
