@@ -59,7 +59,7 @@ services:
       - 3001:3001
 
   pulse:
-    image: ${PULSE_IMAGE:-rcourtman/pulse:6.2.1}
+    image: ${PULSE_IMAGE:-rcourtman/pulse:6.4.1}
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_pulse
     restart: unless-stopped
     user: "1000:1000"
