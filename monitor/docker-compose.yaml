@@ -3,7 +3,7 @@ volumes:
   pulse_data:
 services:
   duplicati:
-    image: duplicati/duplicati:2.3.0.4
+    image: duplicati/duplicati:2.4.0.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -51,7 +51,7 @@ services:
 
   uptime-kuma:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_uptime-kuma
-    image: louislam/uptime-kuma:2.5.0
+    image: louislam/uptime-kuma:2.5.3
     restart: unless-stopped
     volumes:
       - ${DOCKER_PATH_PERSISTENT}/kuma:/app/data
@@ -83,7 +83,7 @@ services:
   # https://github.com/alexjustesen/speedtest-tracker — image: linuxserver/docker-speedtest-tracker
   # Set SPEEDTEST_TRACKER_APP_KEY (Laravel base64 key, e.g. from docs.speedtest-tracker.dev Docker install).
   speedtest-tracker:
-    image: lscr.io/linuxserver/speedtest-tracker:1.14.8
+    image: lscr.io/linuxserver/speedtest-tracker:1.15.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_speedtest-tracker
     restart: unless-stopped
     environment:
@@ -102,7 +102,7 @@ services:
       - 8765:80
 
   homepage:
-    image: ghcr.io/gethomepage/homepage:v2.1.2
+    image: ghcr.io/gethomepage/homepage:v2.3
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_homepage
     ports:
       - 3000:3000

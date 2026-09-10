@@ -24,7 +24,7 @@ services:
         hard: 65536
 
   duplicati:
-    image: duplicati/duplicati:2.3.0.4
+    image: duplicati/duplicati:2.4.0.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
