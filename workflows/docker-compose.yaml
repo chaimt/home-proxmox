@@ -68,7 +68,7 @@ services:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
 
   n8n:
-    image: n8nio/n8n:2.41.2
+    image: n8nio/n8n:2.43.1
     restart: unless-stopped
     user: "1000:1000"
     # user: "${UID}:${GID}"
