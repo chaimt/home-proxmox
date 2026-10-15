@@ -3,7 +3,7 @@ volumes:
 
 services:
   duplicati:
-    image: duplicati/duplicati:2.4.0.0
+    image: duplicati/duplicati:2.4.0.1
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -41,7 +41,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v11.1.2
+    image: amir20/dozzle:v11.3.2
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -51,7 +51,7 @@ services:
 
 
   mealie:
-    image: ghcr.io/mealie-recipes/mealie:v3.25.1
+    image: ghcr.io/mealie-recipes/mealie:v3.28.0
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_mealie  # Names the container for easier management.
     restart: unless-stopped
     ports:

@@ -1,6 +1,6 @@
 services:
   duplicati:
-    image: duplicati/duplicati:2.4.0.0
+    image: duplicati/duplicati:2.4.0.1
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_duplicati
     hostname: duplicati
     restart: unless-stopped
@@ -38,7 +38,7 @@ services:
 
   dozzle:
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_dozzle
-    image: amir20/dozzle:v11.1.2
+    image: amir20/dozzle:v11.3.2
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -71,7 +71,7 @@ services:
 
 
   stirling-pdf:
-      image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:2.14.3
+      image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:3.1.0
       container_name: ${DOCKER_CONTAINER_NAME_PREFIX}stirling-pdf
       ports:
         - "8090:8080"
