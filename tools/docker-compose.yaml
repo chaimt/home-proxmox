@@ -95,6 +95,7 @@ services:
       - ${DOCKER_PATH_PERSISTENT}/opencode-data:/root/.local/share/opencode
       - ${DOCKER_PATH_PERSISTENT}/opencode-state:/root/.local/state/opencode
       - ${DOCKER_PATH_PERSISTENT}/opencode-workspace:/workspace
+      - ${HOME:-/root}/.ssh:/root/.ssh:ro
     environment:
       - TZ=${DOCKER_TZ}
       - OPENCODE_HOSTNAME=0.0.0.0
