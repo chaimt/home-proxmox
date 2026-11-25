@@ -83,7 +83,7 @@ services:
   # https://github.com/alexjustesen/speedtest-tracker — image: linuxserver/docker-speedtest-tracker
   # Set SPEEDTEST_TRACKER_APP_KEY (Laravel base64 key, e.g. from docs.speedtest-tracker.dev Docker install).
   speedtest-tracker:
-    image: lscr.io/linuxserver/speedtest-tracker:1.15.0
+    image: lscr.io/linuxserver/speedtest-tracker:1.15.1
     container_name: ${DOCKER_CONTAINER_NAME_PREFIX}_speedtest-tracker
     restart: unless-stopped
     environment:
